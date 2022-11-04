@@ -146,7 +146,17 @@ function Signup() {
               </>
             ) : null}
             {/* <button className="file-upload-btn">Select Profile Image</button> */}
-
+            {file && submitNotClicked ? (
+              <>
+                <p className="reset-text">
+                  * To reset the image, select the file input.
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="reset-text"></p>
+              </>
+            )}
             <button
               onClick={() => {
                 handleUpload();
