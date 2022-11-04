@@ -94,23 +94,22 @@ function EditNominee() {
                 }}
               />
             </div>
-            {/* <PhoneInput
-                inputExtraProps={{
-                  name: "phone",
-                  required: true,
-                  autoFocus: false,
-                }}
-                // country={"us"}
-                placeholder="Phone number"
-                value={UserData.contact_number}
-                autoFocus="false"
-                onChange={(e) => setUserData({ ...UserData, contact_number: e })}
-              /> */}
+
             <div className="input-outer-div">
               <img src={emailpic} alt="emailicon" />
               <input
                 type="email"
                 placeholder="Email"
+                onChange={(e) => {
+                  setUserData({ ...userData, email: e.target.value });
+                }}
+              />
+            </div>
+            <div className="input-outer-div">
+              <img src={emailpic} alt="emailicon" />
+              <input
+                type="text"
+                placeholder="Wallet Address"
                 onChange={(e) => {
                   setUserData({ ...userData, email: e.target.value });
                 }}
