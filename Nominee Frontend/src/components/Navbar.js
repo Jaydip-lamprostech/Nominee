@@ -6,7 +6,7 @@ function Navbar() {
     <div className="home-navbar">
       <div className="navbar-menu">
         <ul>
-          <li className="logo-li">Eternal</li>
+          <li className="logo-li">Inheritokens</li>
         </ul>
       </div>
       <button className="home-connect-btn">Connect Wallet</button>

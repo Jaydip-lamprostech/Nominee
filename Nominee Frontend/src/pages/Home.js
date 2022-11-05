@@ -12,7 +12,7 @@ import art1 from "../assets/images/Abstract-3d-art-background-2.png";
 import bitcoin from "../assets/images/Bitcoin.svg";
 import neocoin from "../assets/images/neocoin.svg";
 import tethercoin from "../assets/images/tether.svg";
-// import ecoin from "../assets/images/ethereumcoin.svg";
+import ecoin from "../assets/images/ethereum.svg";
 import item1 from "../assets/images/1.png";
 import item2 from "../assets/images/2.png";
 import item3 from "../assets/images/3.png";
@@ -35,12 +35,11 @@ function Home() {
           <img className="bg-first" src={bg1} alt="background_image" />
           <div className="inside-hero-first">
             <h1 className="home-h1-1">
-              Lorem ipsum dolor sit
-              <span className="home-h1-2">adipiscing elit</span>
+              Nominate your heir with
+              <span className="home-h1-2">Inheritokens</span>
             </h1>
             <p className="home-first-p">
-              Lorem ipsum dolor sit amet. Mauris feugiat orci quam, vel mattis
-              velit efficitur vel. Ligula in mauris et magna.{" "}
+              Inheritokens allows you to nominate a successor to your assets before your demise. This project aims to keep the flow of tokens and NFTs around the web3.{" "}
             </p>
             <div className="home-avatar">
               <div className="avatars">
@@ -48,7 +47,7 @@ function Home() {
                 <img src={avatar2} width="52px" alt="avatar2" />
                 <img src={avatar3} width="52px" alt="avatar3" />
               </div>
-              <button className="home-hero-button">Jaydip</button>
+              <button className="home-hero-button">Get Started</button>
             </div>
             {/* <h1>Hello</h1> */}
           </div>
@@ -58,11 +57,11 @@ function Home() {
                 <img src={purplecharacter} alt="character" />
               </div>
               <div>
-                <h3>something</h3>
+                <h3>NFT</h3>
               </div>
               <div className="hero-inside-second-btn-div">
-                <button className="hero-inside-second-button-1">Lorem</button>
-                <button className="hero-inside-second-button-2">Ipsum</button>
+                <button className="hero-inside-second-button-1">Add Nominee</button>
+                <button className="hero-inside-second-button-2">Change Nominee</button>
               </div>
             </div>
           </div>
@@ -72,8 +71,16 @@ function Home() {
           <img className="abstarct-img-1" src={art1} alt="artimage" />
           <img className="abstarct-img-2" src={art2} alt="artimage" />
           <h1 className="home-h2-1">
-            <span className="home-h2-2">Lorem ipsum</span> adipiscing elit
+            <span className="home-h2-2">Inheritokens</span>  works like...
           </h1>
+          <div className="process-div">
+            <ul>
+              <li>We monitor account activity and beware of 6 months of inactivity.</li>
+              <li>We send an email to the account holder</li>
+              <li>If we receive a reply, the assets are yours. Else, it transfers to your heir</li>
+              <li>The heir has to come over to our portal to claim their new-found treasure!</li>
+              <li>There is no step 5, we're just waiting for you to start connecting your wallet and fill in the deets of your email ID and your nominee. Go NOW!</li>
+            </ul></div>
           <div className="inside-second">
             <div className="inside-second-inside-three">
               <img className="wallet-image" src={wallet01} alt="walletimage" />
@@ -83,7 +90,7 @@ function Home() {
                 <img src={bitcoin} alt="" className="bitcoin" />
                 <img src={neocoin} alt="" className="neocoin" />
                 <img src={tethercoin} alt="" className="tethercoin" />
-                <img src={tethercoin} alt="" className="ethereumcoin" />
+                <img src={ecoin} alt="" className="ethereumcoin" />
                 <img src={item1} alt="" className="nft-1" />
                 <img src={item2} alt="" className="nft-2" />
                 <img src={item3} alt="" className="nft-3" />

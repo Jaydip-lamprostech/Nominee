@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Web3Storage } from "web3.storage";
 import profilepic from "../assets/images/profile_image.svg";
 import emailpic from "../assets/images/Mail.svg";
-// import namepic from "../assets/images/Name.svg";
+import namepic from "../assets/images/Name.svg";
 // import PhoneInput from "react-phone-input-2";
 // import "react-phone-input-2/lib/style.css";
 
@@ -84,7 +84,7 @@ function Signup() {
           {/* <h3>Enter your details</h3> */}
           <div action="" className="login-form">
             <div className="input-outer-div name-input">
-              <img src={emailpic} alt="nameicon" />
+              <img src={namepic} alt="nameicon" />
               {/* <MailSvg /> */}
               <input
                 type="text"
