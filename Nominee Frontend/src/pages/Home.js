@@ -22,15 +22,15 @@ function Home() {
   return (
     <>
       <section className="home-main">
-        {/* <div className="home-navbar">
+        <div className="home-navbar">
           <div className="navbar-menu">
             <ul>
-              <li className="logo-li">Eternal</li>
-              <li>Eternal</li>
+              <li className="logo-li">Inheritokens</li>
+              {/* <li></li> */}
             </ul>
           </div>
           <button className="home-connect-btn">Connect Wallet</button>
-        </div> */}
+        </div>
         <section className="home-hero">
           <img className="bg-first" src={bg1} alt="background_image" />
           <div className="inside-hero-first">
@@ -39,7 +39,9 @@ function Home() {
               <span className="home-h1-2">Inheritokens</span>
             </h1>
             <p className="home-first-p">
-              Inheritokens allows you to nominate a successor to your assets before your demise. This project aims to keep the flow of tokens and NFTs around the web3.{" "}
+              Inheritokens allows you to nominate a successor to your assets
+              before your demise. This project aims to keep the flow of tokens
+              and NFTs around the web3.{" "}
             </p>
             <div className="home-avatar">
               <div className="avatars">
@@ -60,8 +62,12 @@ function Home() {
                 <h3>NFT</h3>
               </div>
               <div className="hero-inside-second-btn-div">
-                <button className="hero-inside-second-button-1">Add Nominee</button>
-                <button className="hero-inside-second-button-2">Change Nominee</button>
+                <button className="hero-inside-second-button-1">
+                  Add Nominee
+                </button>
+                <button className="hero-inside-second-button-2">
+                  Change Nominee
+                </button>
               </div>
             </div>
           </div>
@@ -71,16 +77,30 @@ function Home() {
           <img className="abstarct-img-1" src={art1} alt="artimage" />
           <img className="abstarct-img-2" src={art2} alt="artimage" />
           <h1 className="home-h2-1">
-            <span className="home-h2-2">Inheritokens</span>  works like...
+            <span className="home-h2-2">Inheritokens</span> works like...
           </h1>
           <div className="process-div">
             <ul>
-              <li>We monitor account activity and beware of 6 months of inactivity.</li>
+              <li>
+                We monitor account activity and beware of 6 months of
+                inactivity.
+              </li>
               <li>We send an email to the account holder</li>
-              <li>If we receive a reply, the assets are yours. Else, it transfers to your heir</li>
-              <li>The heir has to come over to our portal to claim their new-found treasure!</li>
-              <li>There is no step 5, we're just waiting for you to start connecting your wallet and fill in the deets of your email ID and your nominee. Go NOW!</li>
-            </ul></div>
+              <li>
+                If we receive a reply, the assets are yours. Else, it transfers
+                to your heir
+              </li>
+              <li>
+                The heir has to come over to our portal to claim their new-found
+                treasure!
+              </li>
+              <li>
+                There is no step 5, we're just waiting for you to start
+                connecting your wallet and fill in the deets of your email ID
+                and your nominee. Go NOW!
+              </li>
+            </ul>
+          </div>
           <div className="inside-second">
             <div className="inside-second-inside-three">
               <img className="wallet-image" src={wallet01} alt="walletimage" />

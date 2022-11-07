@@ -15,7 +15,7 @@ div.home-navbar {
   // margin-top: 30px;
   margin-top: 2rem;
   max-width: 100%;
-  padding: 0px 80px 30px 50px;
+  padding: 0px 80px 30px 80px;
   position: absolute;
   z-index: 109;
 
@@ -34,6 +34,8 @@ div.home-navbar {
     padding: 30px 10px 10px 10px;
     cursor: pointer;
     font-size: 1rem;
+    font-family: "Josefin Sans";
+    font-weight: 400;
 
     &:hover {
       background-color: #000;
@@ -51,6 +53,8 @@ div.home-navbar {
     padding: 10px 20px;
     background-color: #fff;
     border: none;
+    font-family: "Josefin Sans";
+    font-weight: 400;
   }
 }
 
@@ -81,15 +85,18 @@ section.home-hero {
 
   .inside-hero-first {
     max-width: 65%;
-    margin-top: 25vh;
+    margin-top: 22vh;
     position: relative;
     z-index: 5;
-    padding: 0 0 0 50px;
+    padding: 0 0 0 80px;
 
     h1 {
       font-size: 2.5rem;
       font-weight: 600;
       margin: 20px 0px;
+      font-family: "Josefin Sans";
+      font-weight: 400;
+      line-height: 1.5;
     }
 
     span.home-h1-2 {
@@ -117,7 +124,10 @@ section.home-hero {
       max-width: 70%;
       word-wrap: break-word;
       width: max-content;
-      font-size: 18px;
+      // font-size: 18px;
+      font-family: "Josefin Sans";
+      font-weight: 200;
+      line-height: 1.3;
     }
 
     .home-avatar {
@@ -139,6 +149,8 @@ section.home-hero {
         -webkit-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.1);
         -moz-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.1);
         box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.1);
+        font-family: "Josefin Sans";
+        font-weight: 300;
       }
     }
   }
@@ -202,6 +214,8 @@ section.home-hero {
       h3 {
         margin: 5px;
         padding: 5px;
+        font-family: "Josefin Sans";
+        font-weight: 300;
       }
 
       .hero-inside-second-btn-div {
@@ -220,6 +234,8 @@ section.home-hero {
           width: 50%;
           margin: 0 5px;
           font-size: 70%;
+          font-family: "Josefin Sans";
+          font-weight: 200;
         }
 
         button.hero-inside-second-button-1 {
@@ -278,10 +294,12 @@ section.home-second {
   }
 
   h1 {
-    font-size: 2.5rem;
-    font-weight: 600;
+    font-size: 50px;
     margin: 0;
     padding-top: 200px;
+    font-family: "Josefin Sans";
+    font-weight: 400;
+    line-height: 1.5;
 
     text-align: center;
   }
@@ -296,9 +314,12 @@ section.home-second {
     }
 
     li {
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       padding: 10px 0;
       padding-left: 10px;
+      font-family: "Josefin Sans";
+      font-weight: 300;
+      line-height: 1.2;
     }
 
     // ul li::before {
