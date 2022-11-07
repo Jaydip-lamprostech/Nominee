@@ -3,6 +3,7 @@ import coverimg from "../assets/images/coverfornominee.png";
 import "../styles/profile.scss";
 import Navbar from "../components/Navbar";
 import defaultprofileimage from "../assets/images/defaultprofileimage.png";
+import AllNfts from "../components/AllNfts";
 function Profile() {
   return (
     <>
@@ -18,7 +19,7 @@ function Profile() {
             <div className="profile-card-inside">
               <div className="image-parent">
                 <div className="image-child">
-                  <img src={defaultprofileimage} alt="profileimage" />
+                  <img src={defaultprofileimage} width="176px" height="176px" alt="profileimage" />
                 </div>
               </div>
               <div className="user-profile">
@@ -30,11 +31,14 @@ function Profile() {
             </div>
           </div>
         </div>
-        <div className="profile-navbar">
-          <button>All NFTs</button>
-          <button>Tokens</button>
-          <button>Nominees</button>
-          {/* <button></button> */}
+        <div className="profile-second-section">
+          <div className="profile-navbar">
+            <button className="active">All NFTs</button>
+            <button>Tokens</button>
+            <button>Nominees</button>
+            {/* <button></button> */}
+          </div>
+          <AllNfts />
         </div>
       </section>
     </>

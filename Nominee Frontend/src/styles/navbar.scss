@@ -29,8 +29,9 @@
       padding-right: 1rem;
 
       img {
-        height: 70px;
+        height: 60px;
       }
+
       // width: 100%;
       h1 {
         margin: 0;
@@ -43,6 +44,7 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
       }
+
       .profile-wallet-section {
         display: flex;
         flex-direction: row;
@@ -63,6 +65,7 @@
           box-shadow: 5px 5px 25px 10px rgba(0, 0, 0, 0.1);
           // height: 36px;
         }
+
         .wallet-address {
           font-size: 1rem;
           font-family: "Josefin Sans";
@@ -70,16 +73,12 @@
           background: #dcd6fc;
           // background: linear-gradient(90deg, #dcd6fc, #9bb7ed);
           background-image: linear-gradient(to right, #9f8ff7 0%, #5a88e1 100%);
-          background-image: -moz-linear-gradient(
-            left,
-            #9f8ff7 0%,
-            #5a88e1 100%
-          );
-          background-image: -webkit-linear-gradient(
-            left,
-            #9f8ff7 0%,
-            #5a88e1 100%
-          );
+          background-image: -moz-linear-gradient(left,
+              #9f8ff7 0%,
+              #5a88e1 100%);
+          background-image: -webkit-linear-gradient(left,
+              #9f8ff7 0%,
+              #5a88e1 100%);
           color: #fff;
           padding: 10px 20px;
           border-radius: 20px;
@@ -94,6 +93,7 @@
     .navbar-inside {
       .navbar-main {
         max-width: 638px;
+
         h1 {
           font-size: 1rem;
         }
@@ -101,11 +101,13 @@
     }
   }
 }
+
 @media (min-width: 768px) {
   .navbar {
     .navbar-inside {
       .navbar-main {
         max-width: 764px;
+
         h1 {
           font-size: 1.5rem;
         }
@@ -119,6 +121,7 @@
     .navbar-inside {
       .navbar-main {
         max-width: 1024px;
+
         h1 {
           font-size: 1.6rem;
         }
@@ -126,6 +129,7 @@
     }
   }
 }
+
 @media (min-width: 1280px) {
   .navbar {
     .navbar-inside {
@@ -133,6 +137,7 @@
         max-width: 1280px;
         padding-left: 40px;
         padding-right: 40px;
+
         h1 {
           font-size: 1.8rem;
         }
@@ -140,14 +145,17 @@
     }
   }
 }
+
 @media (min-width: 1536px) {
   .navbar {
     max-height: 6rem;
+
     .navbar-inside {
       .navbar-main {
         max-width: 1536px;
         padding-left: 128px;
         padding-right: 128px;
+
         h1 {
           font-size: 2rem;
         }
