@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { Web3Storage } from "web3.storage";
 import profilepic from "../assets/images/profile_image.svg";
 import emailpic from "../assets/images/Mail.svg";
-// import namepic from "../assets/images/Name.svg";
+import namepic from "../assets/images/Name.svg";
+import closeicon from "../assets/images/close.png";
+import Navbar from "../components/Navbar";
 // import PhoneInput from "react-phone-input-2";
 // import "react-phone-input-2/lib/style.css";
 
@@ -56,7 +58,7 @@ function Signup() {
     console.log(files[0].cid);
     setUserData({ ...userData, cid: files[0].cid });
     // setFileCid(files[0].cid);
-    setUploaded("Redirecting...");
+    setUploaded("Uploaded");
     setbtnLoading(false);
     onSuccess();
     // setFile(url);
@@ -67,9 +69,19 @@ function Signup() {
   // };
   const onSuccess = () => {
     setTimeout(() => {
-      navigate("/");
+      setUploaded("Redirecting...");
       // console.log(userData);
     }, 1000);
+    setTimeout(() => {
+      navigate("/");
+      // console.log(userData);
+    }, 2000);
+  };
+
+  const resetImage = () => {
+    setFile("");
+    setFileName("");
+    // setUploaded("Upload File");
   };
 
   useEffect(() => {
@@ -78,13 +90,14 @@ function Signup() {
 
   return (
     <>
+      <Navbar />
       <section className="signup-main">
         <div className="login-card">
           <h2>Sign Up</h2>
           {/* <h3>Enter your details</h3> */}
           <div action="" className="login-form">
             <div className="input-outer-div name-input">
-              <img src={emailpic} alt="nameicon" />
+              <img src={namepic} alt="nameicon" />
               {/* <MailSvg /> */}
               <input
                 type="text"
@@ -116,12 +129,7 @@ function Signup() {
                 }}
               />
             </div>
-            <div
-              className="input-outer-div file-upload-input"
-              onClick={(e) => {
-                profile_picture.current.click();
-              }}
-            >
+            <div className="input-outer-div file-upload-input">
               <img src={profilepic} alt="profileicon" />
               <input
                 className="input-edit-profile"
@@ -134,7 +142,33 @@ function Signup() {
                   uploadImage(e);
                 }}
               />
-              <p>{file ? <>{fileName}</> : <>Choose file</>}</p>
+              {file ? (
+                <>
+                  <p
+                    onClick={(e) => {
+                      profile_picture.current.click();
+                    }}
+                  >
+                    {fileName}
+                  </p>{" "}
+                  <img
+                    className="close-icon"
+                    src={closeicon}
+                    alt="close"
+                    onClick={() => {
+                      resetImage();
+                    }}
+                  />
+                </>
+              ) : (
+                <p
+                  onClick={(e) => {
+                    profile_picture.current.click();
+                  }}
+                >
+                  Choose file
+                </p>
+              )}
             </div>
 
             {file ? (
@@ -146,11 +180,10 @@ function Signup() {
               </>
             ) : null}
             {/* <button className="file-upload-btn">Select Profile Image</button> */}
-
             {file && submitNotClicked ? (
               <>
                 <p className="reset-text">
-                  * To reset the image, select the file input.
+                  * To reset the file, click on the reset button.
                 </p>
               </>
             ) : (

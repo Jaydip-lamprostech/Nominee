@@ -5,39 +5,40 @@
 }
 
 .signup-main {
-  min-height: 100vh;
+  min-height: 90vh;
   // width: 100vw;
-  min-width: 100vw;
-  display: grid;
-  place-items: center;
+  min-width: 100%;
+  // display: grid;
+  // place-items: center;
   margin: 0;
   padding: 0 24px;
   background-image: url("../assets/images/background_1.png");
   background-repeat: no-repeat;
   background-position: top;
   // background-attachment: fixed;
-  background-origin: border-box;
-  background-size: 100% 100%;
+  // background-origin: border-box;
+  background-size: cover;
   // animation: pan 6s infinite alternate linear;
 }
 
 .login-card {
   width: 100%;
-
+  margin-bottom: 50px;
   padding: 20px 40px;
   border-radius: 24px;
   background: linear-gradient(90deg, #dcd6fc, #9bb7ed);
-  -webkit-box-shadow: 5px 5px 25px 10px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 5px 5px 25px 10px rgba(0, 0, 0, 0.1);
-  box-shadow: 5px 5px 25px 10px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 10px 10px 25px 20px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 10px 10px 25px 20px rgba(0, 0, 0, 0.1);
+  box-shadow: 10px 10px 25px 20px rgba(0, 0, 0, 0.1);
   // text-align: center;
 
   h2 {
     margin: 1rem 0 1rem;
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.8rem;
     text-align: center;
     color: #fff;
+    font-family: "Josefin Sans";
+    font-weight: 400;
   }
 
   h3 {
@@ -52,9 +53,12 @@
     height: 10px;
     text-align: left;
     margin: 0;
+    margin-top: 10px;
     font-size: 12px;
     margin-left: 10px;
     color: #ffffff;
+    font-family: "Josefin Sans";
+    font-weight: 300;
   }
 }
 
@@ -70,6 +74,8 @@
     // height: 50px;
     padding: 5px 10px;
     border-radius: 8px;
+    font-family: "Josefin Sans";
+    font-weight: 300;
   }
 
   div.input-outer-div {
@@ -77,9 +83,15 @@
     color: #000;
     border: none;
     background-color: #fff;
+    width: 100%;
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: flex-start;
+    font-size: 15px;
+    -webkit-box-shadow: 5px 5px 25px 10px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 5px 5px 25px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 5px 5px 25px 10px rgba(0, 0, 0, 0.1);
 
     img {
       width: 15%;
@@ -88,18 +100,31 @@
       -moz-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.1);
       box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.1);
     }
+    img.close-icon {
+      // height: 50%;
+      width: 10%;
+      margin-left: auto;
+    }
     p {
       margin: 0;
       margin-left: 10px;
       color: #6c6c6c;
-      font-size: 1rem;
+      font-size: 15px;
+      white-space: nowrap;
+      width: 65%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-family: "Josefin Sans";
+      font-weight: 300;
     }
     input {
-      font-size: 1rem;
+      font-size: 15px;
       margin-left: 10px;
       background-color: transparent;
       box-shadow: none;
       border: none;
+      font-family: "Josefin Sans";
+      font-weight: 300;
       &:focus {
         border: none;
         outline: none;
@@ -111,6 +136,7 @@
   }
 
   button {
+    margin-top: 20px;
     width: 100%;
     height: 45px;
     border: 0;
@@ -211,16 +237,16 @@ svg.animate-spin {
 
 @media (min-width: 500px) {
   .signup-main {
-    padding: 0;
+    padding: calc(120px + 2rem) 0 0 0;
   }
 
   .login-card {
-    margin: 0;
-    margin-top: 2rem;
+    margin: 0 auto;
+    // margin-top: 2rem;
     width: 350px;
-    max-height: max-content;
+    // max-height: max-content;
     // height: 60vh;
-    min-height: 60vh;
+    // min-height: 60vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
