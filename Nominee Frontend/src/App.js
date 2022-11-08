@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 // import Navbar from "./components/Navbar";
+
 import PageNotFound from "./components/PageNotFound";
 import AddNominee from "./pages/AddNominee";
 import EditNominee from "./pages/EditNominee";

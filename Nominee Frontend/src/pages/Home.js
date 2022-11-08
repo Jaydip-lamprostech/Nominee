@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
 import "../styles/home.scss";
+
 import bg1 from "../assets/images/background_copy.svg";
 import avatar2 from "../assets/images/Avatar_1.svg";
 import avatar1 from "../assets/images/Avatar_2.svg";
@@ -19,17 +22,27 @@ import item3 from "../assets/images/3.png";
 import arrow from "../assets/images/yellow_arrow.svg";
 
 function Home() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const togglePopup = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <>
       <section className="home-main">
         <div className="home-navbar">
           <div className="navbar-menu">
             <ul>
-              <li className="logo-li">Inheritokens</li>
+              <Link to="/" className="nav-logo">
+                <li className="logo-li">Inheritokens</li>
+              </Link>
               {/* <li></li> */}
             </ul>
           </div>
-          <button className="home-connect-btn">Connect Wallet</button>
+
+          <button className="home-connect-btn" onClick={togglePopup}>
+            Connect Wallet
+          </button>
         </div>
         <section className="home-hero">
           <img className="bg-first" src={bg1} alt="background_image" />
