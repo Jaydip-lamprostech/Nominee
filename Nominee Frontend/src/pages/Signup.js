@@ -7,8 +7,6 @@ import emailpic from "../assets/images/Mail.svg";
 import namepic from "../assets/images/Name.svg";
 import closeicon from "../assets/images/close.png";
 import Navbar from "../components/Navbar";
-// import PhoneInput from "react-phone-input-2";
-// import "react-phone-input-2/lib/style.css";
 
 import "../styles/signup.scss";
 // import MailSvg from "../components/MailSvg";
@@ -46,7 +44,7 @@ function Signup() {
     var fileInput = document.getElementById("input");
     console.log(fileInput);
     const rootCid = await client.put(fileInput.files, {
-      name: "dehitas profile images",
+      name: "inheritokens profile images",
       maxRetries: 3,
     });
     console.log(rootCid);

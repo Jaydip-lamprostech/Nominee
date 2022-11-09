@@ -47,7 +47,7 @@ function EditNominee() {
     var fileInput = document.getElementById("input");
     console.log(fileInput);
     const rootCid = await client.put(fileInput.files, {
-      name: "dehitas profile images",
+      name: "inheritokens profile images",
       maxRetries: 3,
     });
     console.log(rootCid);

@@ -1,7 +1,8 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "../styles/home.scss";
+import { useAccount } from "wagmi";
 
 import bg1 from "../assets/images/background_copy.svg";
 import avatar2 from "../assets/images/Avatar_1.svg";
@@ -20,13 +21,39 @@ import item1 from "../assets/images/1.png";
 import item2 from "../assets/images/2.png";
 import item3 from "../assets/images/3.png";
 import arrow from "../assets/images/yellow_arrow.svg";
+import ConnectWallet from "../components/ConnectWallet";
 
 function Home() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { address, isConnected } = useAccount();
+  const navigate = useNavigate();
 
-  const togglePopup = () => {
-    setIsOpen(!isOpen);
-  };
+  var data = JSON.stringify({
+    address: address,
+  });
+  useEffect(() => {
+    if (isConnected) {
+      var config = {
+        method: "post",
+        url: "http://822a-2401-4900-1f3e-4e75-6159-e1f2-e6e-8bc5.ngrok.io/checkAddress",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+
+      axios(config)
+        .then(function (response) {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      console.log(address);
+
+      // navigate("/user/profile");
+    }
+  }, [address, data, isConnected]);
+
   return (
     <>
       <section className="home-main">
@@ -39,10 +66,11 @@ function Home() {
               {/* <li></li> */}
             </ul>
           </div>
-
-          <button className="home-connect-btn" onClick={togglePopup}>
+          {/* <ConnectKitButton /> */}
+          <ConnectWallet />
+          {/* <button className="home-connect-btn" onClick={togglePopup}>
             Connect Wallet
-          </button>
+          </button> */}
         </div>
         <section className="home-hero">
           <img className="bg-first" src={bg1} alt="background_image" />
@@ -139,5 +167,4 @@ function Home() {
     </>
   );
 }
-
 export default Home;

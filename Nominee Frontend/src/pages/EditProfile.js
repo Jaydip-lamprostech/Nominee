@@ -4,14 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { Web3Storage } from "web3.storage";
 import profilepic from "../assets/images/profile_image.svg";
 import emailpic from "../assets/images/Mail.svg";
-import walletpic from "../assets/images/wallet_icon.svg";
-import closeicon from "../assets/images/close.png";
 import namepic from "../assets/images/Name.svg";
-// import PhoneInput from "react-phone-input-2";
-// import "react-phone-input-2/lib/style.css";
+import closeicon from "../assets/images/close.png";
+import Navbar from "../components/Navbar";
 
 import "../styles/signup.scss";
-import Navbar from "../components/Navbar";
 // import MailSvg from "../components/MailSvg";
 
 const API_TOKEN =
@@ -19,7 +16,7 @@ const API_TOKEN =
 
 const client = new Web3Storage({ token: API_TOKEN });
 
-function AddNominee() {
+function EditProfile(props) {
   const profile_picture = useRef();
   const navigate = useNavigate();
   const [file, setFile] = useState("");
@@ -27,7 +24,7 @@ function AddNominee() {
   // const [fileCid, setFileCid] = useState("");
   const [btnloading, setbtnLoading] = useState(false);
   const [submitNotClicked, setSubmitNotClicked] = useState(true);
-  const [uploaded, setUploaded] = useState("Add Nominee");
+  const [uploaded, setUploaded] = useState("Submit");
 
   const [userData, setUserData] = useState({
     name: "",
@@ -47,7 +44,7 @@ function AddNominee() {
     var fileInput = document.getElementById("input");
     console.log(fileInput);
     const rootCid = await client.put(fileInput.files, {
-      name: "inheritokens profile images",
+      name: "inheritokens",
       maxRetries: 3,
     });
     console.log(rootCid);
@@ -59,7 +56,7 @@ function AddNominee() {
     console.log(files[0].cid);
     setUserData({ ...userData, cid: files[0].cid });
     // setFileCid(files[0].cid);
-    setUploaded("Redirecting...");
+    setUploaded("Image Uploaded");
     setbtnLoading(false);
     onSuccess();
     // setFile(url);
@@ -70,15 +67,21 @@ function AddNominee() {
   // };
   const onSuccess = () => {
     setTimeout(() => {
-      navigate("/");
+      setUploaded("Redirecting...");
       // console.log(userData);
     }, 1000);
+    setTimeout(() => {
+      props.setShowEditProfile(false);
+      // console.log(userData);
+    }, 2000);
   };
+
   const resetImage = () => {
     setFile("");
     setFileName("");
     // setUploaded("Upload File");
   };
+
   useEffect(() => {
     console.log(userData);
   }, [userData]);
@@ -88,7 +91,24 @@ function AddNominee() {
       <Navbar />
       <section className="signup-main">
         <div className="login-card">
-          <h2>Add Nominee</h2>
+          <div
+            className="close-button"
+            onClick={() => {
+              props.setShowEditProfile(false);
+            }}
+          >
+            <svg
+              id="Layer_1"
+              width="25px"
+              data-name="Layer 1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 122.88 119.79"
+            >
+              <title>close-window</title>
+              <path d="M23.5,0H99.38a23.56,23.56,0,0,1,23.5,23.5V96.29a23.56,23.56,0,0,1-23.5,23.5H23.5a23.44,23.44,0,0,1-16.6-6.9l-.37-.4A23.43,23.43,0,0,1,0,96.29V23.5A23.56,23.56,0,0,1,23.5,0ZM41,49.35a7,7,0,0,1,9.89-9.89L61.44,50,72,39.46a7,7,0,1,1,9.89,9.9L71.33,59.9,81.87,70.43A7,7,0,0,1,72,80.33L61.44,69.79,50.9,80.33A7,7,0,0,1,41,70.43L51.55,59.89,41,49.35ZM99.38,12.52H23.5a11,11,0,0,0-11,11V96.29a10.92,10.92,0,0,0,3,7.49l.27.26a11,11,0,0,0,7.75,3.23H99.38a11,11,0,0,0,11-11V23.5a11,11,0,0,0-11-11Z" />
+            </svg>
+          </div>
+          <h2>Edit Profile</h2>
           {/* <h3>Enter your details</h3> */}
           <div action="" className="login-form">
             <div className="input-outer-div name-input">
@@ -103,17 +123,17 @@ function AddNominee() {
               />
             </div>
             {/* <PhoneInput
-                inputExtraProps={{
-                  name: "phone",
-                  required: true,
-                  autoFocus: false,
-                }}
-                // country={"us"}
-                placeholder="Phone number"
-                value={UserData.contact_number}
-                autoFocus="false"
-                onChange={(e) => setUserData({ ...UserData, contact_number: e })}
-              /> */}
+              inputExtraProps={{
+                name: "phone",
+                required: true,
+                autoFocus: false,
+              }}
+              // country={"us"}
+              placeholder="Phone number"
+              value={UserData.contact_number}
+              autoFocus="false"
+              onChange={(e) => setUserData({ ...UserData, contact_number: e })}
+            /> */}
             <div className="input-outer-div">
               <img src={emailpic} alt="emailicon" />
               <input
@@ -124,17 +144,7 @@ function AddNominee() {
                 }}
               />
             </div>
-            <div className="input-outer-div">
-              <img src={walletpic} alt="emailicon" />
-              <input
-                type="text"
-                placeholder="Wallet Address"
-                onChange={(e) => {
-                  setUserData({ ...userData, email: e.target.value });
-                }}
-              />
-            </div>
-            <div className="input-outer-div">
+            <div className="input-outer-div file-upload-input">
               <img src={profilepic} alt="profileicon" />
               <input
                 className="input-edit-profile"
@@ -185,12 +195,15 @@ function AddNominee() {
               </>
             ) : null}
             {/* <button className="file-upload-btn">Select Profile Image</button> */}
-
             {file && submitNotClicked ? (
               <>
                 <p className="reset-text">
                   * To reset the file, click on the reset button.
                 </p>
+              </>
+            ) : file && !submitNotClicked ? (
+              <>
+                <p className="reset-text">Uploading your image on ipfs</p>
               </>
             ) : (
               <>
@@ -227,4 +240,4 @@ function AddNominee() {
   );
 }
 
-export default AddNominee;
+export default EditProfile;
