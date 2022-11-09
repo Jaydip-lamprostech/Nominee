@@ -2,13 +2,13 @@ import React from "react";
 import "../styles/navbar.scss";
 // import profilepic1 from "";
 import profilepic1 from "../assets/images/defaultprofileimage.png";
-import { useState } from "react";
 import logo from "../assets/images/interitokenslogo.png";
+import ConnectWalletNavbar from "./ConnectWalletNavbar";
 
 function Navbar() {
-  const [walletAdd, setWalletAdd] = useState(
-    "0x054ae6107caadc187c304de87365bc52f8c2adb9"
-  );
+  // const [walletAdd, setWalletAdd] = useState(
+  //   "0x054ae6107caadc187c304de87365bc52f8c2adb9"
+  // );
   return (
     <>
       <div className="navbar">
@@ -20,11 +20,12 @@ function Navbar() {
             </h1> */}
             <div className="profile-wallet-section">
               <div className="wallet-address">
-                <span>
+                {/* <span>
                   {walletAdd.substring(0, 6) +
                     "..." +
                     walletAdd.substring(walletAdd.length - 5, walletAdd.length)}
-                </span>
+                </span> */}
+                <ConnectWalletNavbar />
               </div>
               <img
                 className="profile-icon"

@@ -4,14 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { Web3Storage } from "web3.storage";
 import profilepic from "../assets/images/profile_image.svg";
 import emailpic from "../assets/images/Mail.svg";
-import walletpic from "../assets/images/wallet_icon.svg";
-import closeicon from "../assets/images/close.png";
 import namepic from "../assets/images/Name.svg";
-// import PhoneInput from "react-phone-input-2";
-// import "react-phone-input-2/lib/style.css";
+import closeicon from "../assets/images/close.png";
+import Navbar from "../components/Navbar";
 
 import "../styles/signup.scss";
-import Navbar from "../components/Navbar";
 // import MailSvg from "../components/MailSvg";
 
 const API_TOKEN =
@@ -19,7 +16,7 @@ const API_TOKEN =
 
 const client = new Web3Storage({ token: API_TOKEN });
 
-function AddNominee() {
+function EditProfile(props) {
   const profile_picture = useRef();
   const navigate = useNavigate();
   const [file, setFile] = useState("");
@@ -27,7 +24,7 @@ function AddNominee() {
   // const [fileCid, setFileCid] = useState("");
   const [btnloading, setbtnLoading] = useState(false);
   const [submitNotClicked, setSubmitNotClicked] = useState(true);
-  const [uploaded, setUploaded] = useState("Add Nominee");
+  const [uploaded, setUploaded] = useState("Submit");
 
   const [userData, setUserData] = useState({
     name: "",
@@ -47,7 +44,7 @@ function AddNominee() {
     var fileInput = document.getElementById("input");
     console.log(fileInput);
     const rootCid = await client.put(fileInput.files, {
-      name: "inheritokens profile images",
+      name: "inheritokens",
       maxRetries: 3,
     });
     console.log(rootCid);
@@ -59,7 +56,7 @@ function AddNominee() {
     console.log(files[0].cid);
     setUserData({ ...userData, cid: files[0].cid });
     // setFileCid(files[0].cid);
-    setUploaded("Redirecting...");
+    setUploaded("Image Uploaded");
     setbtnLoading(false);
     onSuccess();
     // setFile(url);
@@ -70,15 +67,21 @@ function AddNominee() {
   // };
   const onSuccess = () => {
     setTimeout(() => {
-      navigate("/");
+      setUploaded("Redirecting...");
       // console.log(userData);
     }, 1000);
+    setTimeout(() => {
+      props.setShowEditProfile(false);
+      // console.log(userData);
+    }, 2000);
   };
+
   const resetImage = () => {
     setFile("");
     setFileName("");
     // setUploaded("Upload File");
   };
+
   useEffect(() => {
     console.log(userData);
   }, [userData]);
@@ -88,7 +91,7 @@ function AddNominee() {
       <Navbar />
       <section className="signup-main">
         <div className="login-card">
-          <h2>Add Nominee</h2>
+          <h2>Edit Profile</h2>
           {/* <h3>Enter your details</h3> */}
           <div action="" className="login-form">
             <div className="input-outer-div name-input">
@@ -103,17 +106,17 @@ function AddNominee() {
               />
             </div>
             {/* <PhoneInput
-                inputExtraProps={{
-                  name: "phone",
-                  required: true,
-                  autoFocus: false,
-                }}
-                // country={"us"}
-                placeholder="Phone number"
-                value={UserData.contact_number}
-                autoFocus="false"
-                onChange={(e) => setUserData({ ...UserData, contact_number: e })}
-              /> */}
+              inputExtraProps={{
+                name: "phone",
+                required: true,
+                autoFocus: false,
+              }}
+              // country={"us"}
+              placeholder="Phone number"
+              value={UserData.contact_number}
+              autoFocus="false"
+              onChange={(e) => setUserData({ ...UserData, contact_number: e })}
+            /> */}
             <div className="input-outer-div">
               <img src={emailpic} alt="emailicon" />
               <input
@@ -124,17 +127,7 @@ function AddNominee() {
                 }}
               />
             </div>
-            <div className="input-outer-div">
-              <img src={walletpic} alt="emailicon" />
-              <input
-                type="text"
-                placeholder="Wallet Address"
-                onChange={(e) => {
-                  setUserData({ ...userData, email: e.target.value });
-                }}
-              />
-            </div>
-            <div className="input-outer-div">
+            <div className="input-outer-div file-upload-input">
               <img src={profilepic} alt="profileicon" />
               <input
                 className="input-edit-profile"
@@ -185,12 +178,15 @@ function AddNominee() {
               </>
             ) : null}
             {/* <button className="file-upload-btn">Select Profile Image</button> */}
-
             {file && submitNotClicked ? (
               <>
                 <p className="reset-text">
                   * To reset the file, click on the reset button.
                 </p>
+              </>
+            ) : file && !submitNotClicked ? (
+              <>
+                <p className="reset-text">Uploading your image on ipfs</p>
               </>
             ) : (
               <>
@@ -227,4 +223,4 @@ function AddNominee() {
   );
 }
 
-export default AddNominee;
+export default EditProfile;
