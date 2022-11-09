@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 import os
 import smtplib
 import random
@@ -12,6 +13,8 @@ import json
 
 app = Flask(__name__)
 run_with_ngrok(app)
+cors = CORS(app)
+
 
 smtp = smtplib.SMTP("smtp.gmail.com", 587)
 load_dotenv()
@@ -19,7 +22,8 @@ load_dotenv()
 
 @app.route("/")
 def hello_world():
-    return "hi"
+    response_body = {"status": 200, "data": "Hi"}
+    return response_body
 
 # Contract setup
 alchemy_url = "https://polygon-mumbai.g.alchemy.com/v2/ALbcNieoFrIRYYNDrcr4dAASXUCZbm-i"
