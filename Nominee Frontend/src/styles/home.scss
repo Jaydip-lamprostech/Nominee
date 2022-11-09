@@ -108,7 +108,7 @@ section.home-hero {
       &:after {
         content: "";
         position: absolute;
-        bottom: 10px;
+        bottom: 15%;
         left: 0;
         width: 100%;
         height: 35%;
@@ -342,7 +342,7 @@ section.home-second {
     &:after {
       content: "";
       position: absolute;
-      bottom: 10px;
+      bottom: 15%;
       left: 0;
       width: 100%;
       height: 35%;
@@ -481,7 +481,11 @@ section.home-second {
   }
 
   section.home-second {
-    margin-top: calc(70vh - 100vh);
+    margin-top: calc(69vh - 100vh);
+    h1 {
+      padding-top: 400px;
+      font-size: 70px;
+    }
   }
 
   section.home-hero {
@@ -516,15 +520,9 @@ section.home-second {
     .inside-hero-second {
       min-height: 80vh;
       max-width: 600px;
-      padding: 120px 30px 50px 50px;
+      padding: 150px 80px 120px 80px;
     }
   }
-
-  // section.home-second {
-  //   h2.home-h2-1 {
-  //     padding-top: 300px;
-  //   }
-  // }
 }
 
 @media only screen and (min-width: 1240px) and (max-width: 1599px) {

@@ -46,3 +46,11 @@ code {
   src: local(""),
     url("./components/fonts/JosefinSans-ExtraLight.ttf") format("truetype"); /* Safari, Android, iOS */
 }
+
+@font-face {
+  font-family: "JosefinSans";
+  font-style: normal;
+  font-weight: 700;
+  src: local(""),
+    url("./components/fonts/JosefinSans-Bold.ttf") format("truetype"); /* Safari, Android, iOS */
+}
