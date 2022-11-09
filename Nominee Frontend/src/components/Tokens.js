@@ -10,7 +10,6 @@ function Tokens() {
 
   return (
     <div className="token-main">
-      Tokens
       <div className="token-table" id="token-table">
         <div className="token-parent">
           {/* <div className="token-header">
@@ -26,9 +25,7 @@ function Tokens() {
             <tr>
               <th>Token</th>
               <th>Balance</th>
-              <th>Price</th>
-              <th>Nominated</th>
-              <th>Avaliable</th>
+              <th>Nominee</th>
             </tr>
             {data.map((val, key) => {
               return (

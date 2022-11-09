@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/navbar.scss";
 // import profilepic1 from "";
 import profilepic1 from "../assets/images/defaultprofileimage.png";
-import logo from "../assets/images/interitokenslogo.png";
+import logo from "../assets/images/interitokenslogo2.png";
 import ConnectWalletNavbar from "./ConnectWalletNavbar";
 
 function Navbar() {

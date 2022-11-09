@@ -19,6 +19,10 @@ div.home-navbar {
   position: absolute;
   z-index: 109;
 
+  img.logo-image {
+    height: 64px;
+  }
+
   ul {
     display: flex;
     flex-direction: row;
@@ -481,6 +485,7 @@ section.home-second {
 
   section.home-second {
     margin-top: calc(69vh - 100vh);
+
     h1 {
       padding-top: 400px;
       font-size: 70px;

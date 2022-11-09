@@ -164,7 +164,7 @@ function Signup() {
                     profile_picture.current.click();
                   }}
                 >
-                  Choose file
+                  Upload Profile Picture
                 </p>
               )}
             </div>
@@ -183,6 +183,10 @@ function Signup() {
                 <p className="reset-text">
                   * To reset the file, click on the reset button.
                 </p>
+              </>
+            ) : file && !submitNotClicked ? (
+              <>
+                <p className="reset-text">* Uploading your image on ipfs...</p>
               </>
             ) : (
               <>

@@ -177,6 +177,10 @@ function EditNominee() {
                   * To reset the file, click on the reset button.
                 </p>
               </>
+            ) : file && !submitNotClicked ? (
+              <>
+                <p className="reset-text">Uploading your image on ipfs</p>
+              </>
             ) : (
               <>
                 <p className="reset-text"></p>

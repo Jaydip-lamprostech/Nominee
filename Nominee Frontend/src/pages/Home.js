@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles/home.scss";
 import { useAccount } from "wagmi";
+import ConnectWallet from "../components/ConnectWallet";
 
 import bg1 from "../assets/images/background_copy.svg";
 import avatar2 from "../assets/images/Avatar_1.svg";
@@ -21,7 +22,9 @@ import item1 from "../assets/images/1.png";
 import item2 from "../assets/images/2.png";
 import item3 from "../assets/images/3.png";
 import arrow from "../assets/images/yellow_arrow.svg";
-import ConnectWallet from "../components/ConnectWallet";
+import logo from "../assets/images/interitokenslogo2.png";
+
+
 
 function Home() {
   const { address, isConnected } = useAccount();
@@ -34,7 +37,7 @@ function Home() {
     if (isConnected) {
       var config = {
         method: "post",
-        url: "http://822a-2401-4900-1f3e-4e75-6159-e1f2-e6e-8bc5.ngrok.io/checkAddress",
+        url: "http://127.0.0.1:5000/checkAddress",
         headers: {
           "Content-Type": "application/json",
         },
@@ -44,6 +47,16 @@ function Home() {
       axios(config)
         .then(function (response) {
           console.log(JSON.stringify(response.data));
+          console.log(response.data.status);
+          // if (response.data.status === 0) {
+          //   navigate("/signup");
+          // }
+          // else if (response.data.status === 1) {
+          //   navigate("/add-nominee");
+          // }
+          // else if (response.data.status === 2) {
+          //   navigate("/user/profile");
+          // }
         })
         .catch(function (error) {
           console.log(error);
@@ -59,12 +72,12 @@ function Home() {
       <section className="home-main">
         <div className="home-navbar">
           <div className="navbar-menu">
-            <ul>
+            {/* <ul>
               <Link to="/" className="nav-logo">
                 <li className="logo-li">Inheritokens</li>
               </Link>
-              {/* <li></li> */}
-            </ul>
+            </ul> */}
+            <img className="logo-image" src={logo} alt="logo" />
           </div>
           {/* <ConnectKitButton /> */}
           <ConnectWallet />

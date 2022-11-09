@@ -31,16 +31,19 @@
   -webkit-box-shadow: 10px 10px 25px 20px rgba(0, 0, 0, 0.1);
   -moz-box-shadow: 10px 10px 25px 20px rgba(0, 0, 0, 0.1);
   box-shadow: 10px 10px 25px 20px rgba(0, 0, 0, 0.1);
+
   // text-align: center;
   .close-button {
     cursor: pointer;
     position: absolute;
     top: 20px;
     right: 20px;
+
     svg {
       fill: #fff;
     }
   }
+
   h2 {
     margin: 1rem 0 1rem;
     font-size: 1.8rem;
@@ -58,6 +61,7 @@
     text-align: center;
     color: #525252;
   }
+
   p.reset-text {
     height: 10px;
     text-align: left;
@@ -109,11 +113,13 @@
       -moz-box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.1);
       box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.1);
     }
+
     img.close-icon {
       // height: 50%;
       width: 10%;
       margin-left: auto;
     }
+
     p {
       margin: 0;
       margin-left: 10px;
@@ -126,6 +132,7 @@
       font-family: "Josefin Sans";
       font-weight: 300;
     }
+
     input {
       font-size: 15px;
       margin-left: 10px;
@@ -134,12 +141,14 @@
       border: none;
       font-family: "Josefin Sans";
       font-weight: 300;
+
       &:focus {
         border: none;
         outline: none;
       }
     }
   }
+
   .file-upload-input {
     cursor: pointer;
   }
@@ -168,6 +177,7 @@
       // background-image: linear-gradient(to left, #f1fb7c, white, #f1fb7c);
     }
   }
+
   // .react-tel-input {
   //   .form-control {
   //     width: 100%;
@@ -181,6 +191,7 @@
   //   }
   // }
 }
+
 .file-upload-div {
   display: flex;
   flex-direction: column;
@@ -200,9 +211,11 @@
     // border-radius: 8px;
     width: 45px;
   }
+
   img.profile-img {
     width: 64px;
   }
+
   p {
     // opacity: 0.75;
     margin-left: 10px;
@@ -222,6 +235,7 @@
   //     background-color: #ebebeb;
   //   }
 }
+
 .file-upload-div:hover {
   // background-color: #525252;
   scale: 1.1;
@@ -231,6 +245,7 @@ svg.button-spin-svg-pic {
   height: 100%;
   fill: #010101;
 }
+
 svg.animate-spin {
   animation: spin 2s linear infinite;
 }
@@ -239,6 +254,7 @@ svg.animate-spin {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -252,7 +268,7 @@ svg.animate-spin {
   .login-card {
     margin: 0 auto;
     // margin-top: 2rem;
-    width: 350px;
+    width: 400px;
     // max-height: max-content;
     // height: 60vh;
     // min-height: 60vh;

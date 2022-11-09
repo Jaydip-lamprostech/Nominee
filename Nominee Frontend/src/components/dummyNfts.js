@@ -30,4 +30,5 @@ export const dummy = [{
     nft: nft9
 }, {
     nft: nft10
+
 }]
