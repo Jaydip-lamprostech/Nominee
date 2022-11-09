@@ -3,6 +3,7 @@ import os
 import smtplib
 import random
 from email.mime.multipart import MIMEMultipart
+from flask_ngrok import run_with_ngrok
 from email.mime.text import MIMEText
 from flask.globals import request, session
 from dotenv import load_dotenv
@@ -10,6 +11,7 @@ from web3 import Web3
 import json
 
 app = Flask(__name__)
+run_with_ngrok(app)
 
 smtp = smtplib.SMTP("smtp.gmail.com", 587)
 load_dotenv()
@@ -134,3 +136,6 @@ def verify():
     except Exception as e:
         print(e)
         return None
+
+if __name__ == "__main__":
+  app.run()
