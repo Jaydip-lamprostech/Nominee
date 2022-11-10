@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import { useAccount } from "wagmi";
-
 import coverimg from "../assets/images/coverfornominee.png";
 import "../styles/profile.scss";
 import Navbar from "../components/Navbar";
@@ -15,6 +14,9 @@ import { useEffect } from "react";
 import NomineesList from "../components/NomineesList";
 import { useReducer } from "react";
 import { useRef } from "react";
+import { ethers } from "ethers";
+import contract from "../artifacts/Main.json";
+export const CONTRACT_ADDRESS = "0x930C70C11A08764A94D6dC3469eC7b66c6e8E0Df";
 
 function Profile() {
   const dataFetchedRef = useRef(false);
@@ -27,6 +29,43 @@ function Profile() {
   const [showAllTokens, setShowAllTokens] = useState(false);
   const [showAllNominees, setShowAllNominees] = useState(false);
   const [showEditProfile, setShowEditProfile] = useState(false);
+  const [isLoading, setLoading] = React.useState(true);
+  const [data, setData] = useState([]);
+
+  const showProfile = async () => {
+    //contract code starts here...............................
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        if (!provider) {
+          console.log("Metamask is not installed, please install!");
+        }
+        const { chainId } = await provider.getNetwork();
+        console.log("switch case for this case is: " + chainId);
+        if (chainId === 80001) {
+          const con = new ethers.Contract(CONTRACT_ADDRESS, contract, signer);
+          const owner_details = await con.getOwnerDetails(address);
+          console.log(owner_details);
+          const url = "https://ipfs.io/ipfs/" + owner_details[2];
+          data.push([owner_details[0], owner_details[1], url]);
+          setData(data);
+          console.log(data);
+          setLoading(false);
+        } else {
+          alert("Please connect to the mumbai test network!");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    //contract code ends here.................................
+  };
+
+  useEffect(() => {
+    showProfile();
+  }, []);
 
   const toggleEditProfile = () => {
     setShowEditProfile(!showEditProfile);
@@ -95,7 +134,7 @@ function Profile() {
     // };
   }, []);
 
-  if (showProfileComponent) {
+  if (showProfileComponent && !isLoading) {
     if (showEditProfile) {
       return <EditProfile setShowEditProfile={setShowEditProfile} />;
     } else {
@@ -114,7 +153,7 @@ function Profile() {
                   <div className="image-parent">
                     <div className="image-child">
                       <img
-                        src={defaultprofileimage}
+                        src={data[0][2]}
                         width="176px"
                         height="176px"
                         alt="profileimage"
@@ -122,9 +161,9 @@ function Profile() {
                     </div>
                   </div>
                   <div className="user-profile">
-                    <h1>Jaydip Patel</h1>
-                    <p>owner@google.com</p>
-                    <p>0x054ae6107cAadC187c304de87365bc52F8c2ADB9</p>
+                    <h1>{data[0][0]}</h1>
+                    <p>{data[0][1]}</p>
+                    <p>{address}</p>
                   </div>
                   <button
                     className="profile-edit-button"
