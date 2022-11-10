@@ -35,4 +35,22 @@ export const Nominees = [
     email: "email5@gmail.com",
     walletAdd: "0x054ae6107caadc187c304de87365bc52f8c2adb9",
   },
+  {
+    image: nft5,
+    name: "Nominee Name 5",
+    email: "email5@gmail.com",
+    walletAdd: "0x054ae6107caadc187c304de87365bc52f8c2adb9",
+  },
+  {
+    image: nft5,
+    name: "Nominee Name 5",
+    email: "email5@gmail.com",
+    walletAdd: "0x054ae6107caadc187c304de87365bc52f8c2adb9",
+  },
+  {
+    image: nft5,
+    name: "Nominee Name 5",
+    email: "email5@gmail.com",
+    walletAdd: "0x054ae6107caadc187c304de87365bc52f8c2adb9",
+  },
 ];

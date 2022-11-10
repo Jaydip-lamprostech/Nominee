@@ -1,11 +1,51 @@
 .select-nominee-main {
-  position: absolute;
+  position: fixed;
   top: 0;
+  right: 0;
+
   width: 100%;
-  max-width: 1200px;
+  background-color: #00000090;
   z-index: 100;
+  height: 100vh;
+  .select-nominee-inside {
+    margin: 10vh auto;
+    max-width: 1200px;
+    max-height: 80vh;
+
+    .nominees-main {
+      height: 80vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+      padding: 0;
+      .add-nominee {
+        background-color: #ffffff;
+        position: sticky;
+        top: 0;
+        height: 10%;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+::-webkit-scrollbar {
+  border-radius: 1.5rem;
+  width: 0px;
 }
 
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 .nominees-main {
   background-color: #fff;
   margin-top: 3rem;
