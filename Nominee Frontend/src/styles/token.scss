@@ -22,10 +22,22 @@
           text-align: left;
           border-bottom: 1px solid #ddd;
         }
-
+        tr {
+          td {
+            button {
+              padding: 1rem 1rem;
+              background-color: black;
+              color: white;
+              border-radius: 99999px;
+            }
+          }
+          td.token-symbol {
+            font-family: "JosefinSans";
+            font-weight: 700;
+            color: #5a88e1;
+          }
+        }
       }
-
-
     }
   }
 }
