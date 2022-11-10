@@ -1,4 +1,13 @@
+.select-nominee-main {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  max-width: 1200px;
+  z-index: 100;
+}
+
 .nominees-main {
+  background-color: #fff;
   margin-top: 3rem;
   width: 100%;
   border-radius: 1.5rem;
@@ -28,6 +37,7 @@
       border: none;
       background-color: #111827;
       color: #f9fafb;
+      margin: 0 10px;
     }
   }
 
