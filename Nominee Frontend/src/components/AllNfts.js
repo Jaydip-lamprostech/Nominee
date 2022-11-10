@@ -7,6 +7,7 @@ import { Nominees } from "./dummyNominees";
 import SelectNominees from "./SelectNominees";
 
 function AllNfts({ nftData }) {
+  console.log(nftData);
   const [showNomineesComponent, setNomineesComponent] = useState(false);
 
   // useEffect(() => {
@@ -52,7 +53,7 @@ function AllNfts({ nftData }) {
                   className="below-nft-button"
                   onClick={() => setNomineesComponent(true)}
                 >
-                  Add Nominee
+                  Choose Nominee
                 </button>
               </div>
             </div>
