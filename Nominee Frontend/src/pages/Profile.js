@@ -21,11 +21,12 @@ export const CONTRACT_ADDRESS = "0x930C70C11A08764A94D6dC3469eC7b66c6e8E0Df";
 function Profile() {
   const dataFetchedRef = useRef(false);
   const [nftData, setNftData] = useState([]);
+  const [nftInfo, setNftInfo] = useState([{ token_address: "", token_id: "" }]);
   const { address, isConnected } = useAccount("");
   const navigate = useNavigate();
   // const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
   const [showProfileComponent, setProfileComponent] = useState(false);
-  const [showAllNfts, setShowAllNfts] = useState(true);
+  const [showAllNfts, setShowAllNfts] = useState(false);
   const [showAllTokens, setShowAllTokens] = useState(false);
   const [showAllNominees, setShowAllNominees] = useState(false);
   const [showEditProfile, setShowEditProfile] = useState(false);
@@ -72,12 +73,17 @@ function Profile() {
   };
 
   const Nftpush = (props) => {
+    console.log(props);
     props.map((item) => {
       const nft = JSON.parse(item.metadata);
       console.log(nft);
-      if (nftData.length > 0) return nftData;
-      setNftData((prev) => [...prev, nft]);
-
+      if (
+        !nftData.find(
+          (item) => nftData["block_number"] === item["block_number"]
+        )
+      )
+        setNftData((prev) => [...prev, item]);
+      // nftData.push([item]);
       console.log(nftData);
       return nftData;
     });
@@ -108,8 +114,24 @@ function Profile() {
       .request(options)
       .then(function (response) {
         console.log(response.data.result);
-        Nftpush(response.data.result);
+        // Nftpush(response.data.result);
+        for (let i = 0; i < response.data.result.length; i++) {
+          // const nft = JSON.parse(item.metadata);
+          // console.log(nft);
+          if (
+            !nftData.find(
+              (temp) =>
+                response.data.result[i]["block_number"] === temp["block_number"]
+            )
+          ) {
+            nftData.push(response.data.result[i]);
+          }
+          // nftData.push([item]);
+        }
+        setNftData(nftData);
+        console.log(nftData);
         setShowAllNfts(true);
+        console.log("inside the api function");
       })
       .catch(function (error) {
         console.error(error);

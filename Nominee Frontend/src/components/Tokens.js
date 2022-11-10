@@ -3,15 +3,17 @@ import axios from "axios";
 import { useAccount } from "wagmi";
 import { useEffect } from "react";
 import "../styles/token.scss";
+import { parse } from "@ethersproject/transactions";
 
 function Tokens() {
   const { address } = useAccount();
-  const [showMeticBalance, setMeticBalance] = useState("");
+  const [showMeticBalance, setMeticBalance] = useState();
   const data = [
     { name: "Anom", age: 19, gender: "Male" },
     { name: "Megha", age: 19, gender: "Female" },
     { name: "Subham", age: 25, gender: "Male" },
   ];
+  let token;
   const fetchTokens = async () => {
     const options = {
       method: "GET",
@@ -27,9 +29,8 @@ function Tokens() {
     axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
-        setMeticBalance(response.data.balance / Math.pow(10, 8));
-        console.log(setMeticBalance);
+        console.log(response.data.balance);
+        token = response.data.balance;
       })
       .catch(function (error) {
         console.error(error);
@@ -37,6 +38,7 @@ function Tokens() {
   };
   useEffect(() => {
     fetchTokens();
+    console.log(token);
   }, []);
 
   return (
