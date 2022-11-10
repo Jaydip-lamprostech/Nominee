@@ -3,17 +3,22 @@ import axios from "axios";
 import { useAccount } from "wagmi";
 import { useEffect } from "react";
 import "../styles/token.scss";
+import SelectNominees from "./SelectNominees";
 import { parse } from "@ethersproject/transactions";
 
 function Tokens() {
   const { address } = useAccount();
-  const [showMeticBalance, setMeticBalance] = useState();
+  const [showMeticBalance, setMeticBalance] = useState([]);
+  const [allTokens, setAllTokens] = useState([]);
+  const [showAllToken, setShowAllToken] = useState(false);
+  const [showNomineesComponent, setNomineesComponent] = useState(false);
+
   const data = [
     { name: "Anom", age: 19, gender: "Male" },
     { name: "Megha", age: 19, gender: "Female" },
     { name: "Subham", age: 25, gender: "Male" },
   ];
-  let token;
+
   const fetchTokens = async () => {
     const options = {
       method: "GET",
@@ -25,12 +30,50 @@ function Tokens() {
           "sNXC9N5fpBJzWtV0sNHUAOfAyeQDGjfZ01RBZebMLmW2YAOoLgr2ItMow7rVj5Xb",
       },
     };
-
-    axios
+    await axios
       .request(options)
       .then(function (response) {
         console.log(response.data.balance);
-        token = response.data.balance;
+        if (!showMeticBalance.length > 0)
+          showMeticBalance.push(response.data.balance / Math.pow(10, 18));
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+    setMeticBalance(showMeticBalance);
+    console.log(showMeticBalance);
+  };
+
+  const fetchTokenAll = async () => {
+    const options = {
+      method: "GET",
+      url: "https://deep-index.moralis.io/api/v2/0xfaabb044AF5C19145cA4AE13CA12C419395A72FB/erc20",
+      params: { chain: "mumbai" },
+      headers: {
+        accept: "application/json",
+        "X-API-Key":
+          "sNXC9N5fpBJzWtV0sNHUAOfAyeQDGjfZ01RBZebMLmW2YAOoLgr2ItMow7rVj5Xb",
+      },
+    };
+
+    await axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+        console.log("inside the all token");
+        for (let i = 0; i < response.data.length; i++) {
+          if (
+            !allTokens.find(
+              (temp) =>
+                response.data[i]["token_address"] === temp["token_address"]
+            )
+          ) {
+            allTokens.push(response.data[i]);
+          }
+        }
+        setAllTokens(allTokens);
+        console.log(allTokens);
+        setShowAllToken(true);
       })
       .catch(function (error) {
         console.error(error);
@@ -38,14 +81,18 @@ function Tokens() {
   };
   useEffect(() => {
     fetchTokens();
-    console.log(token);
+    fetchTokenAll();
   }, []);
 
   return (
-    <div className="token-main">
-      <div className="token-table" id="token-table">
-        <div className="token-parent">
-          {/* <div className="token-header">
+    <>
+      {showNomineesComponent && (
+        <SelectNominees setNomineesComponent={setNomineesComponent} />
+      )}
+      <div className="token-main">
+        <div className="token-table" id="token-table">
+          <div className="token-parent">
+            {/* <div className="token-header">
             <ul className="token-header-ul">
               <li className="token-header-li">Token</li>
               <li className="token-header-li">Balance</li>
@@ -54,26 +101,41 @@ function Tokens() {
               <li className="token-header-li">Available</li>
             </ul>
           </div> */}
-          <table>
-            <tr>
-              <th>Token</th>
-              <th>Balance</th>
-              <th>Nominee</th>
-            </tr>
-            {data.map((val, key) => {
-              return (
-                <tr key={key}>
-                  <td>{val.name}</td>
-                  <td>{val.age}</td>
-                  <td>{val.gender}</td>
+            <table>
+              <tr>
+                <th>Token</th>
+                <th>Balance</th>
+                <th>Nominee</th>
+              </tr>
+              {showMeticBalance && (
+                <tr>
+                  <td className="token-symbol">MATIC</td>
+                  <td>{String(showMeticBalance[0]).substring(0, 6)}</td>
+                  <td>
+                    <button>Choose Nominee</button>
+                  </td>
                 </tr>
-              );
-            })}
-          </table>
-          <div className="token-child"></div>
+              )}
+              {showAllToken &&
+                allTokens.map((val, key) => {
+                  return (
+                    <tr key={key}>
+                      <td className="token-symbol">{val.symbol}</td>
+                      <td>
+                        {String(val.balance / Math.pow(10, 18)).substring(0, 6)}
+                      </td>
+                      <td>
+                        <button>Choose Nominee</button>
+                      </td>
+                    </tr>
+                  );
+                })}
+            </table>
+            <div className="token-child"></div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
