@@ -84,7 +84,7 @@ function NomineesList() {
             return (
               <div className="nominees-container" key={key}>
                 <div className="nominees-profile">
-                  <img src={item[2]} alt="nominee_profile_image" width="64px" />
+                  <img src={item[2]} alt="nominee_profile_image" width="64px" height="64px" />
                 </div>
                 <div className="nominees-details">
                   <h2>{item[0]}</h2>
@@ -127,7 +127,9 @@ function NomineesList() {
               <p>Please add nominee to display here.</p>
             </div>
             <div className="nominees-last">
-              <button>Add Nominee</button>
+              <button onClick={() => {
+                navigate("/add-nominee");
+              }}>Add Nominee</button>
             </div>
           </div>
         </div>

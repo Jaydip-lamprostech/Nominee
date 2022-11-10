@@ -165,6 +165,16 @@ function SelectNominees(props) {
         <div className="select-nominee-main">
           <div className="select-nominee-inside">
             <div className="nominees-main">
+              <div className="add-nominee">
+                <button
+                  className="add-nominee-btn"
+                  onClick={() => {
+                    props.setNomineesComponent(false);
+                  }}
+                >
+                  Close
+                </button>
+              </div>
               <div className="nominees-container">
                 <div className="nominees-details">
                   <h2>You have 0 nominees added.</h2>

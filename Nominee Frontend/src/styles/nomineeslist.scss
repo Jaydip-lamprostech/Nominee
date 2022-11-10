@@ -7,6 +7,7 @@
   background-color: #00000090;
   z-index: 100;
   height: 100vh;
+
   .select-nominee-inside {
     margin: 10vh auto;
     max-width: 1200px;
@@ -17,6 +18,7 @@
       overflow-x: hidden;
       overflow-y: auto;
       padding: 0;
+
       .add-nominee {
         background-color: #ffffff;
         position: sticky;
@@ -27,25 +29,7 @@
     }
   }
 }
-::-webkit-scrollbar {
-  border-radius: 1.5rem;
-  width: 0px;
-}
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
 .nominees-main {
   background-color: #fff;
   margin-top: 3rem;
@@ -100,40 +84,44 @@
       -webkit-box-shadow: 0px 10px 25px 10px rgba(0, 0, 0, 0.1);
       -moz-box-shadow: 0px 10px 25px 10px rgba(0, 0, 0, 0.1);
       box-shadow: 0px 10px 25px 10px rgba(0, 0, 0, 0.1);
+
       .nominees-details {
         h2 {
           color: #5a88e1;
         }
       }
+
       .nominees-last {
         button {
           color: #ffffff;
           border: 1px solid #dcd6fc;
           background: #dcd6fc;
           background-image: linear-gradient(to right, #9f8ff7 0%, #5a88e1 100%);
-          background-image: -moz-linear-gradient(
-            left,
-            #9f8ff7 0%,
-            #5a88e1 100%
-          );
-          background-image: -webkit-linear-gradient(
-            left,
-            #9f8ff7 0%,
-            #5a88e1 100%
-          );
+          background-image: -moz-linear-gradient(left,
+              #9f8ff7 0%,
+              #5a88e1 100%);
+          background-image: -webkit-linear-gradient(left,
+              #9f8ff7 0%,
+              #5a88e1 100%);
         }
       }
     }
+
     &:last-of-type {
       border: none;
     }
+
     .nominees-profile {
       margin: 0;
       margin-right: 30px;
+
       img {
+        height: 64px;
+        width: 64px;
         border-radius: 9999px;
       }
     }
+
     .nominees-details {
       margin-left: 10px;
 
@@ -145,12 +133,14 @@
         padding: 0;
         transition: color 0.25s ease-in-out;
       }
+
       h2 {
         font-family: "JosefinSans";
         font-weight: 700;
         color: #5a88e1;
       }
     }
+
     .nominees-last {
       margin-left: auto;
 

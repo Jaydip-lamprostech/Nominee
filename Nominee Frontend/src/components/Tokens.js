@@ -22,7 +22,7 @@ function Tokens() {
   const fetchTokens = async () => {
     const options = {
       method: "GET",
-      url: "https://deep-index.moralis.io/api/v2/0xeB88DDaEdA2261298F1b740137B2ae35aA42A975/balance",
+      url: "https://deep-index.moralis.io/api/v2/" + address + "/balance",
       params: { chain: "mumbai" },
       headers: {
         accept: "application/json",
@@ -47,7 +47,7 @@ function Tokens() {
   const fetchTokenAll = async () => {
     const options = {
       method: "GET",
-      url: "https://deep-index.moralis.io/api/v2/0xfaabb044AF5C19145cA4AE13CA12C419395A72FB/erc20",
+      url: "https://deep-index.moralis.io/api/v2/" + address + "/erc20",
       params: { chain: "mumbai" },
       headers: {
         accept: "application/json",
@@ -110,9 +110,12 @@ function Tokens() {
               {showMeticBalance && (
                 <tr>
                   <td className="token-symbol">MATIC</td>
-                  <td>{String(showMeticBalance[0]).substring(0, 6)}</td>
+                  <td>{String(showMeticBalance[0]).substring(0, 7)}</td>
                   <td>
-                    <button>Choose Nominee</button>
+                    <button onClick={() => {
+                      setNomineesComponent(true);
+                      // console.log(temp2.key);
+                    }}>Choose Nominee</button>
                   </td>
                 </tr>
               )}
@@ -122,7 +125,7 @@ function Tokens() {
                     <tr key={key}>
                       <td className="token-symbol">{val.symbol}</td>
                       <td>
-                        {String(val.balance / Math.pow(10, 18)).substring(0, 6)}
+                        {String(val.balance / Math.pow(10, 18)).substring(0, 7)}
                       </td>
                       <td>
                         <button>Choose Nominee</button>

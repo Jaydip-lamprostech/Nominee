@@ -148,10 +148,25 @@ function Profile() {
     } else {
       navigate("/");
     }
-    // return () => {
-    //   dataFetchedRef.current = true;
-    // };
+    return () => {
+      // dataFetchedRef.current = true;
+      setShowAllNfts(false);
+    };
   }, []);
+
+  useEffect(() => {
+    fetchNfts();
+
+    if (address) {
+      setProfileComponent(true);
+    } else {
+      navigate("/");
+    }
+    return () => {
+      // dataFetchedRef.current = true;
+      setShowAllNfts(false);
+    };
+  }, [address])
 
   if (showProfileComponent && !isLoading) {
     if (showEditProfile) {
@@ -159,7 +174,7 @@ function Profile() {
     } else {
       return (
         <>
-          <Navbar />
+          <Navbar userData={data[0][2]} />
           <section className="profile-main">
             <div className="profile-first-section">
               <div className="profile-cover-section">
