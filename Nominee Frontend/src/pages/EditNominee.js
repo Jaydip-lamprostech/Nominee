@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Web3Storage } from "web3.storage";
 import profilepic from "../assets/images/profile_image.svg";
 import emailpic from "../assets/images/Mail.svg";
@@ -21,8 +21,13 @@ const client = new Web3Storage({ token: API_TOKEN });
 
 function EditNominee() {
   const profile_picture = useRef();
+
+  const location = useLocation();
+
   const navigate = useNavigate();
-  const [file, setFile] = useState("");
+
+  const [file, setFile] = useState(location.state.profile_cid);
+  console.log(location.state.profile_cid);
   const [fileName, setFileName] = useState("");
   // const [fileCid, setFileCid] = useState("");
   const [btnloading, setbtnLoading] = useState(false);
@@ -93,6 +98,7 @@ function EditNominee() {
               <input
                 type="text"
                 placeholder="Name"
+                defaultValue={location.state.name}
                 onChange={(e) => {
                   setUserData({ ...userData, name: e.target.value });
                 }}
@@ -104,6 +110,7 @@ function EditNominee() {
               <input
                 type="email"
                 placeholder="Email"
+                defaultValue={location.state.email}
                 onChange={(e) => {
                   setUserData({ ...userData, email: e.target.value });
                 }}
@@ -114,12 +121,13 @@ function EditNominee() {
               <input
                 type="text"
                 placeholder="Wallet Address"
+                defaultValue={location.state.walletAddress}
                 onChange={(e) => {
                   setUserData({ ...userData, email: e.target.value });
                 }}
               />
             </div>
-            <div className="input-outer-div">
+            {/* <div className="input-outer-div">
               <img src={profilepic} alt="profileicon" />
               <input
                 className="input-edit-profile"
@@ -159,19 +167,19 @@ function EditNominee() {
                   Choose file
                 </p>
               )}
-            </div>
+            </div> */}
 
-            {file ? (
+            {/* {file ? (
               <>
                 <div className="file-upload-div">
                   <img src={file} className="uploaded-img" alt="uploadsvg" />
                   <p></p>{" "}
                 </div>
               </>
-            ) : null}
+            ) : null} */}
             {/* <button className="file-upload-btn">Select Profile Image</button> */}
 
-            {file && submitNotClicked ? (
+            {/* {file && submitNotClicked ? (
               <>
                 <p className="reset-text">
                   * To reset the file, click on the reset button.
@@ -185,7 +193,7 @@ function EditNominee() {
               <>
                 <p className="reset-text"></p>
               </>
-            )}
+            )} */}
             <button
               onClick={() => {
                 handleUpload();

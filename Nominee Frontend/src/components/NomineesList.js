@@ -98,7 +98,14 @@ function NomineesList() {
                 <div className="nominees-last">
                   <button
                     onClick={() => {
-                      navigate("/edit-nominee");
+                      navigate("/edit-nominee", {
+                        state: {
+                          name: item[0],
+                          email: item[1],
+                          walletAddress: item[3],
+                          profile_cid: item[2],
+                        },
+                      });
                     }}
                   >
                     Edit
