@@ -91,10 +91,7 @@ function Profile() {
     console.log(nftData);
   };
   const fetchNfts = async () => {
-    let url =
-      "https://deep-index.moralis.io/api/v2/" +
-      "0xeB88DDaEdA2261298F1b740137B2ae35aA42A975" +
-      "/nft";
+    let url = "https://deep-index.moralis.io/api/v2/" + address + "/nft";
     const options = {
       method: "GET",
       url: url,

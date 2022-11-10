@@ -6,6 +6,7 @@ import "../styles/nomineeslist.scss";
 import { useAccount } from "wagmi";
 import { ethers } from "ethers";
 import contract from "../artifacts/Main.json";
+import contract2 from "../artifacts/ERC721.json";
 export const CONTRACT_ADDRESS = "0x930C70C11A08764A94D6dC3469eC7b66c6e8E0Df";
 
 function SelectNominees(props) {
@@ -14,8 +15,10 @@ function SelectNominees(props) {
   const { address, isConnected } = useAccount();
   const [isLoading, setLoading] = React.useState(true);
   const [data, setData] = useState([]);
+  const [index, setIndex] = useState();
 
   const showNominees = async () => {
+    setIndex(props.indexValue.key);
     //contract code starts here...............................
     try {
       const { ethereum } = window;
@@ -52,6 +55,48 @@ function SelectNominees(props) {
           setData(data);
           console.log(data);
           setLoading(false);
+        } else {
+          alert("Please connect to the mumbai test network!");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    //contract code ends here.................................
+  };
+
+  const assignAssets = async (wallet_address) => {
+    const nftData = props.nftData[index];
+    //contract code starts here...............................
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        if (!provider) {
+          console.log("Metamask is not installed, please install!");
+        }
+        const { chainId } = await provider.getNetwork();
+        console.log("switch case for this case is: " + chainId);
+        if (chainId === 80001) {
+          const con = new ethers.Contract(CONTRACT_ADDRESS, contract, signer);
+          const nft = JSON.parse(nftData.metadata);
+          const tx = await con.assignAssetsToNominee(
+            address,
+            wallet_address,
+            nft["name"],
+            nftData["token_address"],
+            0,
+            nftData["token_id"]
+          );
+          tx.wait();
+
+          const contract_address = ethers.utils.getAddress(
+            nftData["token_address"]
+          );
+          const con1 = new ethers.Contract(contract_address, contract2, signer);
+          const tx1 = await con1.approve(wallet_address, nftData["token_id"]);
+          tx1.wait();
         } else {
           alert("Please connect to the mumbai test network!");
         }
@@ -102,7 +147,9 @@ function SelectNominees(props) {
                       </p>
                     </div>
                     <div className="nominees-last">
-                      <button onClick={() => {}}>Select</button>
+                      <button onClick={() => assignAssets(item[3])}>
+                        Select
+                      </button>
                     </div>
                   </div>
                 );
