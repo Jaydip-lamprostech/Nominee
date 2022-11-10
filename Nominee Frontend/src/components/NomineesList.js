@@ -66,7 +66,7 @@ function NomineesList() {
     showNominees();
   }, []);
 
-  if (!isLoading) {
+  if (data.length > 0) {
     return (
       <>
         <div className="nominees-main">

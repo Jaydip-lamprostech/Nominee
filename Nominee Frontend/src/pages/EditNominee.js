@@ -13,6 +13,11 @@ import closeicon from "../assets/images/close.png";
 import "../styles/signup.scss";
 import Navbar from "../components/Navbar";
 // import MailSvg from "../components/MailSvg";
+import { useAccount } from "wagmi";
+import { ethers } from "ethers";
+
+import contract from "../artifacts/Main.json";
+export const CONTRACT_ADDRESS = "0x930C70C11A08764A94D6dC3469eC7b66c6e8E0Df";
 
 const API_TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGZiNzE4QzgwYmJlYUQwNTAzYThFMjgzMmI2MDU0RkVmOUU4MzA2NzQiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjE0MTEzNjczNTAsIm5hbWUiOiJUcnkifQ.srPPE7JD3gn8xEBCgQQs_8wyo6rDrXaDWC0QM8FtChA";
@@ -33,11 +38,12 @@ function EditNominee() {
   const [btnloading, setbtnLoading] = useState(false);
   const [submitNotClicked, setSubmitNotClicked] = useState(true);
   const [uploaded, setUploaded] = useState("Submit");
+  const { address, isConnected } = useAccount();
 
   const [userData, setUserData] = useState({
-    name: "",
-    email: "",
-    cid: "",
+    name: location.state.name,
+    email: location.state.email,
+    wallet_address: location.state.walletAddress,
   });
 
   async function uploadImage(e) {
@@ -49,20 +55,20 @@ function EditNominee() {
   }
 
   async function handleUpload() {
-    var fileInput = document.getElementById("input");
-    console.log(fileInput);
-    const rootCid = await client.put(fileInput.files, {
-      name: "inheritokens profile images",
-      maxRetries: 3,
-    });
-    console.log(rootCid);
-    const res = await client.get(rootCid);
-    const files = await res.files();
-    console.log(files);
-    const url = URL.createObjectURL(files[0]);
-    console.log(url);
-    console.log(files[0].cid);
-    setUserData({ ...userData, cid: files[0].cid });
+    // var fileInput = document.getElementById("input");
+    // console.log(fileInput);
+    // const rootCid = await client.put(fileInput.files, {
+    //   name: "inheritokens profile images",
+    //   maxRetries: 3,
+    // });
+    // console.log(rootCid);
+    // const res = await client.get(rootCid);
+    // const files = await res.files();
+    // console.log(files);
+    // const url = URL.createObjectURL(files[0]);
+    // console.log(url);
+    // console.log(files[0].cid);
+    // setUserData({ ...userData, cid: files[0].cid });
     // setFileCid(files[0].cid);
     setUploaded("Redirecting...");
     setbtnLoading(false);
@@ -70,7 +76,37 @@ function EditNominee() {
     // setFile(url);
   }
 
-  const onSuccess = () => {
+  const onSuccess = async () => {
+    //contract code starts here...............................
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        if (!provider) {
+          console.log("Metamask is not installed, please install!");
+        }
+
+        const { chainId } = await provider.getNetwork();
+        console.log("switch case for this case is: " + chainId);
+        if (chainId === 80001) {
+          const con = new ethers.Contract(CONTRACT_ADDRESS, contract, signer);
+          const tx = await con.editNomineeDetails(
+            address,
+            location.state.walletAddress,
+            userData.name,
+            userData.email,
+            userData.wallet_address
+          );
+          tx.wait();
+        } else {
+          alert("Please connect to the mumbai test network!");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    //contract code ends here.................................
     setTimeout(() => {
       navigate("/");
       // console.log(userData);
@@ -123,7 +159,7 @@ function EditNominee() {
                 placeholder="Wallet Address"
                 defaultValue={location.state.walletAddress}
                 onChange={(e) => {
-                  setUserData({ ...userData, email: e.target.value });
+                  setUserData({ ...userData, wallet_address: e.target.value });
                 }}
               />
             </div>
