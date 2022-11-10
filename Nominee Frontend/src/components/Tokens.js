@@ -1,13 +1,36 @@
 import React from "react";
+import axios from "axios";
+import { useAccount } from "wagmi";
+import { useEffect } from "react";
 import "../styles/token.scss";
 
 function Tokens() {
+  const { address } = useAccount();
   const data = [
     { name: "Anom", age: 19, gender: "Male" },
     { name: "Megha", age: 19, gender: "Female" },
     { name: "Subham", age: 25, gender: "Male" },
   ];
+  const fetchTokens = async () => {
+    const options = {
+      method: "GET",
+      url: `https://deep-index.moralis.io/api/v2/${address}/balance`,
+      params: { chain: "mumbai" },
+      headers: { accept: "application/json", "X-API-Key": "test" },
+    };
 
+    await axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  };
+  useEffect(() => {
+    fetchTokens();
+  }, []);
   return (
     <div className="token-main">
       <div className="token-table" id="token-table">
