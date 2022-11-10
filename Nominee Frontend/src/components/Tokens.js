@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useAccount } from "wagmi";
 import { useEffect } from "react";
@@ -6,6 +6,7 @@ import "../styles/token.scss";
 
 function Tokens() {
   const { address } = useAccount();
+  const [showMeticBalance, setMeticBalance] = useState("");
   const data = [
     { name: "Anom", age: 19, gender: "Male" },
     { name: "Megha", age: 19, gender: "Female" },
@@ -14,15 +15,21 @@ function Tokens() {
   const fetchTokens = async () => {
     const options = {
       method: "GET",
-      url: `https://deep-index.moralis.io/api/v2/${address}/balance`,
+      url: "https://deep-index.moralis.io/api/v2/0xeB88DDaEdA2261298F1b740137B2ae35aA42A975/balance",
       params: { chain: "mumbai" },
-      headers: { accept: "application/json", "X-API-Key": "test" },
+      headers: {
+        accept: "application/json",
+        "X-API-Key":
+          "sNXC9N5fpBJzWtV0sNHUAOfAyeQDGjfZ01RBZebMLmW2YAOoLgr2ItMow7rVj5Xb",
+      },
     };
 
-    await axios
+    axios
       .request(options)
       .then(function (response) {
         console.log(response.data);
+        setMeticBalance(response.data.balance / Math.pow(10, 8));
+        console.log(setMeticBalance);
       })
       .catch(function (error) {
         console.error(error);
@@ -31,6 +38,7 @@ function Tokens() {
   useEffect(() => {
     fetchTokens();
   }, []);
+
   return (
     <div className="token-main">
       <div className="token-table" id="token-table">
