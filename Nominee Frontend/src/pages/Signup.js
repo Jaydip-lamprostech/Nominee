@@ -13,7 +13,7 @@ import "../styles/signup.scss";
 // import MailSvg from "../components/MailSvg";
 
 import contract from "../artifacts/Main.json";
-export const CONTRACT_ADDRESS = "0x7122b4Dd7aC24E8011D86A4D2e7CF98491813C78";
+export const CONTRACT_ADDRESS = "0x930C70C11A08764A94D6dC3469eC7b66c6e8E0Df";
 
 const API_TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDkyYmY4MEI1OUJlMzBCRjM1ZDdkYTY5M0NFNTQzNDdGNjlFZEM1NmQiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2Njc5NzY5MDYzODYsIm5hbWUiOiJpbmhlcml0b2tlbnMifQ.Z4UmWNYWRFp7AwVpbPfcm12T2E5oRylpnd8c3cp9PHA";
@@ -61,18 +61,19 @@ function Signup() {
     // const url = URL.createObjectURL(files[0]);
     // console.log(url);
     // console.log(files[0].cid);
+    const image_cid = cid + "/" + fileName;
     setUserData({ ...userData, cid: cid + "/" + fileName });
     // setFileCid(files[0].cid);
     setUploaded("Uploaded");
     setbtnLoading(false);
-    onSuccess();
+    onSuccess(image_cid);
     // setFile(url);
   }
   // const resetFile = () => {
   //   setFile("");
   //   setUploaded("Upload File");
   // };
-  const onSuccess = async () => {
+  const onSuccess = async (image_cid) => {
     //contract code starts here...............................
     try {
       const { ethereum } = window;
@@ -90,7 +91,7 @@ function Signup() {
           const tx = await con.addOwnerDetails(
             userData.name,
             userData.email,
-            userData.cid
+            image_cid
           );
           tx.wait();
         } else {

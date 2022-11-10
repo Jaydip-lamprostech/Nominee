@@ -7,12 +7,17 @@ import emailpic from "../assets/images/Mail.svg";
 import walletpic from "../assets/images/wallet_icon.svg";
 import closeicon from "../assets/images/close.png";
 import namepic from "../assets/images/Name.svg";
+import { useAccount } from "wagmi";
+import { ethers } from "ethers";
 // import PhoneInput from "react-phone-input-2";
 // import "react-phone-input-2/lib/style.css";
 
 import "../styles/signup.scss";
 import Navbar from "../components/Navbar";
 // import MailSvg from "../components/MailSvg";
+
+import contract from "../artifacts/Main.json";
+export const CONTRACT_ADDRESS = "0x930C70C11A08764A94D6dC3469eC7b66c6e8E0Df";
 
 const API_TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGZiNzE4QzgwYmJlYUQwNTAzYThFMjgzMmI2MDU0RkVmOUU4MzA2NzQiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjE0MTEzNjczNTAsIm5hbWUiOiJUcnkifQ.srPPE7JD3gn8xEBCgQQs_8wyo6rDrXaDWC0QM8FtChA";
@@ -28,10 +33,12 @@ function AddNominee() {
   const [btnloading, setbtnLoading] = useState(false);
   const [submitNotClicked, setSubmitNotClicked] = useState(true);
   const [uploaded, setUploaded] = useState("Add Nominee");
+  const { address, isConnected } = useAccount();
 
   const [userData, setUserData] = useState({
     name: "",
     email: "",
+    wallet_address: "",
     cid: "",
   });
 
@@ -46,29 +53,61 @@ function AddNominee() {
   async function handleUpload() {
     var fileInput = document.getElementById("input");
     console.log(fileInput);
-    const rootCid = await client.put(fileInput.files, {
-      name: "inheritokens profile images",
-      maxRetries: 3,
-    });
-    console.log(rootCid);
-    const res = await client.get(rootCid);
-    const files = await res.files();
-    console.log(files);
-    const url = URL.createObjectURL(files[0]);
-    console.log(url);
-    console.log(files[0].cid);
-    setUserData({ ...userData, cid: files[0].cid });
+    const cid = await client.put(fileInput.files);
+    // const rootCid = await client.put(fileInput.files, {
+    //   name: "inheritokens profile images",
+    //   maxRetries: 3,
+    // });
+    // console.log(rootCid);
+    // const res = await client.get(rootCid);
+    // const files = await res.files();
+    // console.log(files);
+    // const url = URL.createObjectURL(files[0]);
+    // console.log(url);
+    // console.log(files[0].cid);
+    const image_cid = cid + "/" + fileName;
+    setUserData({ ...userData, cid: cid + "/" + fileName });
     // setFileCid(files[0].cid);
     setUploaded("Redirecting...");
     setbtnLoading(false);
-    onSuccess();
+    onSuccess(image_cid);
     // setFile(url);
   }
   // const resetFile = () => {
   //   setFile("");
   //   setUploaded("Upload File");
   // };
-  const onSuccess = () => {
+  const onSuccess = async (image_cid) => {
+    //contract code starts here...............................
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        if (!provider) {
+          console.log("Metamask is not installed, please install!");
+        }
+
+        const { chainId } = await provider.getNetwork();
+        console.log("switch case for this case is: " + chainId);
+        if (chainId === 80001) {
+          const con = new ethers.Contract(CONTRACT_ADDRESS, contract, signer);
+          const tx = await con.addNomineesDetails(
+            userData.name,
+            userData.email,
+            image_cid,
+            userData.wallet_address
+          );
+          tx.wait();
+        } else {
+          alert("Please connect to the mumbai test network!");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    //contract code ends here.................................
+
     setTimeout(() => {
       navigate("/");
       // console.log(userData);
@@ -130,7 +169,7 @@ function AddNominee() {
                 type="text"
                 placeholder="Wallet Address"
                 onChange={(e) => {
-                  setUserData({ ...userData, email: e.target.value });
+                  setUserData({ ...userData, wallet_address: e.target.value });
                 }}
               />
             </div>
