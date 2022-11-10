@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import { useAccount } from "wagmi";
 
-
 import coverimg from "../assets/images/coverfornominee.png";
 import "../styles/profile.scss";
 import Navbar from "../components/Navbar";
@@ -17,12 +16,10 @@ import NomineesList from "../components/NomineesList";
 import { useReducer } from "react";
 
 function Profile() {
-
-
   const [nftData, setNftData] = useState([]);
   const { address, isConnected } = useAccount();
   const navigate = useNavigate();
-  const [reducerValue, forceUpdate] = useReducer(x => x + 1, 0);
+  const [reducerValue, forceUpdate] = useReducer((x) => x + 1, 0);
   const [showProfileComponent, setProfileComponent] = useState(false);
   const [showAllNfts, setShowAllNfts] = useState(true);
   const [showAllTokens, setShowAllTokens] = useState(false);
@@ -34,34 +31,42 @@ function Profile() {
   };
 
   useEffect(() => {
-
     const Nftpush = (props) => {
       props.map((item) => {
         const nft = JSON.parse(item.metadata);
-        console.log(nft)
+        console.log(nft);
 
-        setNftData(prev => [...prev, nft]);
-        console.log(nftData)
+        setNftData((prev) => [...prev, nft]);
+        console.log(nftData);
         return nftData;
-      })
+      });
 
       console.log(nftData);
-    }
+    };
     // get nft from wallet address
     // Moralis get nft api
     const fetchNfts = () => {
+      let url = "https://deep-index.moralis.io/api/v2/" + address + "/nft";
       const options = {
-        method: 'GET',
-        url: 'https://deep-index.moralis.io/api/v2/0xeB88DDaEdA2261298F1b740137B2ae35aA42A975/nft',
-        params: { chain: 'mumbai', format: 'decimal', normalizeMetadata: 'false' },
-        headers: { accept: 'application/json', 'X-API-Key': 'sNXC9N5fpBJzWtV0sNHUAOfAyeQDGjfZ01RBZebMLmW2YAOoLgr2ItMow7rVj5Xb' }
+        method: "GET",
+        url: url,
+        params: {
+          chain: "mumbai",
+          format: "decimal",
+          normalizeMetadata: "false",
+        },
+        headers: {
+          accept: "application/json",
+          "X-API-Key":
+            "sNXC9N5fpBJzWtV0sNHUAOfAyeQDGjfZ01RBZebMLmW2YAOoLgr2ItMow7rVj5Xb",
+        },
       };
 
       axios
         .request(options)
         .then(function (response) {
           console.log(response.data.result);
-          if (nftData.length < (response.data.result).length)
+          if (nftData.length < response.data.result.length)
             Nftpush(response.data.result);
           setShowAllNfts(true);
         })
@@ -69,9 +74,8 @@ function Profile() {
           console.error(error);
         });
       // get nft api ends
-    }
+    };
     fetchNfts();
-
 
     if (address) {
       setProfileComponent(true);
@@ -79,7 +83,9 @@ function Profile() {
       navigate("/");
     }
 
-    return () => { setNftData([]) }
+    return () => {
+      setNftData([]);
+    };
   }, []);
 
   if (showProfileComponent) {
