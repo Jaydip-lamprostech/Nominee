@@ -45,9 +45,7 @@ function EmailVerified() {
             <div className="sending-email-div">
               <h1 className="sending-email-h1">Email Verified</h1>
               <p className="sending-email-p">Your email</p>
-              <span className="sending-email-span">
-                jaydip.lamprostech@gmail.com
-              </span>
+              <span className="sending-email-span">{params.email}</span>
               <p className="sending-email-p">is verified</p>
               {/* <MailSvg /> */}
             </div>
