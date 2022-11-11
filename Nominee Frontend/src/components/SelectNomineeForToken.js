@@ -6,8 +6,8 @@ import "../styles/nomineeslist.scss";
 import { useAccount } from "wagmi";
 import { ethers } from "ethers";
 import contract from "../artifacts/Main.json";
-import contract2 from "../artifacts/ERC721.json";
-export const CONTRACT_ADDRESS = "0x249fBB1743800Cb482207963dC481827c5B5A269";
+import contract2 from "../artifacts/ERC20.json";
+export const CONTRACT_ADDRESS = "0xC14A3C13034750526B3c8a4dd2c3E7BaE426A444";
 
 function SelectNomineeForToken({ tokenDetails, setNomineesComponent }) {
   const navigate = useNavigate();
@@ -65,48 +65,49 @@ function SelectNomineeForToken({ tokenDetails, setNomineesComponent }) {
     //contract code ends here.................................
   };
 
-  // const assignAssets = async (wallet_address) => {
-  //   // const nftData = props.nftData[index];
-  //   //contract code starts here...............................
-  //   try {
-  //     const { ethereum } = window;
-  //     if (ethereum) {
-  //       const provider = new ethers.providers.Web3Provider(ethereum);
-  //       const signer = provider.getSigner();
-  //       if (!provider) {
-  //         console.log("Metamask is not installed, please install!");
-  //       }
-  //       const { chainId } = await provider.getNetwork();
-  //       console.log("switch case for this case is: " + chainId);
-  //       if (chainId === 80001) {
-  //         const con = new ethers.Contract(CONTRACT_ADDRESS, contract, signer);
-  //         const nft = JSON.parse(nftData.metadata);
-  //         const tx = await con.assignAssetsToNominee(
-  //           nftData["token_hash"],
-  //           address,
-  //           wallet_address,
-  //           nft["name"],
-  //           nftData["token_address"],
-  //           0,
-  //           nftData["token_id"]
-  //         );
-  //         tx.wait();
+  const assignTokens = async (wallet_address) => {
+    //contract code starts here...............................
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        if (!provider) {
+          console.log("Metamask is not installed, please install!");
+        }
+        const { chainId } = await provider.getNetwork();
+        console.log("switch case for this case is: " + chainId);
+        if (chainId === 80001) {
+          const con = new ethers.Contract(CONTRACT_ADDRESS, contract, signer);
+          const tx = await con.assignAssetsToNominee(
+            "transaction_hash",
+            address,
+            wallet_address,
+            tokenDetails.token_name,
+            tokenDetails.token_address,
+            tokenDetails.token_balance,
+            0
+          );
+          tx.wait();
 
-  //         const contract_address = ethers.utils.getAddress(
-  //           nftData["token_address"]
-  //         );
-  //         const con1 = new ethers.Contract(contract_address, contract2, signer);
-  //         const tx1 = await con1.approve(wallet_address, nftData["token_id"]);
-  //         tx1.wait();
-  //       } else {
-  //         alert("Please connect to the mumbai test network!");
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  //   //contract code ends here.................................
-  // };
+          const contract_address = ethers.utils.getAddress(
+            tokenDetails.token_address
+          );
+          const con1 = new ethers.Contract(contract_address, contract2, signer);
+          const tx1 = await con1.approve(
+            wallet_address,
+            tokenDetails.token_balance
+          );
+          tx1.wait();
+        } else {
+          alert("Please connect to the mumbai test network!");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    //contract code ends here.................................
+  };
 
   useEffect(() => {
     showNominees();
@@ -148,9 +149,7 @@ function SelectNomineeForToken({ tokenDetails, setNomineesComponent }) {
                       </p>
                     </div>
                     <div className="nominees-last">
-                      <button
-                      // onClick={() => assignAssets(item[3])}
-                      >
+                      <button onClick={() => assignTokens(item[3])}>
                         Select
                       </button>
                     </div>

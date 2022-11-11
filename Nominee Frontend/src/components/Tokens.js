@@ -3,7 +3,6 @@ import axios from "axios";
 import { useAccount } from "wagmi";
 import { useEffect } from "react";
 import "../styles/token.scss";
-import SelectNominees from "./SelectNominees";
 import { parse } from "@ethersproject/transactions";
 import SelectNomineeForToken from "./SelectNomineeForToken";
 
@@ -14,11 +13,6 @@ function Tokens() {
   const [showAllToken, setShowAllToken] = useState(false);
   const [showNomineesComponent, setNomineesComponent] = useState(false);
 
-  const data = [
-    { name: "Anom", age: 19, gender: "Male" },
-    { name: "Megha", age: 19, gender: "Female" },
-    { name: "Subham", age: 25, gender: "Male" },
-  ];
   const [tokenDetails, setTokenDetails] = useState({
     token_address: "",
     token_name: "",
@@ -41,7 +35,7 @@ function Tokens() {
       .then(function (response) {
         console.log(response.data.balance);
         if (!showMeticBalance.length > 0)
-          showMeticBalance.push(response.data.balance / Math.pow(10, 18));
+          showMeticBalance.push(response.data.balance);
       })
       .catch(function (error) {
         console.error(error);
@@ -119,7 +113,12 @@ function Tokens() {
               {showMeticBalance && (
                 <tr>
                   <td className="token-symbol">MATIC</td>
-                  <td>{String(showMeticBalance[0]).substring(0, 7)}</td>
+                  <td>
+                    {String(showMeticBalance[0] / Math.pow(10, 18)).substring(
+                      0,
+                      7
+                    )}
+                  </td>
                   <td>
                     <button
                       onClick={() => {
@@ -131,7 +130,7 @@ function Tokens() {
                           token_name: "MATIC",
                           token_symbol: "MATIC",
                           token_balance: Number(
-                            String(showMeticBalance[0]).substring(0, 7)
+                            String(showMeticBalance[0]).substring(0, 16)
                           ),
                         });
                       }}
@@ -159,9 +158,7 @@ function Tokens() {
                               token_name: val.name,
                               token_symbol: val.symbol,
                               token_balance: Number(
-                                String(
-                                  val.balance / Math.pow(10, 18)
-                                ).substring(0, 7)
+                                String(val.balance).substring(0, 16)
                               ),
                             });
                           }}
