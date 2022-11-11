@@ -8,7 +8,7 @@ import SelectNominees from "./SelectNominees";
 import { useAccount } from "wagmi";
 import { ethers } from "ethers";
 import contract from "../artifacts/Main.json";
-export const CONTRACT_ADDRESS = "0xBFc0da3Bbdee513b9626f64401EeE00316beeB06";
+export const CONTRACT_ADDRESS = "0x249fBB1743800Cb482207963dC481827c5B5A269";
 
 function AllNfts({ nftData }) {
   const [indexValue, setIndexValue] = useState();

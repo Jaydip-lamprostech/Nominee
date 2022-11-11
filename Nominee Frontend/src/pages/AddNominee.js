@@ -17,7 +17,7 @@ import Navbar from "../components/Navbar";
 // import MailSvg from "../components/MailSvg";
 
 import contract from "../artifacts/Main.json";
-export const CONTRACT_ADDRESS = "0xBFc0da3Bbdee513b9626f64401EeE00316beeB06";
+export const CONTRACT_ADDRESS = "0x249fBB1743800Cb482207963dC481827c5B5A269";
 
 const API_TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGZiNzE4QzgwYmJlYUQwNTAzYThFMjgzMmI2MDU0RkVmOUU4MzA2NzQiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjE0MTEzNjczNTAsIm5hbWUiOiJUcnkifQ.srPPE7JD3gn8xEBCgQQs_8wyo6rDrXaDWC0QM8FtChA";
