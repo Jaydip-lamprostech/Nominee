@@ -84,7 +84,7 @@ function Signup() {
 
     var config = {
       method: "post",
-      url: `${process.env.REACT_APP_URL}/email_verification`,
+      url: `${process.env.REACT_APP_URL}email_verification`,
       headers: {
         "Content-Type": "application/json",
       },

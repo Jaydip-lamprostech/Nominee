@@ -38,7 +38,7 @@ function Home() {
     if (isConnected) {
       var config = {
         method: "post",
-        url: `${process.env.REACT_APP_URL}/checkAddress`,
+        url: `${process.env.REACT_APP_URL}checkAddress`,
         headers: {
           "Content-Type": "application/json",
         },
