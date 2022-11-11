@@ -23,19 +23,22 @@ import item2 from "../assets/images/2.png";
 import item3 from "../assets/images/3.png";
 import arrow from "../assets/images/yellow_arrow.svg";
 import logo from "../assets/images/interitokenslogo2.png";
+import { useState } from "react";
 
 function Home() {
   const { address, isConnected } = useAccount();
+  const [checkAddress, setCheckAddress] = useState();
   const navigate = useNavigate();
 
   var data = JSON.stringify({
     address: address,
   });
   useEffect(() => {
+    console.log(process.env.REACT_APP_URL);
     if (isConnected) {
       var config = {
         method: "post",
-        url: "http://127.0.0.1:5000/checkAddress",
+        url: `${process.env.REACT_APP_URL}/checkAddress`,
         headers: {
           "Content-Type": "application/json",
         },
@@ -46,10 +49,11 @@ function Home() {
         .then(function (response) {
           console.log(JSON.stringify(response.data));
           console.log(response.data.status);
+          setCheckAddress(response.data.status);
           // if (response.data.status === 0) {
           //   navigate("/signup");
           // } else if (response.data.status === 1) {
-          //   navigate("/add-nominee");
+          //   navigate("/verify/email");
           // } else if (response.data.status === 2) {
           //   navigate("/user/profile");
           // }
@@ -61,8 +65,18 @@ function Home() {
 
       // navigate("/user/profile");
     }
-  }, [address, data, isConnected]);
+  }, [address, data, isConnected, navigate]);
 
+  const getStarted = () => {
+    console.log(checkAddress);
+    if (checkAddress === 0) {
+      navigate("/signup");
+    } else if (checkAddress === 1) {
+      navigate("/verify/email");
+    } else if (checkAddress === 2) {
+      navigate("/user/profile");
+    }
+  };
   return (
     <>
       <section className="home-main">
@@ -102,7 +116,8 @@ function Home() {
               <button
                 className="home-hero-button"
                 onClick={() => {
-                  navigate("/user/profile");
+                  // navigate("/user/profile");
+                  getStarted();
                 }}
               >
                 Get Started
