@@ -70,6 +70,8 @@
           width: 80%;
           max-width: 80%;
           text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
           text-align: center;
           margin: 10px auto;
           padding: 1rem 0;
