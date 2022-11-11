@@ -230,12 +230,12 @@
 				"type": "address"
 			},
 			{
-				"internalType": "string",
-				"name": "_date",
-				"type": "string"
+				"internalType": "bool",
+				"name": "_response",
+				"type": "bool"
 			}
 		],
-		"name": "setResponseDate",
+		"name": "setResponse",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -285,12 +285,12 @@
 				"type": "address"
 			},
 			{
-				"internalType": "bool",
-				"name": "_response",
-				"type": "bool"
+				"internalType": "string",
+				"name": "_date",
+				"type": "string"
 			}
 		],
-		"name": "setResponse",
+		"name": "setResponseDate",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -680,6 +680,30 @@
 			}
 		],
 		"name": "isOwnerAdded",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "isTokensNominated",
 		"outputs": [
 			{
 				"internalType": "bool",

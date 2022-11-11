@@ -7,7 +7,7 @@ import logo from "../assets/images/interitokenslogo2.png";
 import ConnectWalletNavbar from "./ConnectWalletNavbar";
 import { ethers } from "ethers";
 import contract from "../artifacts/Main.json";
-export const CONTRACT_ADDRESS = "0xFB72264BB6E8D1689EB699079437F24920E611d9";
+export const CONTRACT_ADDRESS = "0xBFc0da3Bbdee513b9626f64401EeE00316beeB06";
 
 function Navbar({ userData }) {
   const [data, setData] = useState([]);
