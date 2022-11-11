@@ -109,7 +109,7 @@ function AddNominee() {
     //contract code ends here.................................
 
     setTimeout(() => {
-      navigate("/");
+      navigate("/user/profile");
       // console.log(userData);
     }, 1000);
   };
