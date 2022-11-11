@@ -1,13 +1,28 @@
 import React from "react";
+import { useLocation } from "react-router";
+
+import queryString from "query-string";
+
 import Navbar from "./Navbar";
 import "../styles/signup.scss";
-import { useLocation } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
 
-function SendingEmailRequest() {
+function EmailVerified() {
   const location = useLocation();
+  const [params, setParams] = useState({});
+
+  useEffect(() => {
+    setParams(queryString.parse(location.search));
+    console.log(params);
+    return () => {
+      setParams(queryString.parse(location.search));
+    };
+  }, []);
 
   return (
     <>
+      {params && console.log(params)}
       <Navbar />
       <section className="signup-main">
         <div className="login-card mail-request">
@@ -28,12 +43,12 @@ function SendingEmailRequest() {
 
           <div className="login-form">
             <div className="sending-email-div">
-              <h1 className="sending-email-h1">Confirm your email</h1>
-              <p className="sending-email-p">We emailed a link to</p>
-              <span className="sending-email-span">{location.state.email}</span>
-              <p className="sending-email-p">
-                Click the link to verify your email
-              </p>
+              <h1 className="sending-email-h1">Email Verified</h1>
+              <p className="sending-email-p">Your email</p>
+              <span className="sending-email-span">
+                jaydip.lamprostech@gmail.com
+              </span>
+              <p className="sending-email-p">is verified</p>
               {/* <MailSvg /> */}
             </div>
           </div>
@@ -43,4 +58,4 @@ function SendingEmailRequest() {
   );
 }
 
-export default SendingEmailRequest;
+export default EmailVerified;

@@ -130,7 +130,12 @@ function Signup() {
           );
           tx.wait();
           setTimeout(() => {
-            navigate("/verify/email");
+            // navigate("/verify/email", {
+            //   state: {
+            //     email: userData.email,
+            //   },
+            // });
+            navigate("/");
             // console.log(userData);
           }, 2000);
         } else {
