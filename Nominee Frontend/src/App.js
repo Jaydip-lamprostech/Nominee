@@ -27,6 +27,7 @@ import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import { WalletConnectConnector } from "wagmi/connectors/walletConnect";
 
 import { ConnectKitProvider } from "connectkit";
+import SendingEmailRequest from "./components/SendingEmailRequest";
 
 const { provider, webSocketProvider } = configureChains(defaultChains, [
   alchemyProvider({ apiKey: "O5NYvtwLMNG0LjAXPQEk0YJT2l3UxTAY" }),
@@ -101,6 +102,8 @@ function App() {
               <Route path="/edit-profile" element={<EditProfile />} />
               <Route path="/add-nominee" element={<AddNominee />} />
               <Route path="/user/profile" element={<Profile />} />
+              <Route path="/verify/email" element={<SendingEmailRequest />} />
+
               <Route path="/*" element={<PageNotFound />} />
             </Routes>
           </Router>
