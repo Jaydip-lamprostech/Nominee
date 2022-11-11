@@ -90,7 +90,37 @@ function Navbar({ userData }) {
         </div>
       </>
     );
-  else return <>Loading...</>;
+  else
+    return (
+      <>
+        <div className="navbar">
+          <div className="navbar-inside">
+            <div className="navbar-main">
+              <img className="logo" src={logo} alt="logo" />
+              {/* <h1 className="navbar-h1">
+        <span>INHERITOKENS</span>
+      </h1> */}
+              <div className="profile-wallet-section">
+                <div className="wallet-address">
+                  {/* <span>
+            {walletAdd.substring(0, 6) +
+              "..." +
+              walletAdd.substring(walletAdd.length - 5, walletAdd.length)}
+          </span> */}
+                  <ConnectWalletNavbar />
+                </div>
+
+                <img
+                  className="profile-icon"
+                  src={profilepic1}
+                  alt="profileicon"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    );
 }
 
 export default Navbar;

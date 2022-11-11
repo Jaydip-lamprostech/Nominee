@@ -104,6 +104,10 @@ function Signup() {
       });
   };
   const onSuccess = async (image_cid, otp) => {
+    setTimeout(() => {
+      setUploaded("Requesting...");
+      // console.log(userData);
+    }, 1000);
     //contract code starts here...............................
     try {
       const { ethereum } = window;
@@ -125,6 +129,10 @@ function Signup() {
             otp
           );
           tx.wait();
+          setTimeout(() => {
+            navigate("/verify/email");
+            // console.log(userData);
+          }, 2000);
         } else {
           alert("Please connect to the mumbai test network!");
         }
@@ -135,14 +143,6 @@ function Signup() {
     //contract code ends here.................................
 
     // console.log("userdata" + userData);
-    setTimeout(() => {
-      setUploaded("Redirecting...");
-      // console.log(userData);
-    }, 1000);
-    setTimeout(() => {
-      // navigate("/");
-      // console.log(userData);
-    }, 2000);
   };
 
   const resetImage = () => {
