@@ -28,7 +28,7 @@ def hello_world():
 # Contract setup
 alchemy_url = "https://polygon-mumbai.g.alchemy.com/v2/ALbcNieoFrIRYYNDrcr4dAASXUCZbm-i"
 web3 = Web3(Web3.HTTPProvider(alchemy_url))
-nominee_factory = "0x336041F8FdB4E2b148BE1C5C52344D4cC442f65a"
+nominee_factory = "0x249fBB1743800Cb482207963dC481827c5B5A269"
 file = open("Nominee.json")
 abi = json.load(file)
 contract = web3.eth.contract(address=nominee_factory, abi=abi)
@@ -50,8 +50,8 @@ def email_verification():
             + "/verify?otp="
             + str(otp)
             + "&"
-            + "email="
-            + client_mail
+            + "address="
+            + user_address
         )
         # Invoking smtp to send mail
         smtp.starttls()
@@ -116,29 +116,37 @@ def checkAddress():
 def verify():
     try:
         address = request.json["address"]
+        otp = request.json["otp"]
+        #get opt from contract
+        owner_details = contract.functions.getOwnerDetails(address).call()
+        contract_otp = (owner_details[5])
         # data to sign the transaction
-        chain_id = 80001
-        my_address = os.environ.get("ADDRESS")
-        private_key = os.environ.get("KEY")
-        nonce = web3.eth.getTransactionCount(my_address)
-        # contract function to verify the owner's email address
-        store_transaction = contract.functions.verifyOwner(address).buildTransaction(
-            {
-                "chainId": chain_id,
-                "from": my_address,
-                "nonce": nonce,
-                "gasPrice": web3.eth.gas_price,
-            }
-        )
-        signed_store_txn = web3.eth.account.sign_transaction(
-            store_transaction, private_key=private_key
-        )
-        send_store_tx = web3.eth.send_raw_transaction(signed_store_txn.rawTransaction)
-        tx_receipt = web3.eth.wait_for_transaction_receipt(send_store_tx)
-        # print(tx_receipt)
-        print("done")
-        response_body = {"status": 200, "message": "verified"}                   
-        return response_body
+        if contract_otp==otp:
+            chain_id = 80001
+            my_address = os.environ.get("ADDRESS")
+            private_key = os.environ.get("KEY")
+            nonce = web3.eth.getTransactionCount(my_address)
+            # contract function to verify the owner's email address
+            store_transaction = contract.functions.verifyOwner(address).buildTransaction(
+                {
+                    "chainId": chain_id,
+                    "from": my_address,
+                    "nonce": nonce,
+                    "gasPrice": web3.eth.gas_price,
+                }
+            )
+            signed_store_txn = web3.eth.account.sign_transaction(
+                store_transaction, private_key=private_key
+            )
+            send_store_tx = web3.eth.send_raw_transaction(signed_store_txn.rawTransaction)
+            tx_receipt = web3.eth.wait_for_transaction_receipt(send_store_tx)
+            # print(tx_receipt)
+            print("done")
+            response_body = {"status": 200, "message": "verified"}                   
+            return response_body
+        else:
+            response_body = {"status": 500, "message": "otp is not same"}                   
+            return response_body
     except Exception as e:
         print(e)
         return None

@@ -43,6 +43,11 @@
 				"internalType": "string",
 				"name": "cid",
 				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_otp",
+				"type": "uint256"
 			}
 		],
 		"name": "addOwnerDetails",
@@ -196,17 +201,17 @@
 			},
 			{
 				"internalType": "string",
-				"name": "name",
+				"name": "_name",
 				"type": "string"
 			},
 			{
 				"internalType": "string",
-				"name": "email",
+				"name": "_email",
 				"type": "string"
 			},
 			{
 				"internalType": "string",
-				"name": "cid",
+				"name": "_cid",
 				"type": "string"
 			}
 		],
@@ -394,6 +399,11 @@
 				"internalType": "bool",
 				"name": "isAlive",
 				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "otp",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -586,6 +596,11 @@
 						"internalType": "bool",
 						"name": "isAlive",
 						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "otp",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct Main.Owner",

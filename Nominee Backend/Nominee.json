@@ -12,6 +12,11 @@
 				"type": "string"
 			},
 			{
+				"internalType": "string",
+				"name": "cid",
+				"type": "string"
+			},
+			{
 				"internalType": "address",
 				"name": "nominee_address",
 				"type": "address"
@@ -38,6 +43,11 @@
 				"internalType": "string",
 				"name": "cid",
 				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_otp",
+				"type": "uint256"
 			}
 		],
 		"name": "addOwnerDetails",
@@ -47,6 +57,16 @@
 	},
 	{
 		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_transaction_hash",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			},
 			{
 				"internalType": "address",
 				"name": "nominee_address",
@@ -80,6 +100,16 @@
 	},
 	{
 		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_transaction_hash",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			},
 			{
 				"internalType": "address",
 				"name": "old_nominee",
@@ -117,7 +147,13 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_nominee",
+				"type": "address"
+			}
+		],
 		"name": "claim",
 		"outputs": [],
 		"stateMutability": "nonpayable",
@@ -126,9 +162,14 @@
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_oldNomineeAddress",
+				"type": "address"
 			},
 			{
 				"internalType": "string",
@@ -155,6 +196,41 @@
 		"inputs": [
 			{
 				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_email",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_cid",
+				"type": "string"
+			}
+		],
+		"name": "editOwnerDetails",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
 				"name": "_owner",
 				"type": "address"
 			},
@@ -165,6 +241,43 @@
 			}
 		],
 		"name": "setResponse",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "previousOwner",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "OwnershipTransferred",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			}
+		],
+		"name": "setOwnerNotAlive",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -191,6 +304,19 @@
 		"inputs": [
 			{
 				"internalType": "address",
+				"name": "newOwner",
+				"type": "address"
+			}
+		],
+		"name": "transferOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
 				"name": "_owner",
 				"type": "address"
 			}
@@ -198,6 +324,45 @@
 		"name": "verifyOwner",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "addressToNominee",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "nominee_name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "nominee_email",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "image_cid",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "nominee_address",
+				"type": "address"
+			},
+			{
+				"internalType": "bool",
+				"name": "isClaimed",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -229,6 +394,40 @@
 				"internalType": "bool",
 				"name": "isEmailVerified",
 				"type": "bool"
+			},
+			{
+				"internalType": "bool",
+				"name": "isAlive",
+				"type": "bool"
+			},
+			{
+				"internalType": "uint256",
+				"name": "otp",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_transaction_hash",
+				"type": "string"
+			}
+		],
+		"name": "checkIsNominated",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -256,20 +455,39 @@
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_token_address",
+				"type": "address"
+			}
+		],
+		"name": "getAssetsToNominee",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_nominee",
+				"type": "address"
 			}
 		],
 		"name": "getNomineeDetails",
 		"outputs": [
 			{
 				"components": [
-					{
-						"internalType": "uint256",
-						"name": "id",
-						"type": "uint256"
-					},
 					{
 						"internalType": "string",
 						"name": "nominee_name",
@@ -281,9 +499,19 @@
 						"type": "string"
 					},
 					{
+						"internalType": "string",
+						"name": "image_cid",
+						"type": "string"
+					},
+					{
 						"internalType": "address",
 						"name": "nominee_address",
 						"type": "address"
+					},
+					{
+						"internalType": "bool",
+						"name": "isClaimed",
+						"type": "bool"
 					}
 				],
 				"internalType": "struct Main.Nominee",
@@ -305,9 +533,28 @@
 		"name": "getNominees",
 		"outputs": [
 			{
-				"internalType": "uint256[]",
+				"internalType": "address[]",
 				"name": "",
-				"type": "uint256[]"
+				"type": "address[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			}
+		],
+		"name": "getOwnerAlive",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -344,6 +591,16 @@
 						"internalType": "bool",
 						"name": "isEmailVerified",
 						"type": "bool"
+					},
+					{
+						"internalType": "bool",
+						"name": "isAlive",
+						"type": "bool"
+					},
+					{
+						"internalType": "uint256",
+						"name": "otp",
+						"type": "uint256"
 					}
 				],
 				"internalType": "struct Main.Owner",
@@ -408,32 +665,22 @@
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
+				"internalType": "address",
 				"name": "",
-				"type": "uint256"
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
 			}
 		],
-		"name": "idToNominee",
+		"name": "isNominated",
 		"outputs": [
 			{
-				"internalType": "uint256",
-				"name": "id",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "nominee_name",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "nominee_email",
-				"type": "string"
-			},
-			{
-				"internalType": "address",
-				"name": "nominee_address",
-				"type": "address"
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -466,6 +713,30 @@
 				"type": "address"
 			},
 			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "isTokensNominated",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
@@ -473,6 +744,11 @@
 		],
 		"name": "nomineeToAssets",
 		"outputs": [
+			{
+				"internalType": "string",
+				"name": "transaction_hash",
+				"type": "string"
+			},
 			{
 				"internalType": "address",
 				"name": "token_address",
@@ -508,6 +784,19 @@
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "uint256",
@@ -534,6 +823,30 @@
 				"type": "address"
 			},
 			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "ownerTokenIdToAddress",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
@@ -542,9 +855,9 @@
 		"name": "ownerToNominees",
 		"outputs": [
 			{
-				"internalType": "uint256",
+				"internalType": "address",
 				"name": "",
-				"type": "uint256"
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",
