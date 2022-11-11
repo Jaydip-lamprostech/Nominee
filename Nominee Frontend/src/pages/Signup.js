@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useEffect } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Web3Storage } from "web3.storage";
 import profilepic from "../assets/images/profile_image.svg";
@@ -13,7 +14,7 @@ import "../styles/signup.scss";
 // import MailSvg from "../components/MailSvg";
 
 import contract from "../artifacts/Main.json";
-export const CONTRACT_ADDRESS = "0xBFc0da3Bbdee513b9626f64401EeE00316beeB06";
+export const CONTRACT_ADDRESS = "0x249fBB1743800Cb482207963dC481827c5B5A269";
 
 const API_TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDkyYmY4MEI1OUJlMzBCRjM1ZDdkYTY5M0NFNTQzNDdGNjlFZEM1NmQiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2Njc5NzY5MDYzODYsIm5hbWUiOiJpbmhlcml0b2tlbnMifQ.Z4UmWNYWRFp7AwVpbPfcm12T2E5oRylpnd8c3cp9PHA";
@@ -35,6 +36,7 @@ function Signup() {
     name: "",
     email: "",
     cid: "",
+    otp: "",
   });
 
   async function uploadImage(e) {
@@ -66,14 +68,42 @@ function Signup() {
     // setFileCid(files[0].cid);
     setUploaded("Uploaded");
     setbtnLoading(false);
-    onSuccess(image_cid);
+    sendEmailVarification(image_cid);
+
     // setFile(url);
   }
   // const resetFile = () => {
   //   setFile("");
   //   setUploaded("Upload File");
   // };
-  const onSuccess = async (image_cid) => {
+  const sendEmailVarification = async (image_cid) => {
+    var data = JSON.stringify({
+      email: userData.email,
+      user_address: address,
+    });
+
+    var config = {
+      method: "post",
+      url: "http://127.0.0.1:5000/email_verification",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    await axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+        console.log(response.data.otp);
+        console.log(typeof response.data.otp);
+        setUserData({ ...userData, otp: response.data.otp });
+        onSuccess(image_cid, response.data.otp);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+  const onSuccess = async (image_cid, otp) => {
     //contract code starts here...............................
     try {
       const { ethereum } = window;
@@ -91,7 +121,8 @@ function Signup() {
           const tx = await con.addOwnerDetails(
             userData.name,
             userData.email,
-            image_cid
+            image_cid,
+            otp
           );
           tx.wait();
         } else {
@@ -109,7 +140,7 @@ function Signup() {
       // console.log(userData);
     }, 1000);
     setTimeout(() => {
-      navigate("/");
+      // navigate("/");
       // console.log(userData);
     }, 2000);
   };
