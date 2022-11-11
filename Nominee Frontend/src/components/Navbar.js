@@ -7,11 +7,10 @@ import logo from "../assets/images/interitokenslogo2.png";
 import ConnectWalletNavbar from "./ConnectWalletNavbar";
 import { ethers } from "ethers";
 import contract from "../artifacts/Main.json";
-export const CONTRACT_ADDRESS = "0x930C70C11A08764A94D6dC3469eC7b66c6e8E0Df";
-
+export const CONTRACT_ADDRESS = "0xFB72264BB6E8D1689EB699079437F24920E611d9";
 
 function Navbar({ userData }) {
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
   const { address, isConnected } = useAccount("");
   const [isLoading, setLoading] = React.useState(true);
   // const [walletAdd, setWalletAdd] = useState(
@@ -39,7 +38,7 @@ function Navbar({ userData }) {
           setData(data);
           console.log(data);
           setLoading(false);
-          console.log(data[0][2])
+          console.log(data[0][2]);
         } else {
           alert("Please connect to the mumbai test network!");
         }
@@ -72,25 +71,26 @@ function Navbar({ userData }) {
                 </span> */}
                   <ConnectWalletNavbar />
                 </div>
-                {data[0][2] !== "https://ipfs.io/ipfs/" ? <img
-                  className="profile-icon"
-                  src={data[0][2]}
-                  alt="profileicon"
-                /> :
+                {data[0][2] !== "https://ipfs.io/ipfs/" ? (
+                  <img
+                    className="profile-icon"
+                    src={data[0][2]}
+                    alt="profileicon"
+                  />
+                ) : (
                   <img
                     className="profile-icon"
                     src={profilepic1}
                     alt="profileicon"
-                  />}
-
-
+                  />
+                )}
               </div>
             </div>
           </div>
         </div>
       </>
     );
-  else return (<>Loading...</>)
+  else return <>Loading...</>;
 }
 
 export default Navbar;

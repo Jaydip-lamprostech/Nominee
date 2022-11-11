@@ -17,7 +17,7 @@ import { useAccount } from "wagmi";
 import { ethers } from "ethers";
 
 import contract from "../artifacts/Main.json";
-export const CONTRACT_ADDRESS = "0x930C70C11A08764A94D6dC3469eC7b66c6e8E0Df";
+export const CONTRACT_ADDRESS = "0xFB72264BB6E8D1689EB699079437F24920E611d9";
 
 const API_TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGZiNzE4QzgwYmJlYUQwNTAzYThFMjgzMmI2MDU0RkVmOUU4MzA2NzQiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjE0MTEzNjczNTAsIm5hbWUiOiJUcnkifQ.srPPE7JD3gn8xEBCgQQs_8wyo6rDrXaDWC0QM8FtChA";

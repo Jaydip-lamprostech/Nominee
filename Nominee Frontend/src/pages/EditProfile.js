@@ -7,31 +7,37 @@ import emailpic from "../assets/images/Mail.svg";
 import namepic from "../assets/images/Name.svg";
 import closeicon from "../assets/images/close.png";
 import Navbar from "../components/Navbar";
+import { useLocation } from "react-router-dom";
+import { useAccount } from "wagmi";
+import { ethers } from "ethers";
 
 import "../styles/signup.scss";
 // import MailSvg from "../components/MailSvg";
-
+import contract from "../artifacts/Main.json";
+export const CONTRACT_ADDRESS = "0xFB72264BB6E8D1689EB699079437F24920E611d9";
 const API_TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGZiNzE4QzgwYmJlYUQwNTAzYThFMjgzMmI2MDU0RkVmOUU4MzA2NzQiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjE0MTEzNjczNTAsIm5hbWUiOiJUcnkifQ.srPPE7JD3gn8xEBCgQQs_8wyo6rDrXaDWC0QM8FtChA";
 
 const client = new Web3Storage({ token: API_TOKEN });
 
-function EditProfile(props) {
+function EditProfile({ setShowEditProfile, data }) {
   const profile_picture = useRef();
   const navigate = useNavigate();
-  const [file, setFile] = useState("");
+  const location = useLocation();
+
+  const [file, setFile] = useState(data[0][3]);
   const [fileName, setFileName] = useState("");
   // const [fileCid, setFileCid] = useState("");
   const [btnloading, setbtnLoading] = useState(false);
   const [submitNotClicked, setSubmitNotClicked] = useState(true);
   const [uploaded, setUploaded] = useState("Submit");
+  const { address, isConnected } = useAccount();
 
   const [userData, setUserData] = useState({
-    name: "",
-    email: "",
-    cid: "",
+    name: data[0][0],
+    email: data[0][1],
   });
-
+  // console.log(location.state.profile_cid);
   async function uploadImage(e) {
     console.log(e.target.value);
     console.log(document.getElementById("input").files[0].name);
@@ -41,20 +47,22 @@ function EditProfile(props) {
   }
 
   async function handleUpload() {
-    var fileInput = document.getElementById("input");
-    console.log(fileInput);
-    const rootCid = await client.put(fileInput.files, {
-      name: "inheritokens",
-      maxRetries: 3,
-    });
-    console.log(rootCid);
-    const res = await client.get(rootCid);
-    const files = await res.files();
-    console.log(files);
-    const url = URL.createObjectURL(files[0]);
-    console.log(url);
-    console.log(files[0].cid);
-    setUserData({ ...userData, cid: files[0].cid });
+    // var fileInput = document.getElementById("input");
+    // console.log(fileInput);
+    // const cid = await client.put(fileInput.files);
+    // const rootCid = await client.put(fileInput.files, {
+    //   name: "inheritokens",
+    //   maxRetries: 3,
+    // });
+    // console.log(rootCid);
+    // const res = await client.get(rootCid);
+    // const files = await res.files();
+    // console.log(files);
+    // const url = URL.createObjectURL(files[0]);
+    // console.log(url);
+    // console.log(files[0].cid);
+    // const image_cid = cid + "/" + fileName;
+    // setUserData({ ...userData, cid: cid + "/" + fileName });
     // setFileCid(files[0].cid);
     setUploaded("Image Uploaded");
     setbtnLoading(false);
@@ -65,13 +73,42 @@ function EditProfile(props) {
   //   setFile("");
   //   setUploaded("Upload File");
   // };
-  const onSuccess = () => {
+  const onSuccess = async () => {
+    //contract code starts here...............................
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        if (!provider) {
+          console.log("Metamask is not installed, please install!");
+        }
+
+        const { chainId } = await provider.getNetwork();
+        console.log("switch case for this case is: " + chainId);
+        if (chainId === 80001) {
+          const con = new ethers.Contract(CONTRACT_ADDRESS, contract, signer);
+          const tx = await con.editOwnerDetails(
+            address,
+            userData.name,
+            userData.email,
+            data[0][3]
+          );
+          tx.wait();
+        } else {
+          alert("Please connect to the mumbai test network!");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    //contract code ends here.................................
     setTimeout(() => {
       setUploaded("Redirecting...");
       // console.log(userData);
     }, 1000);
     setTimeout(() => {
-      props.setShowEditProfile(false);
+      setShowEditProfile(false);
       // console.log(userData);
     }, 2000);
   };
@@ -94,7 +131,7 @@ function EditProfile(props) {
           <div
             className="close-button"
             onClick={() => {
-              props.setShowEditProfile(false);
+              setShowEditProfile(false);
             }}
           >
             <svg
@@ -116,6 +153,7 @@ function EditProfile(props) {
               {/* <MailSvg /> */}
               <input
                 type="text"
+                defaultValue={data[0][0]}
                 placeholder="Name"
                 onChange={(e) => {
                   setUserData({ ...userData, name: e.target.value });
@@ -138,13 +176,14 @@ function EditProfile(props) {
               <img src={emailpic} alt="emailicon" />
               <input
                 type="email"
+                defaultValue={data[0][1]}
                 placeholder="Email"
                 onChange={(e) => {
                   setUserData({ ...userData, email: e.target.value });
                 }}
               />
             </div>
-            <div className="input-outer-div file-upload-input">
+            {/* <div className="input-outer-div file-upload-input">
               <img src={profilepic} alt="profileicon" />
               <input
                 className="input-edit-profile"
@@ -195,7 +234,7 @@ function EditProfile(props) {
               </>
             ) : null}
             {/* <button className="file-upload-btn">Select Profile Image</button> */}
-            {file && submitNotClicked ? (
+            {/* {file && submitNotClicked ? (
               <>
                 <p className="reset-text">
                   * To reset the file, click on the reset button.
@@ -209,7 +248,7 @@ function EditProfile(props) {
               <>
                 <p className="reset-text"></p>
               </>
-            )}
+            )}  */}
             <button
               onClick={() => {
                 handleUpload();

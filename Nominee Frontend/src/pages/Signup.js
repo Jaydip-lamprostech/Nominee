@@ -13,7 +13,7 @@ import "../styles/signup.scss";
 // import MailSvg from "../components/MailSvg";
 
 import contract from "../artifacts/Main.json";
-export const CONTRACT_ADDRESS = "0x930C70C11A08764A94D6dC3469eC7b66c6e8E0Df";
+export const CONTRACT_ADDRESS = "0xFB72264BB6E8D1689EB699079437F24920E611d9";
 
 const API_TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDkyYmY4MEI1OUJlMzBCRjM1ZDdkYTY5M0NFNTQzNDdGNjlFZEM1NmQiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2Njc5NzY5MDYzODYsIm5hbWUiOiJpbmhlcml0b2tlbnMifQ.Z4UmWNYWRFp7AwVpbPfcm12T2E5oRylpnd8c3cp9PHA";

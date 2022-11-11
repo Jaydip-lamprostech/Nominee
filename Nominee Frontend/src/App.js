@@ -7,6 +7,7 @@ import EditNominee from "./pages/EditNominee";
 import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
+import EditProfile from "./pages/EditProfile";
 
 /// wagmi start
 
@@ -103,6 +104,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/edit-nominee" element={<EditNominee />} />
+              <Route path="/edit-profile" element={<EditProfile />} />
               <Route path="/add-nominee" element={<AddNominee />} />
               <Route path="/user/profile" element={<Profile />} />
               <Route path="/*" element={<PageNotFound />} />

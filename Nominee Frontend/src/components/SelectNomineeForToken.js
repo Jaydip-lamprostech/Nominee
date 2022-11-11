@@ -9,7 +9,7 @@ import contract from "../artifacts/Main.json";
 import contract2 from "../artifacts/ERC721.json";
 export const CONTRACT_ADDRESS = "0xFB72264BB6E8D1689EB699079437F24920E611d9";
 
-function SelectNominees(props) {
+function SelectNomineeForToken(props) {
   const navigate = useNavigate();
   const walletAdd = "0x054ae6107caadc187c304de87365bc52f8c2adb9";
   const { address, isConnected } = useAccount();
@@ -193,4 +193,4 @@ function SelectNominees(props) {
   }
 }
 
-export default SelectNominees;
+export default SelectNomineeForToken;

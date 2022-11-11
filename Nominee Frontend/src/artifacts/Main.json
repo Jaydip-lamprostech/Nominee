@@ -53,6 +53,11 @@
 	{
 		"inputs": [
 			{
+				"internalType": "string",
+				"name": "_transaction_hash",
+				"type": "string"
+			},
+			{
 				"internalType": "address",
 				"name": "_owner",
 				"type": "address"
@@ -90,6 +95,11 @@
 	},
 	{
 		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_transaction_hash",
+				"type": "string"
+			},
 			{
 				"internalType": "address",
 				"name": "_owner",
@@ -178,6 +188,59 @@
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "email",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "cid",
+				"type": "string"
+			}
+		],
+		"name": "editOwnerDetails",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_owner",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "_date",
+				"type": "string"
+			}
+		],
+		"name": "setResponseDate",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
@@ -200,13 +263,6 @@
 		],
 		"name": "OwnershipTransferred",
 		"type": "event"
-	},
-	{
-		"inputs": [],
-		"name": "renounceOwnership",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
 	},
 	{
 		"inputs": [
@@ -235,24 +291,6 @@
 			}
 		],
 		"name": "setResponse",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_owner",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "_date",
-				"type": "string"
-			}
-		],
-		"name": "setResponseDate",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -369,9 +407,9 @@
 				"type": "address"
 			},
 			{
-				"internalType": "address",
-				"name": "_token_address",
-				"type": "address"
+				"internalType": "string",
+				"name": "_transaction_hash",
+				"type": "string"
 			}
 		],
 		"name": "checkIsNominated",
@@ -617,9 +655,9 @@
 				"type": "address"
 			},
 			{
-				"internalType": "address",
+				"internalType": "string",
 				"name": "",
-				"type": "address"
+				"type": "string"
 			}
 		],
 		"name": "isNominated",
@@ -667,6 +705,11 @@
 		],
 		"name": "nomineeToAssets",
 		"outputs": [
+			{
+				"internalType": "string",
+				"name": "transaction_hash",
+				"type": "string"
+			},
 			{
 				"internalType": "address",
 				"name": "token_address",

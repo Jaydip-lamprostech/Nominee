@@ -16,7 +16,7 @@ import { useReducer } from "react";
 import { useRef } from "react";
 import { ethers } from "ethers";
 import contract from "../artifacts/Main.json";
-export const CONTRACT_ADDRESS = "0x930C70C11A08764A94D6dC3469eC7b66c6e8E0Df";
+export const CONTRACT_ADDRESS = "0xFB72264BB6E8D1689EB699079437F24920E611d9";
 
 function Profile() {
   const dataFetchedRef = useRef(false);
@@ -50,7 +50,12 @@ function Profile() {
           const owner_details = await con.getOwnerDetails(address);
           console.log(owner_details);
           const url = "https://ipfs.io/ipfs/" + owner_details[2];
-          data.push([owner_details[0], owner_details[1], url]);
+          data.push([
+            owner_details[0],
+            owner_details[1],
+            url,
+            owner_details[2],
+          ]);
           setData(data);
           console.log(data);
           setLoading(false);
@@ -166,11 +171,13 @@ function Profile() {
       // dataFetchedRef.current = true;
       setShowAllNfts(false);
     };
-  }, [address])
+  }, [address]);
 
   if (showProfileComponent && !isLoading) {
     if (showEditProfile) {
-      return <EditProfile setShowEditProfile={setShowEditProfile} />;
+      return (
+        <EditProfile setShowEditProfile={setShowEditProfile} data={data} />
+      );
     } else {
       return (
         <>
@@ -201,7 +208,16 @@ function Profile() {
                   </div>
                   <button
                     className="profile-edit-button"
-                    onClick={toggleEditProfile}
+                    onClick={() => {
+                      // navigate("/edit-profile", {
+                      //   state: {
+                      //     name: data[0][0],
+                      //     email: data[0][1],
+                      //     profile_cid: data[0][3],
+                      //   },
+                      // });
+                      toggleEditProfile();
+                    }}
                   >
                     Edit Profile
                   </button>

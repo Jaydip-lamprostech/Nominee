@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import "../styles/token.scss";
 import SelectNominees from "./SelectNominees";
 import { parse } from "@ethersproject/transactions";
+import SelectNomineeForToken from "./SelectNomineeForToken";
 
 function Tokens() {
   const { address } = useAccount();
@@ -87,7 +88,7 @@ function Tokens() {
   return (
     <>
       {showNomineesComponent && (
-        <SelectNominees setNomineesComponent={setNomineesComponent} />
+        <SelectNomineeForToken setNomineesComponent={setNomineesComponent} />
       )}
       <div className="token-main">
         <div className="token-table" id="token-table">
@@ -112,10 +113,14 @@ function Tokens() {
                   <td className="token-symbol">MATIC</td>
                   <td>{String(showMeticBalance[0]).substring(0, 7)}</td>
                   <td>
-                    <button onClick={() => {
-                      setNomineesComponent(true);
-                      // console.log(temp2.key);
-                    }}>Choose Nominee</button>
+                    <button
+                      onClick={() => {
+                        setNomineesComponent(true);
+                        // console.log(temp2.key);
+                      }}
+                    >
+                      Choose Nominee
+                    </button>
                   </td>
                 </tr>
               )}

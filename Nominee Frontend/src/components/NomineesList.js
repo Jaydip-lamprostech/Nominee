@@ -6,7 +6,7 @@ import "../styles/nomineeslist.scss";
 import { useAccount } from "wagmi";
 import { ethers } from "ethers";
 import contract from "../artifacts/Main.json";
-export const CONTRACT_ADDRESS = "0x930C70C11A08764A94D6dC3469eC7b66c6e8E0Df";
+export const CONTRACT_ADDRESS = "0xFB72264BB6E8D1689EB699079437F24920E611d9";
 
 function NomineesList() {
   const navigate = useNavigate();
@@ -84,7 +84,12 @@ function NomineesList() {
             return (
               <div className="nominees-container" key={key}>
                 <div className="nominees-profile">
-                  <img src={item[2]} alt="nominee_profile_image" width="64px" height="64px" />
+                  <img
+                    src={item[2]}
+                    alt="nominee_profile_image"
+                    width="64px"
+                    height="64px"
+                  />
                 </div>
                 <div className="nominees-details">
                   <h2>{item[0]}</h2>
@@ -127,9 +132,13 @@ function NomineesList() {
               <p>Please add nominee to display here.</p>
             </div>
             <div className="nominees-last">
-              <button onClick={() => {
-                navigate("/add-nominee");
-              }}>Add Nominee</button>
+              <button
+                onClick={() => {
+                  navigate("/add-nominee");
+                }}
+              >
+                Add Nominee
+              </button>
             </div>
           </div>
         </div>
