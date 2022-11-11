@@ -38,13 +38,7 @@ const { provider, webSocketProvider } = configureChains(defaultChains, [
 //   [publicProvider()]
 // );
 
-const chains = [
-  chain.mainnet,
-  chain.polygon,
-  chain.optimism,
-  chain.arbitrum,
-  chain.polygonMumbai,
-];
+const chains = [chain.polygonMumbai];
 
 // const client = createClient(
 //   getDefaultClient({
