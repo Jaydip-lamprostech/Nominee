@@ -16,7 +16,7 @@ import { useReducer } from "react";
 import { useRef } from "react";
 import { ethers } from "ethers";
 import contract from "../artifacts/Main.json";
-export const CONTRACT_ADDRESS = "0xC14A3C13034750526B3c8a4dd2c3E7BaE426A444";
+export const CONTRACT_ADDRESS = "0x23C82960b09F192A4c6056525829BE57422FaAE9";
 
 function Profile() {
   const dataFetchedRef = useRef(false);
