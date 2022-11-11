@@ -38,9 +38,10 @@ contract = web3.eth.contract(address=nominee_factory, abi=abi)
 # ---------------------------------------------------------------------------------------
 # Sending Verification otp using mail
 @app.route("/email_verification", methods=["POST"])
-def send_verification_mail():
+def email_verification():
     try:
         client_mail = request.json["email"]
+        user_address = request.json["user_address"]
 
         # Generate OTP
         otp = random.randint(1000, 9999)
@@ -65,7 +66,7 @@ def send_verification_mail():
             Hi User,<br/>
             <p>Please click on the <a href='{hostname}'>link</a> to verify.</p><br/>
             Thank You,<br/>
-            Team DEHITAS
+            Team Inheritokens
         """
 
         part1 = MIMEText(html, "html")
@@ -74,11 +75,12 @@ def send_verification_mail():
 
         smtp.sendmail(os.environ.get("APP_MAIL"), client_mail, msg.as_string())
         smtp.close()
-        response_body = {"status": 200, "data": "sent"}
+        response_body = {"status": 200, "data": "sent", "otp":otp}
         return response_body
 
     except Exception as e:
         print(e)
+        print("error")
         return None
     
 # ---------------------------------------------------------------------------------------
