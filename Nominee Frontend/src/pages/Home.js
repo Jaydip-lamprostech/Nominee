@@ -24,8 +24,6 @@ import item3 from "../assets/images/3.png";
 import arrow from "../assets/images/yellow_arrow.svg";
 import logo from "../assets/images/interitokenslogo2.png";
 
-
-
 function Home() {
   const { address, isConnected } = useAccount();
   const navigate = useNavigate();
@@ -48,15 +46,13 @@ function Home() {
         .then(function (response) {
           console.log(JSON.stringify(response.data));
           console.log(response.data.status);
-          // if (response.data.status === 0) {
-          //   navigate("/signup");
-          // }
-          // else if (response.data.status === 1) {
-          //   navigate("/add-nominee");
-          // }
-          // else if (response.data.status === 2) {
-          //   navigate("/user/profile");
-          // }
+          if (response.data.status === 0) {
+            navigate("/signup");
+          } else if (response.data.status === 1) {
+            navigate("/add-nominee");
+          } else if (response.data.status === 2) {
+            navigate("/user/profile");
+          }
         })
         .catch(function (error) {
           console.log(error);
