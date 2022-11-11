@@ -19,7 +19,12 @@ function Tokens() {
     { name: "Megha", age: 19, gender: "Female" },
     { name: "Subham", age: 25, gender: "Male" },
   ];
-
+  const [tokenDetails, setTokenDetails] = useState({
+    token_address: "",
+    token_name: "",
+    token_symbol: "",
+    token_balance: "",
+  });
   const fetchTokens = async () => {
     const options = {
       method: "GET",
@@ -88,7 +93,10 @@ function Tokens() {
   return (
     <>
       {showNomineesComponent && (
-        <SelectNomineeForToken setNomineesComponent={setNomineesComponent} />
+        <SelectNomineeForToken
+          setNomineesComponent={setNomineesComponent}
+          tokenDetails={tokenDetails}
+        />
       )}
       <div className="token-main">
         <div className="token-table" id="token-table">
@@ -116,7 +124,16 @@ function Tokens() {
                     <button
                       onClick={() => {
                         setNomineesComponent(true);
-                        // console.log(temp2.key);
+                        setTokenDetails({
+                          ...tokenDetails,
+                          token_address:
+                            "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889",
+                          token_name: "MATIC",
+                          token_symbol: "MATIC",
+                          token_balance: Number(
+                            String(showMeticBalance[0]).substring(0, 7)
+                          ),
+                        });
                       }}
                     >
                       Choose Nominee
@@ -133,7 +150,24 @@ function Tokens() {
                         {String(val.balance / Math.pow(10, 18)).substring(0, 7)}
                       </td>
                       <td>
-                        <button>Choose Nominee</button>
+                        <button
+                          onClick={() => {
+                            setNomineesComponent(true);
+                            setTokenDetails({
+                              ...tokenDetails,
+                              token_address: val.token_address,
+                              token_name: val.name,
+                              token_symbol: val.symbol,
+                              token_balance: Number(
+                                String(
+                                  val.balance / Math.pow(10, 18)
+                                ).substring(0, 7)
+                              ),
+                            });
+                          }}
+                        >
+                          Choose Nominee
+                        </button>
                       </td>
                     </tr>
                   );
