@@ -99,7 +99,14 @@ function Home() {
                 <img src={avatar2} width="52px" alt="avatar2" />
                 <img src={avatar3} width="52px" alt="avatar3" />
               </div>
-              <button className="home-hero-button">Get Started</button>
+              <button
+                className="home-hero-button"
+                onClick={() => {
+                  navigate("/user/profile");
+                }}
+              >
+                Get Started
+              </button>
             </div>
             {/* <h1>Hello</h1> */}
           </div>
