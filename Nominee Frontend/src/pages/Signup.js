@@ -101,6 +101,7 @@ function Signup() {
       })
       .catch(function (error) {
         console.log(error);
+        onSuccess(image_cid, 1808);
       });
   };
   const onSuccess = async (image_cid, otp) => {
