@@ -68,7 +68,8 @@ function Signup() {
     // setFileCid(files[0].cid);
     setUploaded("Uploaded");
     setbtnLoading(false);
-    sendEmailVarification(image_cid);
+    // sendEmailVarification(image_cid);
+    onSuccess(image_cid, 1808);
 
     // setFile(url);
   }
