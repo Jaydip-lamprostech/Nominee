@@ -110,6 +110,30 @@ function Signup() {
       setUploaded("Requesting...");
       // console.log(userData);
     }, 1000);
+    // verify api function.....................
+    var data = JSON.stringify({
+      address: address,
+      otp: otp,
+    });
+
+    var config = {
+      method: "post",
+      url: "https://api.dehitas.xyz/verify",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    await axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    // verify function ends....................
     //contract code starts here...............................
     try {
       const { ethereum } = window;
