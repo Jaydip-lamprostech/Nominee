@@ -96,8 +96,8 @@ function Signup() {
         console.log(JSON.stringify(response.data));
         console.log(response.data.otp);
         console.log(typeof response.data.otp);
-        setUserData({ ...userData, otp: response.data.otp });
-        onSuccess(image_cid, response.data.otp);
+        setUserData({ ...userData, otp: 1808 });
+        onSuccess(image_cid, 1808);
       })
       .catch(function (error) {
         console.log(error);
@@ -135,7 +135,7 @@ function Signup() {
             //     email: userData.email,
             //   },
             // });
-            navigate("/");
+            navigate("/user/profile");
             // console.log(userData);
           }, 2000);
         } else {

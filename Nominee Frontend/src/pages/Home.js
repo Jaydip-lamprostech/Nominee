@@ -71,9 +71,11 @@ function Home() {
     console.log(checkAddress);
     if (checkAddress === 0) {
       navigate("/signup");
-    } else if (checkAddress === 1) {
-      navigate("/verify/email");
-    } else if (checkAddress === 2) {
+    }
+    // else if (checkAddress === 1) {
+    //   navigate("/verify/email");
+    // }
+    else if (checkAddress === 2) {
       navigate("/user/profile");
     }
   };
