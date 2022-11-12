@@ -48,7 +48,7 @@ function Profile() {
         if (chainId === 80001) {
           const con = new ethers.Contract(CONTRACT_ADDRESS, contract, signer);
           const owner_details = await con.getOwnerDetails(address);
-          console.log(owner_details);
+          // console.log(owner_details);
           const url = "https://ipfs.io/ipfs/" + owner_details[2];
           data.push([
             owner_details[0],
@@ -57,7 +57,7 @@ function Profile() {
             owner_details[2],
           ]);
           setData(data);
-          console.log(data);
+          // console.log(data);
           setLoading(false);
         } else {
           alert("Please connect to the mumbai test network!");
@@ -78,10 +78,10 @@ function Profile() {
   };
 
   const Nftpush = (props) => {
-    console.log(props);
+    // console.log(props);
     props.map((item) => {
       const nft = JSON.parse(item.metadata);
-      console.log(nft);
+      // console.log(nft);
       if (
         !nftData.find(
           (item) => nftData["block_number"] === item["block_number"]
@@ -89,11 +89,11 @@ function Profile() {
       )
         setNftData((prev) => [...prev, item]);
       // nftData.push([item]);
-      console.log(nftData);
+      // console.log(nftData);
       return nftData;
     });
 
-    console.log(nftData);
+    // console.log(nftData);
   };
   const fetchNfts = async () => {
     let url = "https://deep-index.moralis.io/api/v2/" + address + "/nft";
@@ -115,7 +115,7 @@ function Profile() {
     await axios
       .request(options)
       .then(function (response) {
-        console.log(response.data.result);
+        // console.log(response.data.result);
         // Nftpush(response.data.result);
         for (let i = 0; i < response.data.result.length; i++) {
           // const nft = JSON.parse(item.metadata);
@@ -131,9 +131,9 @@ function Profile() {
           // nftData.push([item]);
         }
         setNftData(nftData);
-        console.log(nftData);
+        // console.log(nftData);
         setShowAllNfts(true);
-        console.log("inside the api function");
+        // console.log("inside the api function");
       })
       .catch(function (error) {
         console.error(error);

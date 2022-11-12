@@ -14,7 +14,7 @@ function EmailVerified() {
 
   useEffect(() => {
     setParams(queryString.parse(location.search));
-    console.log(params);
+    // console.log(params);
     return () => {
       setParams(queryString.parse(location.search));
     };
@@ -22,7 +22,7 @@ function EmailVerified() {
 
   return (
     <>
-      {params && console.log(params)}
+      {/* {params && console.log(params)} */}
       <Navbar />
       <section className="signup-main">
         <div className="login-card mail-request">

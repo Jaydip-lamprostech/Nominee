@@ -30,7 +30,7 @@ function EditProfile({ setShowEditProfile, data }) {
   // const [fileCid, setFileCid] = useState("");
   const [btnloading, setbtnLoading] = useState(false);
   const [submitNotClicked, setSubmitNotClicked] = useState(true);
-  const [uploaded, setUploaded] = useState("Submit");
+  const [uploaded, setUploaded] = useState("Update");
   const { address, isConnected } = useAccount();
 
   const [userData, setUserData] = useState({
@@ -39,10 +39,10 @@ function EditProfile({ setShowEditProfile, data }) {
   });
   // console.log(location.state.profile_cid);
   async function uploadImage(e) {
-    console.log(e.target.value);
-    console.log(document.getElementById("input").files[0].name);
+    // console.log(e.target.value);
+    // console.log(document.getElementById("input").files[0].name);
     setFileName(document.getElementById("input").files[0].name);
-    console.log(URL.createObjectURL(e.target.files[0]));
+    // console.log(URL.createObjectURL(e.target.files[0]));
     setFile(URL.createObjectURL(e.target.files[0]));
   }
 
@@ -120,7 +120,7 @@ function EditProfile({ setShowEditProfile, data }) {
   };
 
   useEffect(() => {
-    console.log(userData);
+    // console.log(userData);
   }, [userData]);
 
   return (

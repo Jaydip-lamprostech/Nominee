@@ -34,7 +34,7 @@ function Home() {
     address: address,
   });
   useEffect(() => {
-    console.log(process.env.REACT_APP_URL);
+    // console.log(process.env.REACT_APP_URL);
     if (isConnected) {
       var config = {
         method: "post",
@@ -47,8 +47,8 @@ function Home() {
 
       axios(config)
         .then(function (response) {
-          console.log(JSON.stringify(response.data));
-          console.log(response.data.status);
+          // console.log(JSON.stringify(response.data));
+          // console.log(response.data.status);
           setCheckAddress(response.data.status);
           // if (response.data.status === 0) {
           //   navigate("/signup");
@@ -61,14 +61,14 @@ function Home() {
         .catch(function (error) {
           console.log(error);
         });
-      console.log(address);
+      // console.log(address);
 
       // navigate("/user/profile");
     }
   }, [address, data, isConnected, navigate]);
 
   const getStarted = () => {
-    console.log(checkAddress);
+    // console.log(checkAddress);
     if (checkAddress === 0) {
       navigate("/signup");
     }

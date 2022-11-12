@@ -40,18 +40,18 @@ function Signup() {
   });
 
   async function uploadImage(e) {
-    console.log(e.target.value);
-    console.log(document.getElementById("input").files[0].name);
+    // console.log(e.target.value);
+    // console.log(document.getElementById("input").files[0].name);
     setFileName(document.getElementById("input").files[0].name);
-    console.log(URL.createObjectURL(e.target.files[0]));
+    // console.log(URL.createObjectURL(e.target.files[0]));
     setFile(URL.createObjectURL(e.target.files[0]));
   }
 
   async function handleUpload() {
     var fileInput = document.getElementById("input");
-    console.log(fileInput);
+    // console.log(fileInput);
     const cid = await client.put(fileInput.files);
-    console.log("new " + cid + "/" + fileName);
+    // console.log("new " + cid + "/" + fileName);
     // const rootCid = await client.put(fileInput.files, {
     //   name: "inheritokens profile images",
     //   maxRetries: 5,
@@ -159,7 +159,7 @@ function Signup() {
   };
 
   useEffect(() => {
-    console.log(userData);
+    // console.log(userData);
   }, [userData]);
 
   return (

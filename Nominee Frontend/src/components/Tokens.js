@@ -33,7 +33,7 @@ function Tokens() {
     await axios
       .request(options)
       .then(function (response) {
-        console.log(response.data.balance);
+        // console.log(response.data.balance);
         if (!showMeticBalance.length > 0)
           showMeticBalance.push(response.data.balance);
       })
@@ -41,7 +41,7 @@ function Tokens() {
         console.error(error);
       });
     setMeticBalance(showMeticBalance);
-    console.log(showMeticBalance);
+    // console.log(showMeticBalance);
   };
 
   const fetchTokenAll = async () => {
@@ -59,8 +59,8 @@ function Tokens() {
     await axios
       .request(options)
       .then(function (response) {
-        console.log(response.data);
-        console.log("inside the all token");
+        // console.log(response.data);
+        // console.log("inside the all token");
         for (let i = 0; i < response.data.length; i++) {
           if (
             !allTokens.find(
@@ -72,7 +72,7 @@ function Tokens() {
           }
         }
         setAllTokens(allTokens);
-        console.log(allTokens);
+        // console.log(allTokens);
         setShowAllToken(true);
       })
       .catch(function (error) {

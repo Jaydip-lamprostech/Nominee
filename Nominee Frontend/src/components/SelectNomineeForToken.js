@@ -17,7 +17,7 @@ function SelectNomineeForToken({ tokenDetails, setNomineesComponent }) {
   const [data, setData] = useState([]);
   const [index, setIndex] = useState();
 
-  console.log(tokenDetails);
+  // console.log(tokenDetails);
   const showNominees = async () => {
     //contract code starts here...............................
     try {
@@ -53,7 +53,7 @@ function SelectNomineeForToken({ tokenDetails, setNomineesComponent }) {
             }
           }
           setData(data);
-          console.log(data);
+          // console.log(data);
           setLoading(false);
         } else {
           alert("Please connect to the mumbai test network!");
