@@ -24,10 +24,14 @@ import item3 from "../assets/images/3.png";
 import arrow from "../assets/images/yellow_arrow.svg";
 import logo from "../assets/images/interitokenslogo2.png";
 import { useState } from "react";
+import { ethers } from "ethers";
+import contract from "../artifacts/Main.json";
+export const CONTRACT_ADDRESS = "0xaEF8eb4EDCB0177A5ef6a5e3f46E581a5908eef4";
 
 function Home() {
   const { address, isConnected } = useAccount();
   const [checkAddress, setCheckAddress] = useState();
+  const [isRegistered, setIsRegistered] = useState(false);
   const navigate = useNavigate();
 
   var data = JSON.stringify({
@@ -63,35 +67,40 @@ function Home() {
   }, [address, data, isConnected]);
 
   const getStarted = () => {
-    console.log(checkAddress);
+    // console.log(checkAddress);
     if (isConnected) {
-      var config = {
-        method: "post",
-        url: `${process.env.REACT_APP_URL}checkAddress`,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: data,
-      };
-
-      axios(config)
-        .then(function (response) {
-          // console.log(JSON.stringify(response.data));
-          console.log(response.data.status);
-          setCheckAddress(response.data.status);
-          if (response.data.status === 0) {
-            navigate("/signup");
-          }
-          // else if (response.data.status === 1) {
-          //   navigate("/verify/email");
-          // }
-          else if (response.data.status === 1) {
-            navigate("/user/profile");
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+      checkRegister();
+      // if (isRegistered) {
+      //   navigate("/user/profile");
+      // } else {
+      //   navigate("/signup");
+      // }
+      // var config = {
+      //   method: "post",
+      //   url: `${process.env.REACT_APP_URL}checkAddress`,
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   data: data,
+      // };
+      // axios(config)
+      //   .then(function (response) {
+      //     // console.log(JSON.stringify(response.data));
+      //     console.log(response.data.status);
+      //     setCheckAddress(response.data.status);
+      //     if (response.data.status === 0) {
+      //       navigate("/signup");
+      //     }
+      //     // else if (response.data.status === 1) {
+      //     //   navigate("/verify/email");
+      //     // }
+      //     else if (response.data.status === 1) {
+      //       navigate("/user/profile");
+      //     }
+      //   })
+      //   .catch(function (error) {
+      //     console.log(error);
+      //   });
       // console.log(address);
       // if (checkAddress === 0) {
       //   navigate("/signup");
@@ -103,6 +112,45 @@ function Home() {
       //   navigate("/user/profile");
       // }
     }
+  };
+
+  const checkRegister = async () => {
+    //contract code starts here...............................
+    try {
+      const { ethereum } = window;
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        if (!provider) {
+          console.log("Metamask is not installed, please install!");
+        }
+        const { chainId } = await provider.getNetwork();
+        console.log("switch case for this case is: " + chainId);
+        if (chainId === 80001) {
+          const con = new ethers.Contract(CONTRACT_ADDRESS, contract, signer);
+          const address_array = await con.getOwners();
+          let check = false;
+          for (let i = 0; i < address_array.length; i++) {
+            if (address_array[i] === address) {
+              console.log("registering");
+              check = true;
+              break;
+            }
+          }
+          if (check === false) {
+            navigate("/signup");
+          } else {
+            navigate("/user/profile");
+          }
+          // console.log(data);
+        } else {
+          alert("Please connect to the mumbai test network!");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    //contract code ends here.................................
   };
 
   return (
