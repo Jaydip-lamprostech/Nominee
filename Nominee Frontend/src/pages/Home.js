@@ -26,6 +26,7 @@ import logo from "../assets/images/interitokenslogo2.png";
 import { useState } from "react";
 import { ethers } from "ethers";
 import contract from "../artifacts/Main.json";
+import { useRef } from "react";
 export const CONTRACT_ADDRESS = "0xaEF8eb4EDCB0177A5ef6a5e3f46E581a5908eef4";
 
 function Home() {
@@ -33,7 +34,7 @@ function Home() {
   const [checkAddress, setCheckAddress] = useState();
   const [isRegistered, setIsRegistered] = useState(false);
   const navigate = useNavigate();
-
+  const walletButtonRef = useRef();
   var data = JSON.stringify({
     address: address,
   });
@@ -112,6 +113,9 @@ function Home() {
       //   navigate("/user/profile");
       // }
     }
+    else {
+
+    }
   };
 
   const checkRegister = async () => {
@@ -168,7 +172,7 @@ function Home() {
             </Link>
           </div>
           {/* <ConnectKitButton /> */}
-          <ConnectWallet />
+          <ConnectWallet ref={walletButtonRef} />
           {/* <button className="home-connect-btn" onClick={togglePopup}>
             Connect Wallet
           </button> */}
@@ -195,6 +199,7 @@ function Home() {
                 className="home-hero-button"
                 onClick={() => {
                   // navigate("/user/profile");
+
                   getStarted();
                 }}
               >

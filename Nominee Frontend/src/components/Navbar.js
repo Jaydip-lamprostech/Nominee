@@ -7,6 +7,7 @@ import logo from "../assets/images/interitokenslogo2.png";
 import ConnectWalletNavbar from "./ConnectWalletNavbar";
 import { ethers } from "ethers";
 import contract from "../artifacts/Main.json";
+import { Link } from "react-router-dom";
 export const CONTRACT_ADDRESS = "0xaEF8eb4EDCB0177A5ef6a5e3f46E581a5908eef4";
 
 function Navbar({ userData }) {
@@ -51,14 +52,16 @@ function Navbar({ userData }) {
 
   useEffect(() => {
     showProfile();
-  }, []);
+  }, [address]);
   if (!isLoading)
     return (
       <>
         <div className="navbar">
           <div className="navbar-inside">
             <div className="navbar-main">
-              <img className="logo" src={logo} alt="logo" />
+              <Link to="/">
+                <img className="logo" src={logo} alt="logo" />
+              </Link>
               {/* <h1 className="navbar-h1">
               <span>INHERITOKENS</span>
             </h1> */}
@@ -71,19 +74,21 @@ function Navbar({ userData }) {
                 </span> */}
                   <ConnectWalletNavbar />
                 </div>
-                {data[0][2] !== "https://ipfs.io/ipfs/" ? (
-                  <img
-                    className="profile-icon"
-                    src={data[0][2]}
-                    alt="profileicon"
-                  />
-                ) : (
-                  <img
-                    className="profile-icon"
-                    src={profilepic1}
-                    alt="profileicon"
-                  />
-                )}
+                <Link to="/user/profile">
+                  {data[0][2] !== "https://ipfs.io/ipfs/" ? (
+                    <img
+                      className="profile-icon"
+                      src={data[0][2]}
+                      alt="profileicon"
+                    />
+                  ) : (
+                    <img
+                      className="profile-icon"
+                      src={profilepic1}
+                      alt="profileicon"
+                    />
+                  )}
+                </Link>
               </div>
             </div>
           </div>
@@ -109,12 +114,13 @@ function Navbar({ userData }) {
           </span> */}
                   <ConnectWalletNavbar />
                 </div>
-
-                <img
-                  className="profile-icon"
-                  src={profilepic1}
-                  alt="profileicon"
-                />
+                <Link to="/user/profile">
+                  <img
+                    className="profile-icon"
+                    src={profilepic1}
+                    alt="profileicon"
+                  />
+                </Link>
               </div>
             </div>
           </div>
