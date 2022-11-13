@@ -12,6 +12,7 @@ import EditProfile from "./pages/EditProfile";
 /// wagmi start
 
 import {
+  Chain,
   WagmiConfig,
   createClient,
   defaultChains,
