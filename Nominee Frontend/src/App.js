@@ -40,8 +40,27 @@ const { provider, webSocketProvider } = configureChains(defaultChains, [
 //   [chain.mainnet, chain.optimism],
 //   [publicProvider()]
 // );
+const customChain = {
+  id: 1029,
+  name: 'BitTorrent Chain Donau',
+  network: 'BitTorrent Chain Donau',
+  nativeCurrency: {
+    decimals: 18,
+    name: 'BitTorrent Chain Donau',
+    symbol: 'BTT'
+  },
+  rpcUrls: {
+    default: 'https://pre-rpc.bittorrentchain.io/'
+  },
+  blockExplorers: {
+    default: {
+      name: 'BitTorrent Chain Donau', url: 'https://testscan.bt.io'
+    }
+  },
+  testnet: true
+}
 
-const chains = [chain.polygonMumbai];
+const chains = [chain.polygonMumbai, customChain];
 
 // const client = createClient(
 //   getDefaultClient({
