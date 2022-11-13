@@ -154,6 +154,10 @@ section.home-hero {
         box-shadow: 5px 5px 10px 0px rgba(0, 0, 0, 0.1);
         font-family: "Josefin Sans";
         font-weight: 300;
+        // min-width: 10vw;
+        svg {
+          margin: 0 auto;
+        }
       }
     }
   }
