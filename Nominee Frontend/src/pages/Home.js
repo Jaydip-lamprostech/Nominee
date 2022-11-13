@@ -36,6 +36,37 @@ function Home() {
   });
   useEffect(() => {
     // console.log(process.env.REACT_APP_URL);
+    // if (isConnected) {
+    //   var config = {
+    //     method: "post",
+    //     url: `${process.env.REACT_APP_URL}checkAddress`,
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     data: data,
+    //   };
+    //   axios(config)
+    //     .then(function (response) {
+    //       // console.log(JSON.stringify(response.data));
+    //       console.log(response.data.status);
+    //       setCheckAddress(response.data.status);
+    //       // if (response.data.status === 0) {
+    //       //   navigate("/signup");
+    //       // } else if (response.data.status === 1) {
+    //       //   navigate("/verify/email");
+    //       // } else if (response.data.status === 2) {
+    //       //   navigate("/user/profile");
+    //       // }
+    //     })
+    //     .catch(function (error) {
+    //       console.log(error);
+    //     });
+    // console.log(address);
+    // navigate("/user/profile");
+    // }
+  }, [address, data, isConnected]);
+
+  const getStarted = () => {
     if (isConnected) {
       var config = {
         method: "post",
@@ -51,35 +82,30 @@ function Home() {
           // console.log(JSON.stringify(response.data));
           console.log(response.data.status);
           setCheckAddress(response.data.status);
-          // if (response.data.status === 0) {
-          //   navigate("/signup");
-          // } else if (response.data.status === 1) {
-          //   navigate("/verify/email");
-          // } else if (response.data.status === 2) {
-          //   navigate("/user/profile");
-          // }
+          if (response.data.status === 0) {
+            navigate("/signup");
+
+            // else if (response.data.status === 1) {
+            //   navigate("/verify/email");
+          } else if (response.data.status === 1) {
+            navigate("/user/profile");
+          }
         })
         .catch(function (error) {
           console.log(error);
         });
-      // console.log(address);
-
-      // navigate("/user/profile");
     }
-  }, [address, data, isConnected]);
-
-  const getStarted = () => {
-    setbtnLoading(true);
+    // setbtnLoading(true);
     // console.log(checkAddress);
-    if (checkAddress === 0) {
-      navigate("/signup");
-    }
+    // if (checkAddress === 0) {
+    //   navigate("/signup");
+    // }
     // else if (checkAddress === 1) {
     //   navigate("/verify/email");
     // }
-    else if (checkAddress === 2) {
-      navigate("/user/profile");
-    }
+    // else if (checkAddress === 2) {
+    //   navigate("/user/profile");
+    // }
   };
   return (
     <>

@@ -28,7 +28,7 @@ def hello_world():
 # Contract setup
 alchemy_url = "https://polygon-mumbai.g.alchemy.com/v2/ALbcNieoFrIRYYNDrcr4dAASXUCZbm-i"
 web3 = Web3(Web3.HTTPProvider(alchemy_url))
-nominee_factory = "0xBe0FF5ac24aD29C0Ac2DA9713fF40622A587c236"
+nominee_factory = "0xaEF8eb4EDCB0177A5ef6a5e3f46E581a5908eef4"
 file = open("Nominee.json")
 abi = json.load(file)
 contract = web3.eth.contract(address=nominee_factory, abi=abi)
