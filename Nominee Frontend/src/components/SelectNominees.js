@@ -7,7 +7,7 @@ import { useAccount } from "wagmi";
 import { ethers } from "ethers";
 import contract from "../artifacts/Main.json";
 import contract2 from "../artifacts/ERC721.json";
-export const CONTRACT_ADDRESS = "0x23C82960b09F192A4c6056525829BE57422FaAE9";
+export const CONTRACT_ADDRESS = "0xBe0FF5ac24aD29C0Ac2DA9713fF40622A587c236";
 
 function SelectNominees(props) {
   const navigate = useNavigate();
