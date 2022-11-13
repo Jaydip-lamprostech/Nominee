@@ -123,16 +123,42 @@ function AllNfts({ nftData }) {
                 </div>
                 <div className="nft-image-child-inside">
                   <h3>{item[0].name}</h3>
-                  <button
-                    className="below-nft-button"
-                    onClick={() => {
-                      setNomineesComponent(true);
-                      setIndexValue({ key });
-                      // console.log(temp2.key);
-                    }}
-                  >
-                    {item[3] ? "Nominated" : "Choose Nominee"}
-                  </button>
+
+                  {item[3] ? (
+                    <>
+                      <button
+                        className="below-nft-button"
+                        onClick={() => {
+                          // setNomineesComponent(true);
+                          // setIndexValue({ key });
+                          // console.log(temp2.key);
+                        }}
+                      >
+                        Nominated
+                      </button>
+                      <button
+                        className="below-nft-button"
+                        onClick={() => {
+                          setNomineesComponent(true);
+                          setIndexValue({ key });
+                          // console.log(temp2.key);
+                        }}
+                      >
+                        Edit Nominee
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      className="below-nft-button"
+                      onClick={() => {
+                        setNomineesComponent(true);
+                        setIndexValue({ key });
+                        // console.log(temp2.key);
+                      }}
+                    >
+                      Choose Nominee
+                    </button>
+                  )}
                 </div>
               </div>
             ))}

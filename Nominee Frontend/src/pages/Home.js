@@ -28,45 +28,42 @@ import { useState } from "react";
 function Home() {
   const { address, isConnected } = useAccount();
   const [checkAddress, setCheckAddress] = useState();
-  const [btnloading, setbtnLoading] = useState(false);
   const navigate = useNavigate();
 
   var data = JSON.stringify({
     address: address,
   });
+
   useEffect(() => {
-    // console.log(process.env.REACT_APP_URL);
-    // if (isConnected) {
-    //   var config = {
-    //     method: "post",
-    //     url: `${process.env.REACT_APP_URL}checkAddress`,
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     data: data,
-    //   };
-    //   axios(config)
-    //     .then(function (response) {
-    //       // console.log(JSON.stringify(response.data));
-    //       console.log(response.data.status);
-    //       setCheckAddress(response.data.status);
-    //       // if (response.data.status === 0) {
-    //       //   navigate("/signup");
-    //       // } else if (response.data.status === 1) {
-    //       //   navigate("/verify/email");
-    //       // } else if (response.data.status === 2) {
-    //       //   navigate("/user/profile");
-    //       // }
-    //     })
-    //     .catch(function (error) {
-    //       console.log(error);
-    //     });
-    // console.log(address);
-    // navigate("/user/profile");
-    // }
+    if (isConnected) {
+      var config = {
+        method: "post",
+        url: `${process.env.REACT_APP_URL}checkAddress`,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        data: data,
+      };
+      axios(config)
+        .then(function (response) {
+          // console.log(JSON.stringify(response.data));
+          console.log(response.data.status);
+          // if (response.data.status === 0) {
+          //   navigate("/signup");
+          // } else if (response.data.status === 1) {
+          //   navigate("/verify/email");
+          // } else if (response.data.status === 2) {
+          //   navigate("/user/profile");
+          // }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
   }, [address, data, isConnected]);
 
   const getStarted = () => {
+    console.log(checkAddress);
     if (isConnected) {
       var config = {
         method: "post",
@@ -84,40 +81,43 @@ function Home() {
           setCheckAddress(response.data.status);
           if (response.data.status === 0) {
             navigate("/signup");
-
-            // else if (response.data.status === 1) {
-            //   navigate("/verify/email");
-          } else if (response.data.status === 1) {
+          }
+          // else if (response.data.status === 1) {
+          //   navigate("/verify/email");
+          // }
+          else if (response.data.status === 1) {
             navigate("/user/profile");
           }
         })
         .catch(function (error) {
           console.log(error);
         });
+      // console.log(address);
+      // if (checkAddress === 0) {
+      //   navigate("/signup");
+      // }
+      // else if (checkAddress === 1) {
+      //   navigate("/verify/email");
+      // }
+      // else if (checkAddress === 2) {
+      //   navigate("/user/profile");
+      // }
     }
-    // setbtnLoading(true);
-    // console.log(checkAddress);
-    // if (checkAddress === 0) {
-    //   navigate("/signup");
-    // }
-    // else if (checkAddress === 1) {
-    //   navigate("/verify/email");
-    // }
-    // else if (checkAddress === 2) {
-    //   navigate("/user/profile");
-    // }
   };
+
   return (
     <>
       <section className="home-main">
         <div className="home-navbar">
           <div className="navbar-menu">
             {/* <ul>
-              <Link to="/" className="nav-logo">
+              
                 <li className="logo-li">Inheritokens</li>
-              </Link>
+              
             </ul> */}
-            <img className="logo-image" src={logo} alt="logo" />
+            <Link to="/">
+              <img className="logo-image" src={logo} alt="logo" />
+            </Link>
           </div>
           {/* <ConnectKitButton /> */}
           <ConnectWallet />
@@ -150,21 +150,7 @@ function Home() {
                   getStarted();
                 }}
               >
-                {btnloading ? (
-                  <svg
-                    className="animate-spin button-spin-svg-pic"
-                    version="1.1"
-                    id="L9"
-                    xmlns="http://www.w3.org/2000/svg"
-                    x="0px"
-                    y="0px"
-                    viewBox="0 0 100 100"
-                  >
-                    <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
-                  </svg>
-                ) : (
-                  <>Get Started</>
-                )}
+                Get Started
               </button>
             </div>
             {/* <h1>Hello</h1> */}
