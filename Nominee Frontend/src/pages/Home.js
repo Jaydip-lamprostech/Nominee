@@ -28,6 +28,7 @@ import { useState } from "react";
 function Home() {
   const { address, isConnected } = useAccount();
   const [checkAddress, setCheckAddress] = useState();
+  const [btnloading, setbtnLoading] = useState(false);
   const navigate = useNavigate();
 
   var data = JSON.stringify({
@@ -48,7 +49,7 @@ function Home() {
       axios(config)
         .then(function (response) {
           // console.log(JSON.stringify(response.data));
-          // console.log(response.data.status);
+          console.log(response.data.status);
           setCheckAddress(response.data.status);
           // if (response.data.status === 0) {
           //   navigate("/signup");
@@ -65,9 +66,10 @@ function Home() {
 
       // navigate("/user/profile");
     }
-  }, [address, data, isConnected, navigate]);
+  }, [address, data, isConnected]);
 
   const getStarted = () => {
+    setbtnLoading(true);
     // console.log(checkAddress);
     if (checkAddress === 0) {
       navigate("/signup");
@@ -122,7 +124,21 @@ function Home() {
                   getStarted();
                 }}
               >
-                Get Started
+                {btnloading ? (
+                  <svg
+                    className="animate-spin button-spin-svg-pic"
+                    version="1.1"
+                    id="L9"
+                    xmlns="http://www.w3.org/2000/svg"
+                    x="0px"
+                    y="0px"
+                    viewBox="0 0 100 100"
+                  >
+                    <path d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50"></path>
+                  </svg>
+                ) : (
+                  <>Get Started</>
+                )}
               </button>
             </div>
             {/* <h1>Hello</h1> */}
