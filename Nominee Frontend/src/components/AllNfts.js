@@ -12,7 +12,7 @@ export const CONTRACT_ADDRESS = "0xBe0FF5ac24aD29C0Ac2DA9713fF40622A587c236";
 
 function AllNfts({ nftData }) {
   const [indexValue, setIndexValue] = useState();
-  console.log(nftData);
+  // console.log(nftData);
   const [showNomineesComponent, setNomineesComponent] = useState(false);
   const [nftData2, setNftData2] = useState([]);
   const [isLoading, setLoading] = React.useState(true);
@@ -39,7 +39,7 @@ function AllNfts({ nftData }) {
           console.log("Metamask is not installed, please install!");
         }
         const { chainId } = await provider.getNetwork();
-        console.log("switch case for this case is: " + chainId);
+        // console.log("switch case for this case is: " + chainId);
         if (chainId === 80001) {
           const con = new ethers.Contract(CONTRACT_ADDRESS, contract, signer);
           for (let i = 0; i < nftData.length; i++) {
@@ -49,8 +49,8 @@ function AllNfts({ nftData }) {
               address,
               nftData[i].token_hash
             );
-            console.log(i);
-            console.log(isNominated);
+            // console.log(i);
+            // console.log(isNominated);
             // console.log(nft);
             if (!nftData2.find((temp) => nft["image"] === temp[0]["image"])) {
               nftData2.push([
@@ -63,7 +63,7 @@ function AllNfts({ nftData }) {
             // nftData.push([item]);
           }
           setNftData2(nftData2);
-          console.log(nftData2);
+          // console.log(nftData2);
           setLoading(false);
         } else {
           alert("Please connect to the mumbai test network!");

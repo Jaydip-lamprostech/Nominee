@@ -32,7 +32,7 @@ function EditNominee() {
   const navigate = useNavigate();
 
   const [file, setFile] = useState(location.state.profile_cid);
-  console.log(location.state.profile_cid);
+  // console.log(location.state.profile_cid);
   const [fileName, setFileName] = useState("");
   // const [fileCid, setFileCid] = useState("");
   const [btnloading, setbtnLoading] = useState(false);
@@ -47,10 +47,10 @@ function EditNominee() {
   });
 
   async function uploadImage(e) {
-    console.log(e.target.value);
-    console.log(document.getElementById("input").files[0].name);
+    // console.log(e.target.value);
+    // console.log(document.getElementById("input").files[0].name);
     setFileName(document.getElementById("input").files[0].name);
-    console.log(URL.createObjectURL(e.target.files[0]));
+    // console.log(URL.createObjectURL(e.target.files[0]));
     setFile(URL.createObjectURL(e.target.files[0]));
   }
 
@@ -117,7 +117,7 @@ function EditNominee() {
     setFileName("");
   };
   useEffect(() => {
-    console.log(userData);
+    // console.log(userData);
   }, [userData]);
 
   return (

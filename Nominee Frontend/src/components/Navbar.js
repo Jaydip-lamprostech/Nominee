@@ -32,13 +32,13 @@ function Navbar({ userData }) {
         if (chainId === 80001) {
           const con = new ethers.Contract(CONTRACT_ADDRESS, contract, signer);
           const owner_details = await con.getOwnerDetails(address);
-          console.log(owner_details);
+          // console.log(owner_details);
           const url = "https://ipfs.io/ipfs/" + owner_details[2];
           data.push([owner_details[0], owner_details[1], url]);
           setData(data);
-          console.log(data);
+          // console.log(data);
           setLoading(false);
-          console.log(data[0][2]);
+          // console.log(data[0][2]);
         } else {
           alert("Please connect to the mumbai test network!");
         }

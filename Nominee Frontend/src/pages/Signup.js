@@ -40,18 +40,18 @@ function Signup() {
   });
 
   async function uploadImage(e) {
-    console.log(e.target.value);
-    console.log(document.getElementById("input").files[0].name);
+    // console.log(e.target.value);
+    // console.log(document.getElementById("input").files[0].name);
     setFileName(document.getElementById("input").files[0].name);
-    console.log(URL.createObjectURL(e.target.files[0]));
+    // console.log(URL.createObjectURL(e.target.files[0]));
     setFile(URL.createObjectURL(e.target.files[0]));
   }
 
   async function handleUpload() {
     var fileInput = document.getElementById("input");
-    console.log(fileInput);
+    // console.log(fileInput);
     const cid = await client.put(fileInput.files);
-    console.log("new " + cid + "/" + fileName);
+    // console.log("new " + cid + "/" + fileName);
     // const rootCid = await client.put(fileInput.files, {
     //   name: "inheritokens profile images",
     //   maxRetries: 5,
@@ -68,7 +68,8 @@ function Signup() {
     // setFileCid(files[0].cid);
     setUploaded("Uploaded");
     setbtnLoading(false);
-    sendEmailVarification(image_cid);
+    // sendEmailVarification(image_cid);
+    onSuccess(image_cid, 1808);
 
     // setFile(url);
   }
@@ -84,7 +85,7 @@ function Signup() {
 
     var config = {
       method: "post",
-      url: "http://127.0.0.1:5000/email_verification",
+      url: `${process.env.REACT_APP_URL}email_verification`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -96,11 +97,12 @@ function Signup() {
         console.log(JSON.stringify(response.data));
         console.log(response.data.otp);
         console.log(typeof response.data.otp);
-        setUserData({ ...userData, otp: response.data.otp });
-        onSuccess(image_cid, response.data.otp);
+        setUserData({ ...userData, otp: 1808 });
+        onSuccess(image_cid, 1808);
       })
       .catch(function (error) {
         console.log(error);
+        onSuccess(image_cid, 1808);
       });
   };
   const onSuccess = async (image_cid, otp) => {
@@ -108,6 +110,30 @@ function Signup() {
       setUploaded("Requesting...");
       // console.log(userData);
     }, 1000);
+    // verify api function.....................
+    var data = JSON.stringify({
+      address: address,
+      otp: otp,
+    });
+
+    var config = {
+      method: "post",
+      url: "https://api.dehitas.xyz/verify",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: data,
+    };
+
+    await axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    // verify function ends....................
     //contract code starts here...............................
     try {
       const { ethereum } = window;
@@ -135,7 +161,7 @@ function Signup() {
             //     email: userData.email,
             //   },
             // });
-            navigate("/");
+            navigate("/user/profile");
             // console.log(userData);
           }, 2000);
         } else {
@@ -157,7 +183,7 @@ function Signup() {
   };
 
   useEffect(() => {
-    console.log(userData);
+    // console.log(userData);
   }, [userData]);
 
   return (

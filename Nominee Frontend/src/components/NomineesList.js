@@ -50,7 +50,7 @@ function NomineesList() {
             }
           }
           setData(data);
-          console.log(data);
+          // console.log(data);
           setLoading(false);
         } else {
           alert("Please connect to the mumbai test network!");

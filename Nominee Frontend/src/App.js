@@ -106,7 +106,7 @@ function App() {
               <Route path="/verify/email" element={<SendingEmailRequest />} />
               <Route path="/email/verified/:slug" element={<EmailVerified />} />
 
-              <Route path="/*" element={<PageNotFound />} />
+              <Route path="/*" element={<Home />} />
             </Routes>
           </Router>
         </div>

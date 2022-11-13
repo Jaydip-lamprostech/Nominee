@@ -58,7 +58,7 @@ def email_verification():
         smtp.login(os.environ.get("APP_MAIL"), os.environ.get("APP_PASSWORD"))
 
         msg = MIMEMultipart("alternative")
-        msg["Subject"] = "Dehitas email verification."
+        msg["Subject"] = "Inheritokens email verification."
         msg["From"] = os.environ.get("APP_MAIL")
         msg["To"] = client_mail
 

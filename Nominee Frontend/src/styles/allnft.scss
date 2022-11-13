@@ -67,9 +67,11 @@
 
         h3 {
           cursor: default;
-          width: 80%;
-          max-width: 80%;
+          width: 100%;
+          max-width: 100%;
           text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
           text-align: center;
           margin: 10px auto;
           padding: 1rem 0;
