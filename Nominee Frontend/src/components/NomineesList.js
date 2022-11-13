@@ -6,7 +6,7 @@ import "../styles/nomineeslist.scss";
 import { useAccount } from "wagmi";
 import { ethers } from "ethers";
 import contract from "../artifacts/Main.json";
-export const CONTRACT_ADDRESS = "0x23C82960b09F192A4c6056525829BE57422FaAE9";
+export const CONTRACT_ADDRESS = "0xaEF8eb4EDCB0177A5ef6a5e3f46E581a5908eef4";
 
 function NomineesList() {
   const navigate = useNavigate();

@@ -33,8 +33,8 @@ function Home() {
   var data = JSON.stringify({
     address: address,
   });
+
   useEffect(() => {
-    // console.log(process.env.REACT_APP_URL);
     if (isConnected) {
       var config = {
         method: "post",
@@ -44,12 +44,10 @@ function Home() {
         },
         data: data,
       };
-
       axios(config)
         .then(function (response) {
           // console.log(JSON.stringify(response.data));
           console.log(response.data.status);
-          setCheckAddress(response.data.status);
           // if (response.data.status === 0) {
           //   navigate("/signup");
           // } else if (response.data.status === 1) {
@@ -61,14 +59,11 @@ function Home() {
         .catch(function (error) {
           console.log(error);
         });
-      // console.log(address);
-
-      // navigate("/user/profile");
     }
   }, [address, data, isConnected]);
 
   const getStarted = () => {
-    // console.log(checkAddress);
+    console.log(checkAddress);
     if (isConnected) {
       var config = {
         method: "post",
@@ -116,11 +111,13 @@ function Home() {
         <div className="home-navbar">
           <div className="navbar-menu">
             {/* <ul>
-              <Link to="/" className="nav-logo">
+              
                 <li className="logo-li">Inheritokens</li>
-              </Link>
+              
             </ul> */}
-            <img className="logo-image" src={logo} alt="logo" />
+            <Link to="/">
+              <img className="logo-image" src={logo} alt="logo" />
+            </Link>
           </div>
           {/* <ConnectKitButton /> */}
           <ConnectWallet />
