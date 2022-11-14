@@ -56,6 +56,32 @@ function SelectNomineeForToken({ tokenDetails, setNomineesComponent }) {
           setData(data);
           // console.log(data);
           setLoading(false);
+        } else if (chainId === 1029) {
+          const con = new ethers.Contract(BTTC_ADDRESS, contract, signer);
+          const address_array = await con.getNominees(address);
+          // console.log(address_array);
+          for (let i = 0; i < address_array.length; i++) {
+            // console.log(address_array[i]);
+            const nominee_details = await con.getNomineeDetails(
+              address_array[i]
+            );
+
+            // console.log(nominee_details[0]);
+            // console.log(nominee_details[1]);
+            // console.log(nominee_details[2]);
+            const url = "https://ipfs.io/ipfs/" + nominee_details[2];
+            if (!data.find((item) => nominee_details[0] === item[0])) {
+              data.push([
+                nominee_details[0],
+                nominee_details[1],
+                url,
+                nominee_details[3],
+              ]);
+            }
+          }
+          setData(data);
+          // console.log(data);
+          setLoading(false);
         } else {
           alert("Please connect to the mumbai test network!");
         }
@@ -102,24 +128,28 @@ function SelectNomineeForToken({ tokenDetails, setNomineesComponent }) {
           tx1.wait();
         } else if (chainId === 1029) {
           const con = new ethers.Contract(BTTC_ADDRESS, contract, signer);
-          const tx = await con.assignAssetsToNominee(
-            "",
-            address,
-            wallet_address,
-            tokenDetails.token_name,
-            tokenDetails.token_address,
-            tokenDetails.token_balance,
-            0
-          );
-          tx.wait();
+          // const tx = await con.assignAssetsToNominee(
+          //   "",
+          //   address,
+          //   wallet_address,
+          //   tokenDetails.token_name,
+          //   tokenDetails.token_address,
+          //   tokenDetails.token_balance,
+          //   // 999716495820000,
+          //   0
+          // );
+          // tx.wait();
 
           const contract_address = ethers.utils.getAddress(
             tokenDetails.token_address
           );
+          console.log("token address");
+          console.log(tokenDetails.token_address);
           const con1 = new ethers.Contract(contract_address, contract2, signer);
           const tx1 = await con1.approve(
             wallet_address,
-            tokenDetails.token_balance
+            tokenDetails.token_balance,
+            { gasLimit: 10000000 }
           );
           tx1.wait();
         } else {

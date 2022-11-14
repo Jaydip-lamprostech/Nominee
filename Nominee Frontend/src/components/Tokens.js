@@ -201,7 +201,7 @@ function Tokens() {
                               token_balance: Number(
                                 String(showNativeTokenBalance[0]).substring(
                                   0,
-                                  16
+                                  15
                                 )
                               ),
                             });
