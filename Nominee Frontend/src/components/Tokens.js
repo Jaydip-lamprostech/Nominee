@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useAccount } from "wagmi";
+import { chainId, useAccount } from "wagmi";
 import { useEffect } from "react";
 import "../styles/token.scss";
 import { parse } from "@ethersproject/transactions";
 import SelectNomineeForToken from "./SelectNomineeForToken";
+import { ethers } from "ethers";
 
 function Tokens() {
   const { address } = useAccount();
-  const [showMeticBalance, setMeticBalance] = useState([]);
+  const [showNativeTokenBalance, setNativeTokenBalance] = useState([]);
   const [allTokens, setAllTokens] = useState([]);
   const [showAllToken, setShowAllToken] = useState(false);
   const [showNomineesComponent, setNomineesComponent] = useState(false);
+  const [checkChainId, setCheckChainId] = useState();
 
   const [tokenDetails, setTokenDetails] = useState({
     token_address: "",
@@ -19,28 +21,65 @@ function Tokens() {
     token_symbol: "",
     token_balance: "",
   });
+
   const fetchTokens = async () => {
-    const options = {
-      method: "GET",
-      url: "https://deep-index.moralis.io/api/v2/" + address + "/balance",
-      params: { chain: "mumbai" },
-      headers: {
-        accept: "application/json",
-        "X-API-Key":
-          "sNXC9N5fpBJzWtV0sNHUAOfAyeQDGjfZ01RBZebMLmW2YAOoLgr2ItMow7rVj5Xb",
-      },
-    };
-    await axios
-      .request(options)
-      .then(function (response) {
-        // console.log(response.data.balance);
-        if (!showMeticBalance.length > 0)
-          showMeticBalance.push(response.data.balance);
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
-    setMeticBalance(showMeticBalance);
+    const { ethereum } = window;
+    if (ethereum) {
+      const provider = new ethers.providers.Web3Provider(ethereum);
+      if (!provider) {
+        console.log("Metamask is not installed, please install!");
+      }
+      const { chainId } = await provider.getNetwork();
+      setCheckChainId(chainId);
+
+      if (chainId === 80001) {
+        const options = {
+          method: "GET",
+          url: "https://deep-index.moralis.io/api/v2/" + address + "/balance",
+          params: { chain: "mumbai" },
+          headers: {
+            accept: "application/json",
+            "X-API-Key":
+              "sNXC9N5fpBJzWtV0sNHUAOfAyeQDGjfZ01RBZebMLmW2YAOoLgr2ItMow7rVj5Xb",
+          },
+        };
+        await axios
+          .request(options)
+          .then(function (response) {
+            console.log(response.data.balance);
+            if (!showNativeTokenBalance.length > 0)
+              showNativeTokenBalance.push(response.data.balance);
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+        setNativeTokenBalance(showNativeTokenBalance);
+      } else if (chainId === 1029) {
+        var config = {
+          method: "post",
+          url:
+            "https://api-testnet.bttcscan.com/api?module=account&action=balance&address=" +
+            address +
+            "&tag=latest&apikey=RBFAJ89HCF95HJ676INF1I6416QAZ1QFZ7",
+          headers: {},
+        };
+
+        await axios(config)
+          .then(function (response) {
+            console.log(JSON.stringify(response.data));
+            if (!showNativeTokenBalance.length > 0)
+              showNativeTokenBalance.push(response.data.result);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        setNativeTokenBalance(showNativeTokenBalance);
+      } else {
+        alert(
+          "Please connect to the mumbai test network or BTTC test network!"
+        );
+      }
+    }
     // console.log(showMeticBalance);
   };
 
@@ -110,14 +149,15 @@ function Tokens() {
                 <th>Balance</th>
                 <th>Nominee</th>
               </tr>
-              {showMeticBalance && (
+              {showNativeTokenBalance && (
                 <tr>
-                  <td className="token-symbol">MATIC</td>
+                  <td className="token-symbol">
+                    {checkChainId === 80001 ? "MATIC" : "BTT"}
+                  </td>
                   <td>
-                    {String(showMeticBalance[0] / Math.pow(10, 18)).substring(
-                      0,
-                      7
-                    )}
+                    {String(
+                      showNativeTokenBalance[0] / Math.pow(10, 18)
+                    ).substring(0, 7)}
                   </td>
                   <td>
                     <button
@@ -130,7 +170,7 @@ function Tokens() {
                           token_name: "MATIC",
                           token_symbol: "MATIC",
                           token_balance: Number(
-                            String(showMeticBalance[0]).substring(0, 16)
+                            String(showNativeTokenBalance[0]).substring(0, 16)
                           ),
                         });
                       }}

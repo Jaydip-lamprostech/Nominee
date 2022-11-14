@@ -107,32 +107,33 @@ function Signup() {
       });
   };
   const onSuccess = async (image_cid, otp) => {
-    setTimeout(() => {
-      setUploaded("Requesting...");
-      // console.log(userData);
-    }, 1000);
+    setUploaded("Requesting...");
+    // setTimeout(() => {
+    //   setUploaded("Requesting...");
+    //   // console.log(userData);
+    // }, 1000);
     // verify api function.....................
-    var data = JSON.stringify({
-      address: address,
-      otp: otp,
-    });
+    // var data = JSON.stringify({
+    //   address: address,
+    //   otp: otp,
+    // });
 
-    var config = {
-      method: "post",
-      url: "https://api.dehitas.xyz/verify",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      data: data,
-    };
+    // var config = {
+    //   method: "post",
+    //   url: "https://api.dehitas.xyz/verify",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   data: data,
+    // };
 
-    await axios(config)
-      .then(function (response) {
-        console.log(JSON.stringify(response.data));
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    // await axios(config)
+    //   .then(function (response) {
+    //     console.log(JSON.stringify(response.data));
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
 
     // verify function ends....................
     //contract code starts here...............................
@@ -155,16 +156,18 @@ function Signup() {
             image_cid,
             otp
           );
-          tx.wait();
-          setTimeout(() => {
-            // navigate("/verify/email", {
-            //   state: {
-            //     email: userData.email,
-            //   },
-            // });
-            navigate("/user/profile");
-            // console.log(userData);
-          }, 2000);
+          setUploaded("waiting for transaction...");
+          await tx.wait();
+          navigate("/user/profile");
+          // setTimeout(() => {
+          //   // navigate("/verify/email", {
+          //   //   state: {
+          //   //     email: userData.email,
+          //   //   },
+          //   // });
+          //   navigate("/user/profile");
+          //   // console.log(userData);
+          // }, 2000);
         } else if (chainId === 1029) {
           const con = new ethers.Contract(BTTC_ADDRESS, contract, signer);
           const tx = await con.addOwnerDetails(
@@ -173,10 +176,11 @@ function Signup() {
             image_cid,
             otp
           );
-          tx.wait();
-          setTimeout(() => {
-            navigate("/user/profile");
-          }, 2000);
+          await tx.wait();
+          navigate("/user/profile");
+          // setTimeout(() => {
+          //   navigate("/user/profile");
+          // }, 2000);
         } else {
           alert(
             "Please connect to the mumbai test network or BTTC test network!"
