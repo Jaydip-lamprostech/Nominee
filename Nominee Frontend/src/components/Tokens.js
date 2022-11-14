@@ -47,13 +47,14 @@ function Tokens() {
           .request(options)
           .then(function (response) {
             console.log(response.data.balance);
-            if (!showNativeTokenBalance.length > 0)
+            if (!showNativeTokenBalance.length > 0) {
               showNativeTokenBalance.push(response.data.balance);
+              setNativeTokenBalance(showNativeTokenBalance);
+            }
           })
           .catch(function (error) {
             console.error(error);
           });
-        setNativeTokenBalance(showNativeTokenBalance);
       } else if (chainId === 1029) {
         var config = {
           method: "post",
@@ -67,8 +68,10 @@ function Tokens() {
         await axios(config)
           .then(function (response) {
             console.log(JSON.stringify(response.data));
-            if (!showNativeTokenBalance.length > 0)
+            if (!showNativeTokenBalance.length > 0) {
               showNativeTokenBalance.push(response.data.result);
+              setNativeTokenBalance(showNativeTokenBalance);
+            }
           })
           .catch(function (error) {
             console.log(error);
@@ -144,71 +147,107 @@ function Tokens() {
             </ul>
           </div> */}
             <table>
-              <tr>
-                <th>Token</th>
-                <th>Balance</th>
-                <th>Nominee</th>
-              </tr>
-              {showNativeTokenBalance && (
+              <thead>
                 <tr>
-                  <td className="token-symbol">
-                    {checkChainId === 80001 ? "MATIC" : "BTT"}
-                  </td>
-                  <td>
-                    {String(
-                      showNativeTokenBalance[0] / Math.pow(10, 18)
-                    ).substring(0, 7)}
-                  </td>
-                  <td>
-                    <button
-                      onClick={() => {
-                        setNomineesComponent(true);
-                        setTokenDetails({
-                          ...tokenDetails,
-                          token_address:
-                            "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889",
-                          token_name: "MATIC",
-                          token_symbol: "MATIC",
-                          token_balance: Number(
-                            String(showNativeTokenBalance[0]).substring(0, 16)
-                          ),
-                        });
-                      }}
-                    >
-                      Choose Nominee
-                    </button>
-                  </td>
+                  <th>Token</th>
+                  <th>Balance</th>
+                  <th>Nominee</th>
                 </tr>
-              )}
-              {showAllToken &&
-                allTokens.map((val, key) => {
-                  return (
-                    <tr key={key}>
-                      <td className="token-symbol">{val.symbol}</td>
-                      <td>
-                        {String(val.balance / Math.pow(10, 18)).substring(0, 7)}
-                      </td>
-                      <td>
+              </thead>
+              <tbody>
+                {showNativeTokenBalance.length > 0 && (
+                  <tr>
+                    <td className="token-symbol">
+                      {console.log(checkChainId)}
+                      {checkChainId === 80001 ? "MATIC" : "BTT"}
+                    </td>
+                    <td>
+                      {String(
+                        showNativeTokenBalance[0] / Math.pow(10, 18)
+                      ).substring(0, 7)}
+                    </td>
+                    <td>
+                      {checkChainId === 80001 ? (
                         <button
                           onClick={() => {
                             setNomineesComponent(true);
                             setTokenDetails({
                               ...tokenDetails,
-                              token_address: val.token_address,
-                              token_name: val.name,
-                              token_symbol: val.symbol,
+                              token_address:
+                                "0x9c3C9283D3e44854697Cd22D3Faa240Cfb032889",
+                              token_name: "MATIC",
+                              token_symbol: "MATIC",
                               token_balance: Number(
-                                String(val.balance).substring(0, 16)
+                                String(showNativeTokenBalance[0]).substring(
+                                  0,
+                                  16
+                                )
                               ),
                             });
                           }}
                         >
                           Choose Nominee
                         </button>
-                      </td>
-                    </tr>
-                  );
-                })}
+                      ) : (
+                        <button
+                          onClick={() => {
+                            setNomineesComponent(true);
+                            setTokenDetails({
+                              ...tokenDetails,
+                              token_address:
+                                "0x0000000000000000000000000000000000001010",
+                              token_name: "BitTorrent Chain Donau",
+                              token_symbol: "BTT",
+                              token_balance: Number(
+                                String(showNativeTokenBalance[0]).substring(
+                                  0,
+                                  16
+                                )
+                              ),
+                            });
+                          }}
+                        >
+                          Choose Nominee
+                        </button>
+                      )}
+                    </td>
+                  </tr>
+                )}
+
+                {showAllToken &&
+                  checkChainId === 80001 &&
+                  allTokens.map((val, key) => {
+                    return (
+                      <tr key={key}>
+                        <td className="token-symbol">{val.symbol}</td>
+                        <td>
+                          {String(val.balance / Math.pow(10, 18)).substring(
+                            0,
+                            7
+                          )}
+                        </td>
+                        <td>
+                          <button
+                            onClick={() => {
+                              setNomineesComponent(true);
+                              setTokenDetails({
+                                ...tokenDetails,
+                                token_address: val.token_address,
+                                token_name: val.name,
+                                token_symbol: val.symbol,
+                                token_balance: Number(
+                                  String(val.balance).substring(0, 16)
+                                ),
+                              });
+                            }}
+                          >
+                            Choose Nominee
+                          </button>
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
             </table>
             <div className="token-child"></div>
           </div>

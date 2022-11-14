@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Nominees } from "./dummyNominees";
 import "../styles/nomineeslist.scss";
-import { useAccount } from "wagmi";
+import { chain, useAccount } from "wagmi";
 import { ethers } from "ethers";
 import contract from "../artifacts/Main.json";
 import contract2 from "../artifacts/ERC20.json";
 export const CONTRACT_ADDRESS = "0xaEF8eb4EDCB0177A5ef6a5e3f46E581a5908eef4";
+export const BTTC_ADDRESS = "0xB987640A52415b64E2d19109E8f9d7a3492d5F54";
 
 function SelectNomineeForToken({ tokenDetails, setNomineesComponent }) {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ function SelectNomineeForToken({ tokenDetails, setNomineesComponent }) {
   const [data, setData] = useState([]);
   const [index, setIndex] = useState();
 
-  // console.log(tokenDetails);
+  console.log(tokenDetails);
   const showNominees = async () => {
     //contract code starts here...............................
     try {
@@ -99,8 +100,32 @@ function SelectNomineeForToken({ tokenDetails, setNomineesComponent }) {
             tokenDetails.token_balance
           );
           tx1.wait();
+        } else if (chainId === 1029) {
+          const con = new ethers.Contract(BTTC_ADDRESS, contract, signer);
+          const tx = await con.assignAssetsToNominee(
+            "",
+            address,
+            wallet_address,
+            tokenDetails.token_name,
+            tokenDetails.token_address,
+            tokenDetails.token_balance,
+            0
+          );
+          tx.wait();
+
+          const contract_address = ethers.utils.getAddress(
+            tokenDetails.token_address
+          );
+          const con1 = new ethers.Contract(contract_address, contract2, signer);
+          const tx1 = await con1.approve(
+            wallet_address,
+            tokenDetails.token_balance
+          );
+          tx1.wait();
         } else {
-          alert("Please connect to the mumbai test network!");
+          alert(
+            "Please connect to the mumbai test network or BTTC test network!"
+          );
         }
       }
     } catch (error) {
