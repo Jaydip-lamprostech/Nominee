@@ -9,7 +9,7 @@ import { ethers } from "ethers";
 
 function Tokens() {
   const { address } = useAccount();
-  const [showNativeTokenBalance, setNativeTokenBalance] = useState([]);
+  const [showNativeTokenBalance, setNativeTokenBalance] = useState();
   const [allTokens, setAllTokens] = useState([]);
   const [showAllToken, setShowAllToken] = useState(false);
   const [showNomineesComponent, setNomineesComponent] = useState(false);
@@ -46,10 +46,14 @@ function Tokens() {
         await axios
           .request(options)
           .then(function (response) {
-            console.log(response.data.balance);
-            if (!showNativeTokenBalance.length > 0) {
-              showNativeTokenBalance.push(response.data.balance);
-              setNativeTokenBalance(showNativeTokenBalance);
+            // console.log(response.data.balance);
+            console.log(response.data);
+            // if (!showNativeTokenBalance.length > 0) {
+            //   showNativeTokenBalance.push(response.data.balance);
+            //   setNativeTokenBalance(showNativeTokenBalance);
+            // }
+            if (showNativeTokenBalance !== Number(response.data.result)) {
+              setNativeTokenBalance(Number(response.data.result));
             }
           })
           .catch(function (error) {
@@ -68,15 +72,19 @@ function Tokens() {
         await axios(config)
           .then(function (response) {
             console.log(JSON.stringify(response.data));
-            if (!showNativeTokenBalance.length > 0) {
-              showNativeTokenBalance.push(response.data.result);
-              setNativeTokenBalance(showNativeTokenBalance);
+
+            // if (!showNativeTokenBalance.length > 0) {
+            // showNativeTokenBalance.push(Number(response.data.result));
+            // setNativeTokenBalance(showNativeTokenBalance);
+            // }
+            if (showNativeTokenBalance !== Number(response.data.result)) {
+              setNativeTokenBalance(Number(response.data.result));
             }
           })
           .catch(function (error) {
             console.log(error);
           });
-        setNativeTokenBalance(showNativeTokenBalance);
+        // setNativeTokenBalance(showNativeTokenBalance);
       } else {
         alert(
           "Please connect to the mumbai test network or BTTC test network!"
@@ -155,7 +163,7 @@ function Tokens() {
                 </tr>
               </thead>
               <tbody>
-                {showNativeTokenBalance.length > 0 && (
+                {showNativeTokenBalance && (
                   <tr>
                     <td className="token-symbol">
                       {console.log(checkChainId)}
@@ -163,7 +171,7 @@ function Tokens() {
                     </td>
                     <td>
                       {String(
-                        showNativeTokenBalance[0] / Math.pow(10, 18)
+                        showNativeTokenBalance / Math.pow(10, 18)
                       ).substring(0, 7)}
                     </td>
                     <td>
@@ -178,10 +186,7 @@ function Tokens() {
                               token_name: "MATIC",
                               token_symbol: "MATIC",
                               token_balance: Number(
-                                String(showNativeTokenBalance[0]).substring(
-                                  0,
-                                  16
-                                )
+                                String(showNativeTokenBalance).substring(0, 16)
                               ),
                             });
                           }}
