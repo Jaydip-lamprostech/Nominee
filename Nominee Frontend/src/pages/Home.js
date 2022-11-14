@@ -28,6 +28,7 @@ import { ethers } from "ethers";
 import contract from "../artifacts/Main.json";
 import { useRef } from "react";
 export const CONTRACT_ADDRESS = "0xaEF8eb4EDCB0177A5ef6a5e3f46E581a5908eef4";
+export const BTTC_ADDRESS = "0xB987640A52415b64E2d19109E8f9d7a3492d5F54";
 
 function Home() {
   const { address, isConnected } = useAccount();
@@ -112,9 +113,7 @@ function Home() {
       // else if (checkAddress === 2) {
       //   navigate("/user/profile");
       // }
-    }
-    else {
-
+    } else {
     }
   };
 
@@ -147,8 +146,27 @@ function Home() {
             navigate("/user/profile");
           }
           // console.log(data);
+        } else if (chainId === 1029) {
+          alert("You are connected to BTTC");
+          const con = new ethers.Contract(BTTC_ADDRESS, contract, signer);
+          const address_array = await con.getOwners();
+          let check = false;
+          for (let i = 0; i < address_array.length; i++) {
+            if (address_array[i] === address) {
+              console.log("registering");
+              check = true;
+              break;
+            }
+          }
+          if (check === false) {
+            navigate("/signup");
+          } else {
+            navigate("/user/profile");
+          }
         } else {
-          alert("Please connect to the mumbai test network!");
+          alert(
+            "Please connect to the mumbai test network or BTTC test network!"
+          );
         }
       }
     } catch (error) {

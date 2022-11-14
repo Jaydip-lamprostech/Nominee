@@ -104,75 +104,79 @@ function AllNfts({ nftData }) {
   //     </>
   //   );
   // }
-  // if (!isLoading)
-  //   return (
-  //     <>
-  //       {showNomineesComponent && (
-  //         <SelectNominees
-  //           setNomineesComponent={setNomineesComponent}
-  //           nftData={nftData}
-  //           indexValue={indexValue}
-  //         />
-  //       )}
-  //       <div className="all-nft-main">
-  //         <div className="nft-image-parent">
-  //           {nftData2.map((item, key) => (
-  //             <div className="nft-image-child" key={key}>
-  //               <div className="image-div">
-  //                 <img src={item[0].image} alt="nftimage" />
-  //               </div>
-  //               <div className="nft-image-child-inside">
-  //                 <h3>{item[0].name}</h3>
+  if (!isLoading)
+    return (
+      <>
+        {showNomineesComponent && (
+          <SelectNominees
+            setNomineesComponent={setNomineesComponent}
+            nftData={nftData}
+            indexValue={indexValue}
+          />
+        )}
+        <div className="all-nft-main">
+          <div className="nft-image-parent">
+            {nftData2.map((item, key) => (
+              <div className="nft-image-child" key={key}>
+                <div className="image-div">
+                  <img src={item[0].image} alt="nftimage" />
+                </div>
+                <div className="nft-image-child-inside">
+                  <h3>{item[0].name}</h3>
 
-  //                 {item[3] ? (
-  //                   <>
-  //                     <button
-  //                       className="below-nft-button"
-  //                       onClick={() => {
-  //                         // setNomineesComponent(true);
-  //                         // setIndexValue({ key });
-  //                         // console.log(temp2.key);
-  //                       }}
-  //                     >
-  //                       Nominated
-  //                     </button>
-  //                     <button
-  //                       className="below-nft-button"
-  //                       onClick={() => {
-  //                         setNomineesComponent(true);
-  //                         setIndexValue({ key });
-  //                         // console.log(temp2.key);
-  //                       }}
-  //                     >
-  //                       Edit Nominee
-  //                     </button>
-  //                   </>
-  //                 ) : (
-  //                   <button
-  //                     className="below-nft-button"
-  //                     onClick={() => {
-  //                       setNomineesComponent(true);
-  //                       setIndexValue({ key });
-  //                       // console.log(temp2.key);
-  //                     }}
-  //                   >
-  //                     Choose Nominee
-  //                   </button>
-  //                 )}
-  //               </div>
-  //             </div>
-  //           ))}
-  //         </div>
-  //       </div>
-  //     </>
-  //   );
-  // else 
-  return <><div className="all-nft-main-empty">
-    <div className="nft-empty-parent">
-      <h3>You don't have any NFT on this chain</h3>
-      <p>Please select a different chain where you have the nft/s</p>
-    </div>
-  </div></>;
+                  {item[3] ? (
+                    <>
+                      <button
+                        className="below-nft-button"
+                        onClick={() => {
+                          // setNomineesComponent(true);
+                          // setIndexValue({ key });
+                          // console.log(temp2.key);
+                        }}
+                      >
+                        Nominated
+                      </button>
+                      <button
+                        className="below-nft-button"
+                        onClick={() => {
+                          setNomineesComponent(true);
+                          setIndexValue({ key });
+                          // console.log(temp2.key);
+                        }}
+                      >
+                        Edit Nominee
+                      </button>
+                    </>
+                  ) : (
+                    <button
+                      className="below-nft-button"
+                      onClick={() => {
+                        setNomineesComponent(true);
+                        setIndexValue({ key });
+                        // console.log(temp2.key);
+                      }}
+                    >
+                      Choose Nominee
+                    </button>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </>
+    );
+  else
+    return (
+      <>
+        <div className="all-nft-main-empty">
+          <div className="nft-empty-parent">
+            <h3>You don't have any NFT on this chain</h3>
+            <p>Please select a different chain where you have the nft/s</p>
+          </div>
+        </div>
+      </>
+    );
 }
 
 export default AllNfts;

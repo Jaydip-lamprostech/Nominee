@@ -15,6 +15,7 @@ import "../styles/signup.scss";
 // import MailSvg from "../components/MailSvg";
 import contract from "../artifacts/Main.json";
 export const CONTRACT_ADDRESS = "0xaEF8eb4EDCB0177A5ef6a5e3f46E581a5908eef4";
+export const BTTC_ADDRESS = "0xB987640A52415b64E2d19109E8f9d7a3492d5F54";
 const API_TOKEN =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweGZiNzE4QzgwYmJlYUQwNTAzYThFMjgzMmI2MDU0RkVmOUU4MzA2NzQiLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2NjE0MTEzNjczNTAsIm5hbWUiOiJUcnkifQ.srPPE7JD3gn8xEBCgQQs_8wyo6rDrXaDWC0QM8FtChA";
 
@@ -95,8 +96,19 @@ function EditProfile({ setShowEditProfile, data }) {
             data[0][3]
           );
           tx.wait();
+        } else if (chainId === 1029) {
+          const con = new ethers.Contract(BTTC_ADDRESS, contract, signer);
+          const tx = await con.editOwnerDetails(
+            address,
+            userData.name,
+            userData.email,
+            data[0][3]
+          );
+          tx.wait();
         } else {
-          alert("Please connect to the mumbai test network!");
+          alert(
+            "Please connect to the mumbai test network or BTTC test network!"
+          );
         }
       }
     } catch (error) {

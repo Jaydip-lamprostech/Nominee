@@ -17,6 +17,7 @@ import { useRef } from "react";
 import { ethers } from "ethers";
 import contract from "../artifacts/Main.json";
 export const CONTRACT_ADDRESS = "0xaEF8eb4EDCB0177A5ef6a5e3f46E581a5908eef4";
+export const BTTC_ADDRESS = "0xB987640A52415b64E2d19109E8f9d7a3492d5F54";
 
 function Profile() {
   const dataFetchedRef = useRef(false);
@@ -59,8 +60,23 @@ function Profile() {
           setData(data);
           // console.log(data);
           setLoading(false);
+        } else if (chainId === 1029) {
+          const con = new ethers.Contract(BTTC_ADDRESS, contract, signer);
+          const owner_details = await con.getOwnerDetails(address);
+          const url = "https://ipfs.io/ipfs/" + owner_details[2];
+          data.push([
+            owner_details[0],
+            owner_details[1],
+            url,
+            owner_details[2],
+          ]);
+          setData(data);
+          // console.log(data);
+          setLoading(false);
         } else {
-          alert("Please connect to the mumbai test network!");
+          alert(
+            "Please connect to the mumbai test network or BTTC test network!"
+          );
         }
       }
     } catch (error) {
