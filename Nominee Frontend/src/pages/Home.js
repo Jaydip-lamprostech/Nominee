@@ -114,6 +114,7 @@ function Home() {
       //   navigate("/user/profile");
       // }
     } else {
+      alert("Please connect your wallet first");
     }
   };
 

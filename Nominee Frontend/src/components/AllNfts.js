@@ -15,6 +15,7 @@ function AllNfts({ nftData }) {
   // console.log(nftData);
   const [showNomineesComponent, setNomineesComponent] = useState(false);
   const [nftData2, setNftData2] = useState([]);
+  const [checkChainId, setCheckChainId] = useState();
   const [isLoading, setLoading] = React.useState(true);
   const { address, isConnected } = useAccount();
 
@@ -39,6 +40,7 @@ function AllNfts({ nftData }) {
           console.log("Metamask is not installed, please install!");
         }
         const { chainId } = await provider.getNetwork();
+        setCheckChainId(chainId);
         // console.log("switch case for this case is: " + chainId);
         if (chainId === 80001) {
           const con = new ethers.Contract(CONTRACT_ADDRESS, contract, signer);
@@ -104,7 +106,7 @@ function AllNfts({ nftData }) {
   //     </>
   //   );
   // }
-  if (!isLoading)
+  if (!isLoading && checkChainId === 80001)
     return (
       <>
         {showNomineesComponent && (
@@ -166,7 +168,18 @@ function AllNfts({ nftData }) {
         </div>
       </>
     );
-  else
+  else if (checkChainId === 1029) {
+    return (
+      <>
+        <div className="all-nft-main-empty">
+          <div className="nft-empty-parent">
+            <h3>Right now we are not providing data for NFT on BTTC chain</h3>
+            <p>You can nominate for native token on BTTC chain</p>
+          </div>
+        </div>
+      </>
+    );
+  } else
     return (
       <>
         <div className="all-nft-main-empty">
