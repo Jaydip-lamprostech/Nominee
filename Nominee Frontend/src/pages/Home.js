@@ -34,8 +34,11 @@ function Home() {
   const { address, isConnected } = useAccount();
   const [checkAddress, setCheckAddress] = useState();
   const [isRegistered, setIsRegistered] = useState(false);
+
   const navigate = useNavigate();
-  const walletButtonRef = useRef();
+
+  const walletButtonRef = React.createRef();
+
   var data = JSON.stringify({
     address: address,
   });
@@ -114,7 +117,8 @@ function Home() {
       //   navigate("/user/profile");
       // }
     } else {
-      alert("Please connect your wallet first");
+      const connectWalletbtn = document.getElementById("connect-wallet");
+      connectWalletbtn.click();
     }
   };
 
@@ -191,7 +195,7 @@ function Home() {
             </Link>
           </div>
           {/* <ConnectKitButton /> */}
-          <ConnectWallet ref={walletButtonRef} />
+          <ConnectWallet />
           {/* <button className="home-connect-btn" onClick={togglePopup}>
             Connect Wallet
           </button> */}
