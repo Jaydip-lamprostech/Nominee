@@ -9,7 +9,7 @@ import { ethers } from "ethers";
 
 function Tokens() {
   const { address } = useAccount();
-  const [showNativeTokenBalance, setNativeTokenBalance] = useState();
+  const [showNativeTokenBalance, setNativeTokenBalance] = useState(0);
   const [allTokens, setAllTokens] = useState([]);
   const [showAllToken, setShowAllToken] = useState(false);
   const [showNomineesComponent, setNomineesComponent] = useState(false);
@@ -52,8 +52,9 @@ function Tokens() {
             //   showNativeTokenBalance.push(response.data.balance);
             //   setNativeTokenBalance(showNativeTokenBalance);
             // }
-            if (showNativeTokenBalance !== Number(response.data.result)) {
-              setNativeTokenBalance(Number(response.data.result));
+            if (showNativeTokenBalance !== Number(response.data.balance)) {
+              setNativeTokenBalance(Number(response.data.balance));
+              console.log(showNativeTokenBalance)
             }
           })
           .catch(function (error) {
@@ -163,14 +164,14 @@ function Tokens() {
                 </tr>
               </thead>
               <tbody>
-                {showNativeTokenBalance && (
+                {showNativeTokenBalance ? (
                   <tr>
                     <td className="token-symbol">
                       {console.log(checkChainId)}
                       {checkChainId === 80001 ? "MATIC" : "BTT"}
                     </td>
                     <td>
-                      {String(
+                      {showNativeTokenBalance === 0 ? "0" : String(
                         showNativeTokenBalance / Math.pow(10, 18)
                       ).substring(0, 7)}
                     </td>
@@ -217,10 +218,10 @@ function Tokens() {
                       )}
                     </td>
                   </tr>
-                )}
+                ) : null}
 
                 {showAllToken &&
-                  checkChainId === 80001 &&
+                  checkChainId === 80001 ?
                   allTokens.map((val, key) => {
                     return (
                       <tr key={key}>
@@ -251,7 +252,7 @@ function Tokens() {
                         </td>
                       </tr>
                     );
-                  })}
+                  }) : null}
               </tbody>
             </table>
             <div className="token-child"></div>
