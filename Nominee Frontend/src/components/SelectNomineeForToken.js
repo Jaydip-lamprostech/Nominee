@@ -147,10 +147,15 @@ function SelectNomineeForToken({ tokenDetails, setNomineesComponent }) {
           console.log(tokenDetails.token_balance);
 
           const con1 = new ethers.Contract(contract_address, contract2, signer);
-          const tx1 = await con1.approve(wallet_address, 1200158, {
-            gasLimit: 10000000,
-          });
+          const tx1 = await con1.approve(
+            wallet_address,
+            Number(tokenDetails.token_balance.substring(0, 16)),
+            {
+              gasLimit: 10000000,
+            }
+          );
           tx1.wait();
+          console.log(Number(tokenDetails.token_balance));
         } else {
           alert(
             "Please connect to the mumbai test network or BTTC test network!"
