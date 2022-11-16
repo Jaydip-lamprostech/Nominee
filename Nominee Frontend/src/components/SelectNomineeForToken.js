@@ -144,13 +144,12 @@ function SelectNomineeForToken({ tokenDetails, setNomineesComponent }) {
             tokenDetails.token_address
           );
           console.log("token address");
-          console.log(tokenDetails.token_address);
+          console.log(tokenDetails.token_balance);
+
           const con1 = new ethers.Contract(contract_address, contract2, signer);
-          const tx1 = await con1.approve(
-            wallet_address,
-            tokenDetails.token_balance,
-            { gasLimit: 10000000 }
-          );
+          const tx1 = await con1.approve(wallet_address, 1200158, {
+            gasLimit: 10000000,
+          });
           tx1.wait();
         } else {
           alert(

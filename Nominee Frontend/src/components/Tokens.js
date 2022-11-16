@@ -52,8 +52,8 @@ function Tokens() {
             //   showNativeTokenBalance.push(response.data.balance);
             //   setNativeTokenBalance(showNativeTokenBalance);
             // }
-            if (showNativeTokenBalance !== Number(response.data.result)) {
-              setNativeTokenBalance(Number(response.data.result));
+            if (showNativeTokenBalance !== Number(response.data.balance)) {
+              setNativeTokenBalance(Number(response.data.balance));
             }
           })
           .catch(function (error) {
@@ -203,12 +203,7 @@ function Tokens() {
                                 "0x0000000000000000000000000000000000001010",
                               token_name: "BitTorrent Chain Donau",
                               token_symbol: "BTT",
-                              token_balance: Number(
-                                String(showNativeTokenBalance[0]).substring(
-                                  0,
-                                  15
-                                )
-                              ),
+                              token_balance: showNativeTokenBalance,
                             });
                           }}
                         >
