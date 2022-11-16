@@ -68,6 +68,8 @@ function AllNfts({ nftData }) {
           // console.log(nftData2);
           setLoading(false);
         } else if (chainId === 1029) {
+          setLoading(false);
+
         } else {
           alert(
             "Please connect to the mumbai test network or BTTC test network!"
@@ -88,7 +90,7 @@ function AllNfts({ nftData }) {
   };
   useEffect(() => {
     temp();
-  }, [nftData2]);
+  }, [nftData2, checkChainId]);
 
   // if (nftData.length === 0) {
   //   return (
@@ -109,7 +111,7 @@ function AllNfts({ nftData }) {
   //     </>
   //   );
   // }
-  if (!isLoading && checkChainId === 80001)
+  if (!isLoading && checkChainId === 80001 && nftData2.length > 0)
     return (
       <>
         {showNomineesComponent && (
@@ -171,7 +173,7 @@ function AllNfts({ nftData }) {
         </div>
       </>
     );
-  else if (checkChainId === 1029) {
+  else if (!isLoading && checkChainId === 1029) {
     return (
       <>
         <div className="all-nft-main-empty">
@@ -182,7 +184,7 @@ function AllNfts({ nftData }) {
         </div>
       </>
     );
-  } else
+  } else if (nftData2.length === 0)
     return (
       <>
         <div className="all-nft-main-empty">
