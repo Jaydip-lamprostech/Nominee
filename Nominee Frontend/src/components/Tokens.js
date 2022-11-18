@@ -123,7 +123,7 @@ function Tokens() {
           }
         }
         setAllTokens(allTokens);
-        // console.log(allTokens);
+        console.log(allTokens);
         setShowAllToken(true);
       })
       .catch(function (error) {
@@ -174,8 +174,8 @@ function Tokens() {
                       {showNativeTokenBalance === 0
                         ? "0"
                         : String(
-                          showNativeTokenBalance / Math.pow(10, 18)
-                        ).substring(0, 7)}
+                            showNativeTokenBalance / Math.pow(10, 18)
+                          ).substring(0, showNativeTokenBalance.length - 1)}
                     </td>
                     <td>
                       {checkChainId === 80001 ? (
@@ -219,36 +219,36 @@ function Tokens() {
 
                 {showAllToken && checkChainId === 80001
                   ? allTokens.map((val, key) => {
-                    return (
-                      <tr key={key}>
-                        <td className="token-symbol">{val.symbol}</td>
-                        <td>
-                          {String(val.balance / Math.pow(10, 18)).substring(
-                            0,
-                            7
-                          )}
-                        </td>
-                        <td>
-                          <button
-                            onClick={() => {
-                              setNomineesComponent(true);
-                              setTokenDetails({
-                                ...tokenDetails,
-                                token_address: val.token_address,
-                                token_name: val.name,
-                                token_symbol: val.symbol,
-                                token_balance: Number(
-                                  String(val.balance).substring(0, 16)
-                                ),
-                              });
-                            }}
-                          >
-                            Choose Nominee
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                  })
+                      return (
+                        <tr key={key}>
+                          <td className="token-symbol">{val.symbol}</td>
+                          <td>
+                            {String(val.balance / Math.pow(10, 18)).substring(
+                              0,
+                              showNativeTokenBalance.length - 1
+                            )}
+                          </td>
+                          <td>
+                            <button
+                              onClick={() => {
+                                setNomineesComponent(true);
+                                setTokenDetails({
+                                  ...tokenDetails,
+                                  token_address: val.token_address,
+                                  token_name: val.name,
+                                  token_symbol: val.symbol,
+                                  token_balance: Number(
+                                    String(val.balance).substring(0, 16)
+                                  ),
+                                });
+                              }}
+                            >
+                              Choose Nominee
+                            </button>
+                          </td>
+                        </tr>
+                      );
+                    })
                   : null}
               </tbody>
             </table>
