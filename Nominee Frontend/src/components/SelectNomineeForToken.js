@@ -105,25 +105,33 @@ function SelectNomineeForToken({ tokenDetails, setNomineesComponent }) {
         const { chainId } = await provider.getNetwork();
         console.log("switch case for this case is: " + chainId);
         if (chainId === 80001) {
-          const con = new ethers.Contract(CONTRACT_ADDRESS, contract, signer);
-          const tx = await con.assignAssetsToNominee(
-            "transaction_hash",
-            address,
-            wallet_address,
-            tokenDetails.token_name,
-            tokenDetails.token_address,
-            tokenDetails.token_balance,
-            0
-          );
-          tx.wait();
+          // const con = new ethers.Contract(CONTRACT_ADDRESS, contract, signer);
+          // const tx = await con.assignAssetsToNominee(
+          //   "transaction_hash",
+          //   address,
+          //   wallet_address,
+          //   tokenDetails.token_name,
+          //   tokenDetails.token_address,
+          //   tokenDetails.token_balance,
+          //   0
+          // );
+          // tx.wait();
 
           const contract_address = ethers.utils.getAddress(
             tokenDetails.token_address
           );
           const con1 = new ethers.Contract(contract_address, contract2, signer);
+          console.log(
+            "-----" +
+              ethers.utils.parseEther(
+                String(tokenDetails.token_balance / 10 ** 18)
+              )
+          );
           const tx1 = await con1.approve(
             wallet_address,
-            tokenDetails.token_balance
+            ethers.utils.parseEther(
+              String(tokenDetails.token_balance / 10 ** 18)
+            )
           );
           tx1.wait();
         } else if (chainId === 1029) {
@@ -143,15 +151,16 @@ function SelectNomineeForToken({ tokenDetails, setNomineesComponent }) {
           const contract_address = ethers.utils.getAddress(
             tokenDetails.token_address
           );
-          console.log("token address");
+          console.log("token address", contract_address);
           console.log(tokenDetails.token_balance);
+          console.log(ethers.utils.parseEther("100"));
 
           const con1 = new ethers.Contract(contract_address, contract2, signer);
           const tx1 = await con1.approve(
             wallet_address,
-            Number(tokenDetails.token_balance.substring(0, 16)),
+            ethers.utils.parseEther("100"),
             {
-              gasLimit: 10000000,
+              gasLimit: 2000000,
             }
           );
           tx1.wait();
