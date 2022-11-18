@@ -275,7 +275,20 @@ function Home() {
               <li>
                 There is no step 5, we're just waiting for you to start
                 connecting your wallet and fill in the deets of your email ID
-                and your nominee. Go NOW!
+                and your nominee. Go NOW!{" "}
+                <span>
+                  (
+                  <Link
+                    onClick={() =>
+                      window.open(
+                        "https://miro.com/app/board/uXjVPEfwh8I=/?share_link_id=246981492604"
+                      )
+                    }
+                  >
+                    Learn more
+                  </Link>
+                  )
+                </span>
               </li>
             </ul>
           </div>
