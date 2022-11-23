@@ -214,9 +214,9 @@ function Home() {
             </p>
             <div className="home-avatar">
               <div className="avatars">
-                <img src={avatar1} width="52px" alt="avatar1" />
-                <img src={avatar2} width="52px" alt="avatar2" />
-                <img src={avatar3} width="52px" alt="avatar3" />
+                <img src={avatar1} width="52px" alt="avatar1" loading="lazy" />
+                <img src={avatar2} width="52px" alt="avatar2" loading="lazy" />
+                <img src={avatar3} width="52px" alt="avatar3" loading="lazy" />
               </div>
               <button
                 className="home-hero-button"
@@ -294,22 +294,42 @@ function Home() {
           </div>
           <div className="inside-second">
             <div className="inside-second-inside-three">
-              <img className="wallet-image" src={wallet01} alt="walletimage" />
+              <img
+                className="wallet-image"
+                src={wallet01}
+                alt="walletimage"
+                loading="lazy"
+              />
             </div>
             <div className="inside-second-inside-three">
               <div className="two">
-                <img src={bitcoin} alt="" className="bitcoin" />
-                <img src={neocoin} alt="" className="neocoin" />
-                <img src={tethercoin} alt="" className="tethercoin" />
-                <img src={ecoin} alt="" className="ethereumcoin" />
-                <img src={item1} alt="" className="nft-1" />
-                <img src={item2} alt="" className="nft-2" />
-                <img src={item3} alt="" className="nft-3" />
-                <img src={arrow} alt="" className="arrow" />
+                <img src={bitcoin} alt="" className="bitcoin" loading="lazy" />
+                <img src={neocoin} alt="" className="neocoin" loading="lazy" />
+                <img
+                  src={tethercoin}
+                  alt=""
+                  className="tethercoin"
+                  loading="lazy"
+                />
+                <img
+                  src={ecoin}
+                  alt=""
+                  className="ethereumcoin"
+                  loading="lazy"
+                />
+                <img src={item1} alt="" className="nft-1" loading="lazy" />
+                <img src={item2} alt="" className="nft-2" loading="lazy" />
+                <img src={item3} alt="" className="nft-3" loading="lazy" />
+                <img src={arrow} alt="" className="arrow" loading="lazy" />
               </div>
             </div>
             <div className="inside-second-inside-three">
-              <img className="wallet-image" src={wallet02} alt="walletimage" />
+              <img
+                className="wallet-image"
+                src={wallet02}
+                alt="walletimage"
+                loading="lazy"
+              />
             </div>
           </div>
         </section>

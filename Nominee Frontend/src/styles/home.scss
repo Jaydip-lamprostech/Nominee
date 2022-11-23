@@ -165,17 +165,19 @@ section.home-hero {
           position: absolute;
           top: -2px;
           left: -2px;
-          background: linear-gradient(45deg,
-              #fb0094,
-              #0000ff,
-              #00ff00,
-              #ffff00,
-              #ff0000,
-              #fb0094,
-              #0000ff,
-              #00ff00,
-              #ffff00,
-              #ff0000);
+          background: linear-gradient(
+            45deg,
+            #fb0094,
+            #0000ff,
+            #00ff00,
+            #ffff00,
+            #ff0000,
+            #fb0094,
+            #0000ff,
+            #00ff00,
+            #ffff00,
+            #ff0000
+          );
           background-size: 400%;
           width: calc(100% + 4px);
           height: calc(100% + 4px);
@@ -192,9 +194,6 @@ section.home-hero {
           margin: 0 auto;
         }
       }
-
-
-
     }
   }
 
@@ -633,6 +632,80 @@ section.home-second {
   }
 }
 
+@media only screen and (max-width: 768px) {
+  .inside-hero-second {
+    display: none;
+  }
+  div.home-navbar {
+    width: 100vw;
+    max-width: 100vw;
+    padding: 0 20px 10px 20px;
+  }
+  div.home-navbar img.logo-image {
+    height: 40px;
+  }
+  button.sc-iWOQzb.jxdegQ {
+    padding: 15px 20px;
+  }
+  section.home-hero .inside-hero-first {
+    max-width: 100%;
+    padding: 20px;
+    margin-top: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+
+    p.home-first-p {
+      max-width: 100%;
+      font-size: 1.5rem;
+    }
+  }
+  section.home-hero .inside-hero-first .home-avatar {
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+
+    button.home-hero-button {
+      margin: 30px 0px;
+    }
+  }
+  section.home-second {
+    background-image: linear-gradient(45deg, #9bb7ed, #dcd6fc);
+    margin-top: 0px;
+  }
+  section.home-second h1 {
+    margin-top: 0px;
+    padding-top: 50px;
+    font-size: 2.5rem;
+  }
+  section.home-second div.process-div {
+    width: 100%;
+    padding: 0px 20px;
+  }
+  section.home-second img.abstarct-img-2 {
+    width: 70%;
+    top: 30%;
+  }
+  section.home-second img.abstarct-img-1 {
+    width: 70%;
+  }
+  section.home-second .inside-second .inside-second-inside-three {
+    margin-top: 20px;
+    .two {
+      min-height: 300px;
+      transform: rotate(90deg);
+
+      img {
+        transform: rotate(-90deg);
+      }
+      img.arrow {
+        transform: none;
+      }
+    }
+  }
+}
 @keyframes animate {
   0% {
     background-position: 0 0;
