@@ -293,3 +293,43 @@ section.profile-main {
     }
   }
 }
+
+@media only screen and (max-width: 768px) {
+  section.profile-main {
+    .profile-first-section {
+      .profile-card {
+        margin-top: -4rem;
+        .profile-card-inside {
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          .image-parent {
+            margin-top: 2rem;
+            width: 8rem;
+            flex-shrink: 0;
+            .image-child {
+              height: 8rem;
+            }
+          }
+          .user-profile {
+            padding-top: 1.25rem;
+            width: 100%;
+            word-break: break-word;
+            padding: 0px 20px;
+            h1 {
+              font-size: 18px;
+              line-height: 1.5rem;
+              text-align: center;
+            }
+            p {
+              text-align: center;
+            }
+          }
+          button.profile-edit-button {
+            margin: 20px 0px;
+          }
+        }
+      }
+    }
+  }
+}

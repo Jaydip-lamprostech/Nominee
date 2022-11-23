@@ -145,3 +145,27 @@
     }
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .navbar {
+    .navbar-inside {
+      .navbar-main {
+        img.logo {
+          height: 30px;
+        }
+        .profile-wallet-section {
+          height: 30px;
+
+          button.sc-fxTzYC.eZwMEI {
+            font-size: 15px;
+            padding: 10px;
+          }
+          img.profile-icon {
+            width: 40px;
+            height: 40px;
+          }
+        }
+      }
+    }
+  }
+}
