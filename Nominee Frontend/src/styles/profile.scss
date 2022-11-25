@@ -320,15 +320,22 @@ section.profile-main {
               font-size: 18px;
               line-height: 1.5rem;
               text-align: center;
+              padding: 10px 0px;
             }
             p {
               text-align: center;
+              font-size: 0.9rem;
             }
           }
           button.profile-edit-button {
             margin: 20px 0px;
           }
         }
+      }
+    }
+    .profile-second-section {
+      button {
+        padding: 10px 15px;
       }
     }
   }

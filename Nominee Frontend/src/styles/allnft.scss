@@ -92,12 +92,16 @@
           border: 1px solid #dcd6fc;
           background: #dcd6fc;
           background-image: linear-gradient(to right, #9f8ff7 0%, #5a88e1 100%);
-          background-image: -moz-linear-gradient(left,
-              #9f8ff7 0%,
-              #5a88e1 100%);
-          background-image: -webkit-linear-gradient(left,
-              #9f8ff7 0%,
-              #5a88e1 100%);
+          background-image: -moz-linear-gradient(
+            left,
+            #9f8ff7 0%,
+            #5a88e1 100%
+          );
+          background-image: -webkit-linear-gradient(
+            left,
+            #9f8ff7 0%,
+            #5a88e1 100%
+          );
 
           &:hover {
             background-image: none;
@@ -124,4 +128,34 @@
   justify-content: flex-start;
   align-items: center;
   padding: 40px;
+}
+
+@media only screen and (max-width: 768px) {
+  .all-nft-main {
+    .nft-image-parent {
+      row-gap: 2rem;
+      column-gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+
+      .nft-image-child {
+        .image-div {
+          height: 12rem;
+          border-radius: 20px;
+          img {
+            border-radius: 20px;
+          }
+        }
+        .nft-image-child-inside {
+          h3 {
+            font-size: 15px;
+          }
+          button.below-nft-button {
+            padding: 10px 20px;
+            font-size: 14px;
+            margin: 5px;
+          }
+        }
+      }
+    }
+  }
 }

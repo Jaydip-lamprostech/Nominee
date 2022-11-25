@@ -97,12 +97,16 @@
           border: 1px solid #dcd6fc;
           background: #dcd6fc;
           background-image: linear-gradient(to right, #9f8ff7 0%, #5a88e1 100%);
-          background-image: -moz-linear-gradient(left,
-              #9f8ff7 0%,
-              #5a88e1 100%);
-          background-image: -webkit-linear-gradient(left,
-              #9f8ff7 0%,
-              #5a88e1 100%);
+          background-image: -moz-linear-gradient(
+            left,
+            #9f8ff7 0%,
+            #5a88e1 100%
+          );
+          background-image: -webkit-linear-gradient(
+            left,
+            #9f8ff7 0%,
+            #5a88e1 100%
+          );
         }
       }
     }
@@ -159,6 +163,29 @@
         // color: white;
         // border: 1px solid black;
         transition: background-color 0.25s ease-in-out;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .nominees-main {
+    .nominees-container {
+      padding: 10px;
+      .nominees-profile {
+        margin-right: 0px;
+        img {
+          height: 32px;
+          width: 32px;
+        }
+      }
+      .nominees-details {
+        h2 {
+          font-size: 1.2rem;
+        }
+        p {
+          font-size: 12px;
+        }
       }
     }
   }

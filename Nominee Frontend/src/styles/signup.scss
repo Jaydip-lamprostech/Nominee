@@ -341,3 +341,12 @@ svg.animate-spin {
     transform: translateY(-10px);
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .signup-main {
+    padding-top: 100px;
+    .login-card {
+      // margin-top: 100px;
+    }
+  }
+}
